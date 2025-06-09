@@ -1,0 +1,7 @@
+venv/
+obj/
+dist/
+bin/
+*~
+*Zone.Identifier
+__pycache__/
