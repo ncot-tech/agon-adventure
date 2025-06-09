@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Chat Export</title>
+                        <style>
+                            body {
+                                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                                background-color: #212121;
+                                color: #ececec;
+                                margin: 0;
+                                padding: 20px;
+                                display: flex;
+                                justify-content: center;
+                            }
+                            main {
+                                max-width: 800px;
+                                margin: 20px auto;
+                                background:rgb(47, 47, 47);
+                                padding: 20px;
+                                border-radius: 10px;
+                                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                                overflow: hidden;
+                            }
+                            .message {
+                                margin-bottom: 15px;
+                                padding: 10px;
+                                border-radius: 5px;
+                            }
+                            .message.user {
+                                background-color: #2e2e2e;
+                                color: white;
+                                text-align: right;
+                                border: 2px solid #cdcdcd;
+                                box-shadow: 0 0 10px rgba(14, 117, 253, 0.23);
+                                font-weight: bold;
+                            }
+                            .message.assistant {
+                                background:rgb(47, 47, 47);
+                                color: #ececec;
+                            }
+                            pre {
+                                background: #0d0d0d;
+                                padding: 10px;
+                                border-radius: 5px;
+                                overflow-x: auto;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <main class="transition-width relative h-full w-full flex-1 overflow-auto" id="main" z-index="-1"><div id="thread" class="group/thread @container/thread h-full w-full"><div role="presentation" class="composer-parent flex flex-col focus-visible:outline-0 h-full"><div id="page-header" class="draggable no-draggable-children sticky top-0 p-3 flex items-center justify-between z-20 h-header-height bg-token-main-surface-primary pointer-events-none select-none [view-transition-name:var(--vt-page-header)] *:pointer-events-auto motion-safe:transition max-md:hidden @[84rem]/thread:absolute @[84rem]/thread:start-0 @[84rem]/thread:end-0 @[84rem]/thread:bg-transparent @[84rem]/thread:shadow-none! [box-shadow:var(--sharp-edge-top-shadow)]"><div class="absolute start-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2"></div><div class="flex items-center"><div class="flex items-center"><span class="flex" data-state="closed"></span><span class="flex" data-state="closed"><a aria-label="New chat" class="text-token-text-secondary hover:bg-token-surface-hover focus-visible:bg-token-surface-hover flex h-10 w-10 items-center justify-center rounded-lg px-2 focus-visible:outline-0" href="/" data-discover="true"></a></span></div></div><div class="flex items-center gap-2 pe-1 leading-[0]" id="conversation-header-actions"></div></div><div class="flex basis-auto flex-col -mb-(--composer-overlap-px) [--composer-overlap-px:24px] grow overflow-hidden"><div class="relative h-full"><div class="flex h-full flex-col overflow-y-auto [scrollbar-gutter:stable_both-edges] @[84rem]/thread:pt-(--header-height)"><div aria-hidden="true" data-edge="true" class="pointer-events-none h-px w-px"></div><div class="@thread-xl/thread:pt-header-height mt-1.5 flex flex-col text-sm pb-25"><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-1" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="2be4e710-1027-46ef-bf72-5358cb868b5a" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">I am writing a text adventure game in C on a limited computer. I am using an array to manage rooms and how they are linked together. You can go N, S, E, W, Up and Down to move between rooms.
+
+Sometimes though i want to incorporate more complex movement, like an elevator where the player might choose a floor number. Or some sort of abstract representation of something like a taxi where the player can say where they want to go.
+
+how can I add that to my game?</div></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-2" data-scroll-anchor="false"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="659141ea-036c-4865-8056-5eebffc70c87" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4o"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="307">Great question — you’re already working with a solid foundation using an array of rooms and directional movement. To support more complex movement mechanisms (like elevators and taxis), you can <strong data-start="194" data-end="253">extend your movement system with a few extra mechanisms</strong> that coexist with your current N/S/E/W/Up/Down model.</p>
+<h3 data-start="309" data-end="333">👣 Strategy Overview</h3>
+<p data-start="335" data-end="532">You can treat "elevator" or "taxi" as <strong data-start="373" data-end="406">special room types or objects</strong> that override the usual direction-based system. Here are a few clean ways to do this in a resource-constrained C environment:</p>
+<hr data-start="534" data-end="537">
+<h2 data-start="539" data-end="572">✅ 1. Extend the Room Structure</h2>
+<p data-start="574" data-end="670">Add a flag or type field to your room struct to indicate whether it uses special movement logic:</p>
+<pre class="overflow-visible!" data-start="672" data-end="979"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">enum</span></span></span><span> {
+    ROOM_NORMAL,
+    ROOM_ELEVATOR,
+    ROOM_TAXI,
+    </span><span><span class="hljs-comment">// Add more special types here</span></span><span>
+} RoomType;
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">char</span></span><span> *description;
+    </span><span><span class="hljs-type">int</span></span><span> exits[</span><span><span class="hljs-number">6</span></span><span>]; </span><span><span class="hljs-comment">// 0=N, 1=S, 2=E, 3=W, 4=U, 5=D</span></span><span>
+    RoomType type;
+    </span><span><span class="hljs-type">void</span></span><span> (*custom_move_handler)(</span><span><span class="hljs-type">void</span></span><span>); </span><span><span class="hljs-comment">// optional function pointer</span></span><span>
+} Room;
+</span></span></code></div></div></pre>
+<h3 data-start="981" data-end="990">Pros:</h3>
+<ul data-start="991" data-end="1106">
+<li data-start="991" data-end="1037">
+<p data-start="993" data-end="1037">Keeps basic room navigation fast and simple.</p>
+</li>
+<li data-start="1038" data-end="1106">
+<p data-start="1040" data-end="1106">Lets you selectively add complex logic only to rooms that need it.</p>
+</li>
+</ul>
+<hr data-start="1108" data-end="1111">
+<h2 data-start="1113" data-end="1165">🚀 2. Handle Special Input in Parser or Game Loop</h2>
+<p data-start="1167" data-end="1271">When the player is in a room with special logic, you can branch to a custom function for handling input.</p>
+<h3 data-start="1273" data-end="1303">Example: Elevator Movement</h3>
+<pre class="overflow-visible!" data-start="1305" data-end="1625"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_elevator_move</span></span><span><span class="hljs-params">()</span></span><span> {
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Which floor? "</span></span><span>);
+    </span><span><span class="hljs-type">char</span></span><span> input[</span><span><span class="hljs-number">10</span></span><span>];
+    fgets(input, </span><span><span class="hljs-keyword">sizeof</span></span><span>(input), </span><span><span class="hljs-built_in">stdin</span></span><span>);
+    </span><span><span class="hljs-type">int</span></span><span> </span><span><span class="hljs-built_in">floor</span></span><span> = atoi(input);
+    </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">floor</span></span><span> &gt;= </span><span><span class="hljs-number">1</span></span><span> &amp;&amp; </span><span><span class="hljs-built_in">floor</span></span><span> &lt;= </span><span><span class="hljs-number">5</span></span><span>) {
+        current_room = get_room_by_floor(</span><span><span class="hljs-built_in">floor</span></span><span>); </span><span><span class="hljs-comment">// You implement this</span></span><span>
+    } </span><span><span class="hljs-keyword">else</span></span><span> {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Invalid floor.\n"</span></span><span>);
+    }
+}
+</span></span></code></div></div></pre>
+<p data-start="1627" data-end="1655">In your main command parser:</p>
+<pre class="overflow-visible!" data-start="1657" data-end="1763"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">if</span></span><span> (rooms[current_room].type == ROOM_ELEVATOR) {
+    rooms[current_room].custom_move_handler();
+}
+</span></span></code></div></div></pre>
+<p data-start="1765" data-end="1829">Or if using a switch-based command parser, add special handling:</p>
+<pre class="overflow-visible!" data-start="1831" data-end="2013"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strcmp</span></span><span>(command, </span><span><span class="hljs-string">"go"</span></span><span>) == </span><span><span class="hljs-number">0</span></span><span> &amp;&amp; </span><span><span class="hljs-built_in">strcmp</span></span><span>(arg, </span><span><span class="hljs-string">"floor"</span></span><span>) == </span><span><span class="hljs-number">0</span></span><span>) {
+    </span><span><span class="hljs-keyword">if</span></span><span> (rooms[current_room].type == ROOM_ELEVATOR) {
+        handle_elevator_move();
+        </span><span><span class="hljs-keyword">continue</span></span><span>;
+    }
+}
+</span></span></code></div></div></pre>
+<hr data-start="2015" data-end="2018">
+<h2 data-start="2020" data-end="2057">🚕 3. Example: Taxi or Fast Travel</h2>
+<p data-start="2059" data-end="2101">Let players specify a destination by name:</p>
+<pre class="overflow-visible!" data-start="2103" data-end="2426"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_taxi_move</span></span><span><span class="hljs-params">()</span></span><span> {
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Where to? "</span></span><span>);
+    </span><span><span class="hljs-type">char</span></span><span> dest[</span><span><span class="hljs-number">50</span></span><span>];
+    fgets(dest, </span><span><span class="hljs-keyword">sizeof</span></span><span>(dest), </span><span><span class="hljs-built_in">stdin</span></span><span>);
+    </span><span><span class="hljs-type">int</span></span><span> destination = find_room_by_name(dest); </span><span><span class="hljs-comment">// Your lookup function</span></span><span>
+    </span><span><span class="hljs-keyword">if</span></span><span> (destination != </span><span><span class="hljs-number">-1</span></span><span>) {
+        current_room = destination;
+    } </span><span><span class="hljs-keyword">else</span></span><span> {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"I don't know where that is.\n"</span></span><span>);
+    }
+}
+</span></span></code></div></div></pre>
+<hr data-start="2428" data-end="2431">
+<h2 data-start="2433" data-end="2466">🧱 Room Linking Remains Intact</h2>
+<p data-start="2468" data-end="2614">For standard rooms, your directional system remains untouched. These special movement rooms just add <strong data-start="2569" data-end="2613">alternate ways of setting <code data-start="2597" data-end="2611">current_room</code></strong>.</p>
+<hr data-start="2616" data-end="2619">
+<h2 data-start="2621" data-end="2662">🧠 Optional: Use a Dispatcher Function</h2>
+<p data-start="2664" data-end="2774">If you want to be clever and avoid checking room types all over the place, create a central movement function:</p>
+<pre class="overflow-visible!" data-start="2776" data-end="3008"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">move_player</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> </span><span><span class="hljs-type">char</span></span><span> *direction_or_command) {
+    </span><span><span class="hljs-keyword">if</span></span><span> (rooms[current_room].custom_move_handler) {
+        rooms[current_room].custom_move_handler();
+    } </span><span><span class="hljs-keyword">else</span></span><span> {
+        </span><span><span class="hljs-comment">// Regular movement logic using exits[]</span></span><span>
+    }
+}
+</span></span></code></div></div></pre>
+<hr data-start="3010" data-end="3013">
+<h2 data-start="3015" data-end="3041">🧼 Tip: Keep It Modular</h2>
+<p data-start="3043" data-end="3077">Each special movement mode should:</p>
+<ul data-start="3078" data-end="3205">
+<li data-start="3078" data-end="3105">
+<p data-start="3080" data-end="3105">Live in its own function.</p>
+</li>
+<li data-start="3106" data-end="3156">
+<p data-start="3108" data-end="3156">Be registered in a room's <code data-start="3134" data-end="3155">custom_move_handler</code>.</p>
+</li>
+<li data-start="3157" data-end="3205">
+<p data-start="3159" data-end="3205">Only trigger when you're in that special room.</p>
+</li>
+</ul>
+<p data-start="3207" data-end="3261">That way your core engine stays simple and extensible.</p>
+<hr data-start="3263" data-end="3266">
+<p data-start="3268" data-end="3331" data-is-last-node="" data-is-only-node="">Would you like a working C code snippet showing this in action?</p></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-3" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="6177df10-e90e-4754-b7ac-26e23ba306e8" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">I am trying to avoid lots of special case code. elevators and taxis are sort of the same concept - the player goes in them and is then asked where to go next. They can be presented with a list of choices.
+
+how can I model this more abstract idea</div></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-4" data-scroll-anchor="false"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="25d16369-3fe2-45e9-b573-746bb08bb891" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4o"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="126">That’s a great instinct — you're thinking in terms of <strong data-start="54" data-end="70">abstractions</strong>, which will keep your game engine clean and extensible.</p>
+<p data-start="128" data-end="371">You’re absolutely right: elevators and taxis are conceptually similar — the player enters, is presented with <strong data-start="237" data-end="269">a set of destination options</strong>, and chooses one. You can model this as a <strong data-start="312" data-end="352">generic "chooser" or "router" entity</strong> inside your world.</p>
+<p data-start="373" data-end="398">Here’s how you can do it.</p>
+<hr data-start="400" data-end="403">
+<h2 data-start="405" data-end="463">🧭 Abstracting Travel Hubs (Elevators, Taxis, Portals…)</h2>
+<h3 data-start="465" data-end="515">🧱 Step 1: Add a Room Type or Interaction Mode</h3>
+<p data-start="517" data-end="579">Update your room struct to support <strong data-start="552" data-end="578">generic travel options</strong>:</p>
+<pre class="overflow-visible!" data-start="581" data-end="974"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">enum</span></span></span><span> {
+    ROOM_NORMAL,
+    ROOM_SELECTOR </span><span><span class="hljs-comment">// A room that lets player pick where to go</span></span><span>
+} RoomType;
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">char</span></span><span> *description;
+    </span><span><span class="hljs-type">int</span></span><span> exits[</span><span><span class="hljs-number">6</span></span><span>]; </span><span><span class="hljs-comment">// for N/S/E/W/U/D</span></span><span>
+    RoomType type;
+
+    </span><span><span class="hljs-comment">// For selector rooms:</span></span><span>
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> **options; </span><span><span class="hljs-comment">// List of destination names (optional)</span></span><span>
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">int</span></span><span> *destinations; </span><span><span class="hljs-comment">// Corresponding room indices</span></span><span>
+    </span><span><span class="hljs-type">int</span></span><span> num_options;
+} Room;
+</span></span></code></div></div></pre>
+<hr data-start="976" data-end="979">
+<h3 data-start="981" data-end="1032">🧠 Step 2: Implement a Generic Selector Handler</h3>
+<pre class="overflow-visible!" data-start="1034" data-end="1543"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_selector_room</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> Room *room) {
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"%s\n"</span></span><span>, room-&gt;description);
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Where would you like to go?\n"</span></span><span>);
+
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; room-&gt;num_options; i++) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"  %d. %s\n"</span></span><span>, i + </span><span><span class="hljs-number">1</span></span><span>, room-&gt;options[i]);
+    }
+
+    </span><span><span class="hljs-type">char</span></span><span> input[</span><span><span class="hljs-number">10</span></span><span>];
+    fgets(input, </span><span><span class="hljs-keyword">sizeof</span></span><span>(input), </span><span><span class="hljs-built_in">stdin</span></span><span>);
+    </span><span><span class="hljs-type">int</span></span><span> choice = atoi(input);
+
+    </span><span><span class="hljs-keyword">if</span></span><span> (choice &gt;= </span><span><span class="hljs-number">1</span></span><span> &amp;&amp; choice &lt;= room-&gt;num_options) {
+        current_room = room-&gt;destinations[choice - </span><span><span class="hljs-number">1</span></span><span>];
+    } </span><span><span class="hljs-keyword">else</span></span><span> {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Invalid choice.\n"</span></span><span>);
+    }
+}
+</span></span></code></div></div></pre>
+<hr data-start="1545" data-end="1548">
+<h3 data-start="1550" data-end="1589">🕹️ Step 3: Use It in the Game Loop</h3>
+<pre class="overflow-visible!" data-start="1591" data-end="1765"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span>Room *room = &amp;rooms[current_room];
+
+</span><span><span class="hljs-keyword">if</span></span><span> (room-&gt;type == ROOM_SELECTOR) {
+    handle_selector_room(room);
+    </span><span><span class="hljs-keyword">continue</span></span><span>;
+}
+
+</span><span><span class="hljs-comment">// Otherwise: handle normal N/S/E/W/U/D input</span></span><span>
+</span></span></code></div></div></pre>
+<hr data-start="1767" data-end="1770">
+<h3 data-start="1772" data-end="1811">🧪 Example: Define an Elevator Room</h3>
+<pre class="overflow-visible!" data-start="1813" data-end="2158"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *elevator_options[] = {
+    </span><span><span class="hljs-string">"Floor 1"</span></span><span>, </span><span><span class="hljs-string">"Floor 2"</span></span><span>, </span><span><span class="hljs-string">"Floor 3"</span></span><span>
+};
+
+</span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">int</span></span><span> elevator_destinations[] = {
+    </span><span><span class="hljs-number">5</span></span><span>, </span><span><span class="hljs-number">6</span></span><span>, </span><span><span class="hljs-number">7</span></span><span> </span><span><span class="hljs-comment">// room indices</span></span><span>
+};
+
+rooms[</span><span><span class="hljs-number">3</span></span><span>] = (Room){
+    .description = </span><span><span class="hljs-string">"You're in the elevator."</span></span><span>,
+    .type = ROOM_SELECTOR,
+    .options = elevator_options,
+    .destinations = elevator_destinations,
+    .num_options = </span><span><span class="hljs-number">3</span></span><span>
+};
+</span></span></code></div></div></pre>
+<hr data-start="2160" data-end="2163">
+<h2 data-start="2165" data-end="2190">🧼 Why This Works Well</h2>
+<ul data-start="2192" data-end="2472">
+<li data-start="2192" data-end="2287">
+<p data-start="2194" data-end="2287"><strong data-start="2194" data-end="2219">No special case logic</strong>: Everything (elevator, taxi, magic portal) is just a ROOM_SELECTOR.</p>
+</li>
+<li data-start="2288" data-end="2374">
+<p data-start="2290" data-end="2374"><strong data-start="2290" data-end="2301">Modular</strong>: You can reuse the same <code data-start="2326" data-end="2348">handle_selector_room</code> function for all of them.</p>
+</li>
+<li data-start="2375" data-end="2472">
+<p data-start="2377" data-end="2472"><strong data-start="2377" data-end="2389">Scalable</strong>: Later, you could add costs, time delays, or conditions per destination if needed.</p>
+</li>
+</ul>
+<hr data-start="2474" data-end="2477">
+<p data-start="2479" data-end="2550" data-is-last-node="" data-is-only-node="">Would you like a minimal working demo of this in C to test or build on?</p></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-5" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="7aafb461-9b40-4730-a54f-096be9745cbb" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">how can I provide NPCs to speak to? I would like some very limited choice based dialog that may trigger other events such as giving the player an item or unlocking a door</div></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-6" data-scroll-anchor="false"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="20d0e872-4b3d-424e-af1f-f73c75739acf" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4o"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="181">To support <strong data-start="11" data-end="48">limited choice-based NPC dialogue</strong> that can <strong data-start="58" data-end="81">trigger game events</strong>, you can introduce a simple, structured <strong data-start="122" data-end="148">NPC interaction system</strong> into your engine. The key is to:</p>
+<ul data-start="183" data-end="349">
+<li data-start="183" data-end="257">
+<p data-start="185" data-end="257">Model each NPC as a set of dialogue options (like a mini state machine).</p>
+</li>
+<li data-start="258" data-end="349">
+<p data-start="260" data-end="349">Allow each option to <strong data-start="281" data-end="306">trigger a game effect</strong>, such as giving an item or setting a flag.</p>
+</li>
+</ul>
+<hr data-start="351" data-end="354">
+<h2 data-start="356" data-end="399">🧱 Step 1: Define a Dialogue Node System</h2>
+<p data-start="401" data-end="433">Each <strong data-start="406" data-end="423">dialogue node</strong> contains:</p>
+<ul data-start="434" data-end="631">
+<li data-start="434" data-end="464">
+<p data-start="436" data-end="464">A line of text the NPC says.</p>
+</li>
+<li data-start="465" data-end="513">
+<p data-start="467" data-end="513">A list of options the player can respond with.</p>
+</li>
+<li data-start="514" data-end="631">
+<p data-start="516" data-end="631">For each option: text, a next node to go to, and an optional side effect (like giving an item or unlocking a door).</p>
+</li>
+</ul>
+<h3 data-start="633" data-end="649">🔧 C Structs</h3>
+<pre class="overflow-visible!" data-start="651" data-end="1037"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *text;       </span><span><span class="hljs-comment">// What the player sees as the choice</span></span><span>
+    </span><span><span class="hljs-type">int</span></span><span> next_node;          </span><span><span class="hljs-comment">// Index of the next node (-1 to exit)</span></span><span>
+    </span><span><span class="hljs-type">void</span></span><span> (*effect)(</span><span><span class="hljs-type">void</span></span><span>);   </span><span><span class="hljs-comment">// Function to call for side effects</span></span><span>
+} DialogueOption;
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *npc_line;         </span><span><span class="hljs-comment">// What the NPC says</span></span><span>
+    </span><span><span class="hljs-type">const</span></span><span> DialogueOption *options;
+    </span><span><span class="hljs-type">int</span></span><span> num_options;
+} DialogueNode;
+</span></span></code></div></div></pre>
+<hr data-start="1039" data-end="1042">
+<h2 data-start="1044" data-end="1078">👤 Step 2: Create an NPC Struct</h2>
+<pre class="overflow-visible!" data-start="1080" data-end="1168"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *name;
+    </span><span><span class="hljs-type">const</span></span><span> DialogueNode *dialogue;
+} NPC;
+</span></span></code></div></div></pre>
+<p data-start="1170" data-end="1309">You can link NPCs to rooms (one or more per room), either with a list of pointers or a simple per-room single-NPC field if memory is tight.</p>
+<hr data-start="1311" data-end="1314">
+<h2 data-start="1316" data-end="1347">🗨️ Step 3: Run the Dialogue</h2>
+<pre class="overflow-visible!" data-start="1349" data-end="2097"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">run_dialogue</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> DialogueNode *dialogue) {
+    </span><span><span class="hljs-type">int</span></span><span> current = </span><span><span class="hljs-number">0</span></span><span>;
+
+    </span><span><span class="hljs-keyword">while</span></span><span> (current &gt;= </span><span><span class="hljs-number">0</span></span><span>) {
+        </span><span><span class="hljs-type">const</span></span><span> DialogueNode *node = &amp;dialogue[current];
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"\n%s\n"</span></span><span>, node-&gt;npc_line);
+
+        </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; node-&gt;num_options; i++) {
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"  %d. %s\n"</span></span><span>, i + </span><span><span class="hljs-number">1</span></span><span>, node-&gt;options[i].text);
+        }
+
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Choose: "</span></span><span>);
+        </span><span><span class="hljs-type">char</span></span><span> input[</span><span><span class="hljs-number">10</span></span><span>];
+        fgets(input, </span><span><span class="hljs-keyword">sizeof</span></span><span>(input), </span><span><span class="hljs-built_in">stdin</span></span><span>);
+        </span><span><span class="hljs-type">int</span></span><span> choice = atoi(input) - </span><span><span class="hljs-number">1</span></span><span>;
+
+        </span><span><span class="hljs-keyword">if</span></span><span> (choice &gt;= </span><span><span class="hljs-number">0</span></span><span> &amp;&amp; choice &lt; node-&gt;num_options) {
+            </span><span><span class="hljs-type">const</span></span><span> DialogueOption *opt = &amp;node-&gt;options[choice];
+            </span><span><span class="hljs-keyword">if</span></span><span> (opt-&gt;effect) opt-&gt;effect();
+            current = opt-&gt;next_node;
+        } </span><span><span class="hljs-keyword">else</span></span><span> {
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Invalid choice.\n"</span></span><span>);
+        }
+    }
+}
+</span></span></code></div></div></pre>
+<hr data-start="2099" data-end="2102">
+<h2 data-start="2104" data-end="2149">🧪 Step 4: Example: A Guard Unlocks a Door</h2>
+<h3 data-start="2151" data-end="2163">Effects:</h3>
+<pre class="overflow-visible!" data-start="2165" data-end="2286"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">int</span></span><span> door_unlocked = </span><span><span class="hljs-number">0</span></span><span>;
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">unlock_door</span></span><span><span class="hljs-params">()</span></span><span> {
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You hear a distant click.\n"</span></span><span>);
+    door_unlocked = </span><span><span class="hljs-number">1</span></span><span>;
+}
+</span></span></code></div></div></pre>
+<h3 data-start="2288" data-end="2312">Dialogue Definition:</h3>
+<pre class="overflow-visible!" data-start="2314" data-end="2754"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">const</span></span><span> DialogueOption guard_node1_options[] = {
+    { </span><span><span class="hljs-string">"Please let me through."</span></span><span>, </span><span><span class="hljs-number">1</span></span><span>, </span><span><span class="hljs-literal">NULL</span></span><span> },
+    { </span><span><span class="hljs-string">"Bye."</span></span><span>, </span><span><span class="hljs-number">-1</span></span><span>, </span><span><span class="hljs-literal">NULL</span></span><span> }
+};
+
+</span><span><span class="hljs-type">const</span></span><span> DialogueOption guard_node2_options[] = {
+    { </span><span><span class="hljs-string">"Thank you."</span></span><span>, </span><span><span class="hljs-number">-1</span></span><span>, unlock_door }
+};
+
+</span><span><span class="hljs-type">const</span></span><span> DialogueNode guard_dialogue[] = {
+    { </span><span><span class="hljs-string">"Halt! Who goes there?"</span></span><span>, guard_node1_options, </span><span><span class="hljs-number">2</span></span><span> },
+    { </span><span><span class="hljs-string">"Hmm... you seem trustworthy. Very well."</span></span><span>, guard_node2_options, </span><span><span class="hljs-number">1</span></span><span> }
+};
+
+NPC guard = {
+    </span><span><span class="hljs-string">"Guard"</span></span><span>,
+    guard_dialogue
+};
+</span></span></code></div></div></pre>
+<hr data-start="2756" data-end="2759">
+<h2 data-start="2761" data-end="2798">🧩 Step 5: Connecting It to a Room</h2>
+<p data-start="2800" data-end="2835">Let each room have an optional NPC:</p>
+<pre class="overflow-visible!" data-start="2837" data-end="3020"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">char</span></span><span> *description;
+    </span><span><span class="hljs-type">int</span></span><span> exits[</span><span><span class="hljs-number">6</span></span><span>];
+    RoomType type;
+    </span><span><span class="hljs-comment">// travel selector data as before...</span></span><span>
+    </span><span><span class="hljs-type">const</span></span><span> NPC *npc; </span><span><span class="hljs-comment">// NULL if no one to talk to</span></span><span>
+} Room;
+</span></span></code></div></div></pre>
+<p data-start="3022" data-end="3045">Then in your game loop:</p>
+<pre class="overflow-visible!" data-start="3047" data-end="3257"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strcmp</span></span><span>(command, </span><span><span class="hljs-string">"talk"</span></span><span>) == </span><span><span class="hljs-number">0</span></span><span>) {
+    </span><span><span class="hljs-keyword">if</span></span><span> (rooms[current_room].npc) {
+        run_dialogue(rooms[current_room].npc-&gt;dialogue);
+    } </span><span><span class="hljs-keyword">else</span></span><span> {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"There's no one here to talk to.\n"</span></span><span>);
+    }
+}
+</span></span></code></div></div></pre>
+<hr data-start="3259" data-end="3262">
+<h2 data-start="3264" data-end="3281">🎁 Bonus Ideas</h2>
+<ul data-start="3283" data-end="3545">
+<li data-start="3283" data-end="3545">
+<p data-start="3285" data-end="3315">You can easily extend this by:</p>
+<ul data-start="3318" data-end="3545">
+<li data-start="3318" data-end="3421">
+<p data-start="3320" data-end="3421">Adding condition checks inside <code data-start="3351" data-end="3361">effect()</code> functions (e.g. only give an item if the player has a key).</p>
+</li>
+<li data-start="3424" data-end="3476">
+<p data-start="3426" data-end="3476">Locking exits based on flags like <code data-start="3460" data-end="3475">door_unlocked</code>.</p>
+</li>
+<li data-start="3479" data-end="3545">
+<p data-start="3481" data-end="3545">Reusing dialogue logic for other events like terminals or signs.</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr data-start="3547" data-end="3550">
+<p data-start="3552" data-end="3642" data-is-last-node="" data-is-only-node="">Would you like a complete runnable C example of a room with a guard NPC and a locked door?</p></div></div></div></div><div class="flex absolute start-0 end-0 flex justify-start"><div class="touch:-me-2 touch:-ms-3.5 -ms-2.5 -me-1 flex items-center p-1 select-none -mt-1 focus-within:transition-none hover:transition-none duration-500 group-hover/turn-messages:delay-300 pointer-events-none [mask-image:linear-gradient(to_right,black_33%,transparent_66%)] [mask-size:300%_100%] [mask-position:100%_0%] motion-safe:transition-[mask-position] group-hover/turn-messages:pointer-events-auto group-hover/turn-messages:[mask-position:0_0] group-focus-within/turn-messages:pointer-events-auto group-focus-within/turn-messages:[mask-position:0_0] has-data-[state=open]:pointer-events-auto has-data-[state=open]:[mask-position:0_0]"><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="hidden"></span><span class="" data-state="closed"></span></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-7" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="4b552d61-5316-430a-b2af-696c5342ec5b" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">How could I include interactive things such as a "computer" the player can interact with. This can have a simple menu system and then callbacks to run mini programs that handle their own input and output with the player</div></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-8" data-scroll-anchor="false"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="dbdd81f2-0800-4ced-9e38-fe83605ba6a0" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4o"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="209">You’re already close to a clean, flexible system — and the way you're thinking (using callback-style "mini-programs") is exactly the right idea for interactive objects like computers, terminals, machines, etc.</p>
+<p data-start="211" data-end="395">Here’s how you can model <strong data-start="236" data-end="268">interactive in-world objects</strong> (like a computer with a menu and sub-programs) in a way that’s clean, reusable, and easy to plug into your existing structure.</p>
+<hr data-start="397" data-end="400">
+<h2 data-start="402" data-end="450">🖥️ Step 1: Define an Interactive Object Type</h2>
+<p data-start="452" data-end="508">Extend your room struct to support interactable objects:</p>
+<pre class="overflow-visible!" data-start="510" data-end="680"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-title function_">void</span></span><span> </span><span><span class="hljs-params">(*InteractionFunction)</span></span><span><span class="hljs-params">(<span class="hljs-type">void</span></span></span><span>);
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *name;
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *description;
+    InteractionFunction interact;
+} Interactable;
+</span></span></code></div></div></pre>
+<p data-start="682" data-end="835">This lets you define objects like <code data-start="716" data-end="728">"terminal"</code>, <code data-start="730" data-end="741">"console"</code>, or <code data-start="746" data-end="764">"elevator panel"</code> that the player can interact with using a command like <code data-start="820" data-end="834">use terminal</code>.</p>
+<p data-start="837" data-end="893">Update your room struct to hold a list of interactables:</p>
+<pre class="overflow-visible!" data-start="895" data-end="1165"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-meta">#<span class="hljs-keyword">define</span></span></span><span> MAX_INTERACTABLES 4
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">char</span></span><span> *description;
+    </span><span><span class="hljs-type">int</span></span><span> exits[</span><span><span class="hljs-number">6</span></span><span>];
+    RoomType type;
+
+    </span><span><span class="hljs-comment">// Selector room fields as before...</span></span><span>
+    </span><span><span class="hljs-type">const</span></span><span> NPC *npc;
+
+    </span><span><span class="hljs-type">const</span></span><span> Interactable *interactables[MAX_INTERACTABLES];
+    </span><span><span class="hljs-type">int</span></span><span> num_interactables;
+} Room;
+</span></span></code></div></div></pre>
+<hr data-start="1167" data-end="1170">
+<h2 data-start="1172" data-end="1214">🗂️ Step 2: Implement the Computer Menu</h2>
+<pre class="overflow-visible!" data-start="1216" data-end="1994"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">interact_computer_terminal</span></span><span><span class="hljs-params">()</span></span><span> {
+    </span><span><span class="hljs-type">int</span></span><span> running = </span><span><span class="hljs-number">1</span></span><span>;
+    </span><span><span class="hljs-keyword">while</span></span><span> (running) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"\n[Computer Terminal]\n"</span></span><span>);
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"1. View logs\n"</span></span><span>);
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"2. Run diagnostic\n"</span></span><span>);
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"3. Exit\n"</span></span><span>);
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Choice: "</span></span><span>);
+
+        </span><span><span class="hljs-type">char</span></span><span> input[</span><span><span class="hljs-number">10</span></span><span>];
+        fgets(input, </span><span><span class="hljs-keyword">sizeof</span></span><span>(input), </span><span><span class="hljs-built_in">stdin</span></span><span>);
+        </span><span><span class="hljs-type">int</span></span><span> choice = atoi(input);
+
+        </span><span><span class="hljs-keyword">switch</span></span><span> (choice) {
+            </span><span><span class="hljs-keyword">case</span></span><span> </span><span><span class="hljs-number">1</span></span><span>:
+                </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Accessing logs...\n[LOG] Intruder detected.\n"</span></span><span>);
+                </span><span><span class="hljs-keyword">break</span></span><span>;
+            </span><span><span class="hljs-keyword">case</span></span><span> </span><span><span class="hljs-number">2</span></span><span>:
+                </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Running diagnostics... All systems nominal.\n"</span></span><span>);
+                </span><span><span class="hljs-keyword">break</span></span><span>;
+            </span><span><span class="hljs-keyword">case</span></span><span> </span><span><span class="hljs-number">3</span></span><span>:
+                running = </span><span><span class="hljs-number">0</span></span><span>;
+                </span><span><span class="hljs-keyword">break</span></span><span>;
+            </span><span><span class="hljs-keyword">default</span></span><span>:
+                </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Invalid option.\n"</span></span><span>);
+        }
+    }
+}
+</span></span></code></div></div></pre>
+<p data-start="1996" data-end="2079">You can implement more “mini-programs” this way, using their own input/output flow.</p>
+<hr data-start="2081" data-end="2084">
+<h2 data-start="2086" data-end="2129">🧱 Step 3: Define an Interactable Object</h2>
+<pre class="overflow-visible!" data-start="2131" data-end="2308"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">const</span></span><span> Interactable terminal = {
+    .name = </span><span><span class="hljs-string">"terminal"</span></span><span>,
+    .description = </span><span><span class="hljs-string">"A flickering computer terminal awaits input."</span></span><span>,
+    .interact = interact_computer_terminal
+};
+</span></span></code></div></div></pre>
+<hr data-start="2310" data-end="2313">
+<h2 data-start="2315" data-end="2359">🏠 Step 4: Attach Interactables to a Room</h2>
+<pre class="overflow-visible!" data-start="2361" data-end="2505"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span>rooms[</span><span><span class="hljs-number">4</span></span><span>] = (Room){
+    .description = </span><span><span class="hljs-string">"You are in the control room."</span></span><span>,
+    .num_interactables = </span><span><span class="hljs-number">1</span></span><span>,
+    .interactables = { &amp;terminal }
+};
+</span></span></code></div></div></pre>
+<hr data-start="2507" data-end="2510">
+<h2 data-start="2512" data-end="2554">🎮 Step 5: Player Uses the Interactable</h2>
+<p data-start="2556" data-end="2589">Support a <code data-start="2566" data-end="2580">use &lt;object&gt;</code> command:</p>
+<pre class="overflow-visible!" data-start="2591" data-end="2958"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_use_command</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> </span><span><span class="hljs-type">char</span></span><span> *target) {
+    Room *room = &amp;rooms[current_room];
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; room-&gt;num_interactables; i++) {
+        </span><span><span class="hljs-type">const</span></span><span> Interactable *obj = room-&gt;interactables[i];
+        </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strcmp</span></span><span>(target, obj-&gt;name) == </span><span><span class="hljs-number">0</span></span><span>) {
+            obj-&gt;interact();
+            </span><span><span class="hljs-keyword">return</span></span><span>;
+        }
+    }
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You see no %s to use.\n"</span></span><span>, target);
+}
+</span></span></code></div></div></pre>
+<p data-start="2960" data-end="2980">In your main parser:</p>
+<pre class="overflow-visible!" data-start="2982" data-end="3069"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strncmp</span></span><span>(command, </span><span><span class="hljs-string">"use "</span></span><span>, </span><span><span class="hljs-number">4</span></span><span>) == </span><span><span class="hljs-number">0</span></span><span>) {
+    handle_use_command(command + </span><span><span class="hljs-number">4</span></span><span>);
+}
+</span></span></code></div></div></pre>
+<hr data-start="3071" data-end="3074">
+<h2 data-start="3076" data-end="3090">🧠 Benefits</h2>
+<ul data-start="3092" data-end="3362">
+<li data-start="3092" data-end="3141">
+<p data-start="3094" data-end="3141"><strong data-start="3094" data-end="3105">Modular</strong>: Each "program" is just a function.</p>
+</li>
+<li data-start="3142" data-end="3272">
+<p data-start="3144" data-end="3272"><strong data-start="3144" data-end="3158">Expandable</strong>: You can implement mini-games, hacking interfaces, log readers, even visual puzzles (if using graphical display).</p>
+</li>
+<li data-start="3273" data-end="3362">
+<p data-start="3275" data-end="3362"><strong data-start="3275" data-end="3293">Consistent API</strong>: Works just like NPCs and dialogue – interactive content is unified.</p>
+</li>
+</ul>
+<hr data-start="3364" data-end="3367">
+<h2 data-start="3369" data-end="3392">🚀 Optional Upgrades</h2>
+<ul data-start="3394" data-end="3638">
+<li data-start="3394" data-end="3465">
+<p data-start="3396" data-end="3465">Add flags or states to control what's available in the computer menu.</p>
+</li>
+<li data-start="3466" data-end="3553">
+<p data-start="3468" data-end="3553">Use an enum and switch instead of strings for better performance on limited hardware.</p>
+</li>
+<li data-start="3554" data-end="3638">
+<p data-start="3556" data-end="3638">Store the <code data-start="3566" data-end="3580">Interactable</code> list in static memory if dynamic allocation is a concern.</p>
+</li>
+</ul>
+<hr data-start="3640" data-end="3643">
+<p data-start="3645" data-end="3774" data-is-last-node="" data-is-only-node="">Would you like a complete working example of a room with both a terminal and an NPC to show how both systems can coexist cleanly?</p></div></div></div></div><div class="flex absolute start-0 end-0 flex justify-start"><div class="touch:-me-2 touch:-ms-3.5 -ms-2.5 -me-1 flex items-center p-1 select-none -mt-1 focus-within:transition-none hover:transition-none duration-500 group-hover/turn-messages:delay-300 pointer-events-none [mask-image:linear-gradient(to_right,black_33%,transparent_66%)] [mask-size:300%_100%] [mask-position:100%_0%] motion-safe:transition-[mask-position] group-hover/turn-messages:pointer-events-auto group-hover/turn-messages:[mask-position:0_0] group-focus-within/turn-messages:pointer-events-auto group-focus-within/turn-messages:[mask-position:0_0] has-data-[state=open]:pointer-events-auto has-data-[state=open]:[mask-position:0_0]"><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="hidden"></span><span class="" data-state="closed"></span></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-9" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="7457727d-4e90-4aa6-be45-fc5234c45111" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">yes show me that</div></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-10" data-scroll-anchor="false"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="c0d1ab1c-0dd1-4077-b711-e8f11997d7f9" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4o"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="64">Here’s a <strong data-start="9" data-end="37">complete working example</strong> in C of a room containing:</p>
+<ul data-start="66" data-end="292">
+<li data-start="66" data-end="165">
+<p data-start="68" data-end="165">✅ An <strong data-start="73" data-end="80">NPC</strong> you can talk to, with simple branching dialogue and a side effect (unlocking a door)</p>
+</li>
+<li data-start="166" data-end="239">
+<p data-start="168" data-end="239">✅ A <strong data-start="172" data-end="193">computer terminal</strong> you can <code data-start="202" data-end="207">use</code>, with a simple menu of programs</p>
+</li>
+<li data-start="240" data-end="292">
+<p data-start="242" data-end="292">✅ A very lightweight game loop to demo interaction</p>
+</li>
+</ul>
+<p data-start="294" data-end="396">This code avoids dynamic memory allocation and assumes a very simple parser (<code data-start="371" data-end="377">talk</code> or <code data-start="381" data-end="394">use &lt;thing&gt;</code>).</p>
+<hr data-start="398" data-end="401">
+<h3 data-start="403" data-end="420">🧱 Structures</h3>
+<pre class="overflow-visible!" data-start="422" data-end="1271"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-meta">#<span class="hljs-keyword">include</span></span></span><span> </span><span><span class="hljs-string">&lt;stdio.h&gt;</span></span><span>
+</span><span><span class="hljs-meta">#<span class="hljs-keyword">include</span></span></span><span> </span><span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><span>
+</span><span><span class="hljs-meta">#<span class="hljs-keyword">include</span></span></span><span> </span><span><span class="hljs-string">&lt;string.h&gt;</span></span><span>
+
+</span><span><span class="hljs-comment">// ==== Dialogue System ====</span></span><span>
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-title function_">void</span></span><span> </span><span><span class="hljs-params">(*EffectFunction)</span></span><span><span class="hljs-params">(<span class="hljs-type">void</span></span></span><span>);
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *text;
+    </span><span><span class="hljs-type">int</span></span><span> next_node;
+    EffectFunction effect;
+} DialogueOption;
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *npc_line;
+    </span><span><span class="hljs-type">const</span></span><span> DialogueOption *options;
+    </span><span><span class="hljs-type">int</span></span><span> num_options;
+} DialogueNode;
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *name;
+    </span><span><span class="hljs-type">const</span></span><span> DialogueNode *dialogue;
+} NPC;
+
+</span><span><span class="hljs-comment">// ==== Interactable System ====</span></span><span>
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-title function_">void</span></span><span> </span><span><span class="hljs-params">(*InteractionFunction)</span></span><span><span class="hljs-params">(<span class="hljs-type">void</span></span></span><span>);
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *name;
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *description;
+    InteractionFunction interact;
+} Interactable;
+
+</span><span><span class="hljs-comment">// ==== Room System ====</span></span><span>
+
+</span><span><span class="hljs-meta">#<span class="hljs-keyword">define</span></span></span><span> MAX_INTERACTABLES 4
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *description;
+    </span><span><span class="hljs-type">const</span></span><span> NPC *npc;
+    </span><span><span class="hljs-type">const</span></span><span> Interactable *interactables[MAX_INTERACTABLES];
+    </span><span><span class="hljs-type">int</span></span><span> num_interactables;
+} Room;
+</span></span></code></div></div></pre>
+<hr data-start="1273" data-end="1276">
+<h3 data-start="1278" data-end="1295">🎮 Game State</h3>
+<pre class="overflow-visible!" data-start="1297" data-end="1370"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-comment">// Game state flags</span></span><span>
+</span><span><span class="hljs-type">int</span></span><span> door_unlocked = </span><span><span class="hljs-number">0</span></span><span>;
+</span><span><span class="hljs-type">int</span></span><span> current_room = </span><span><span class="hljs-number">0</span></span><span>;
+</span></span></code></div></div></pre>
+<hr data-start="1372" data-end="1375">
+<h3 data-start="1377" data-end="1410">🗣️ Dialogue System Functions</h3>
+<pre class="overflow-visible!" data-start="1412" data-end="2284"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">unlock_door</span></span><span><span class="hljs-params">()</span></span><span> {
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"[SYSTEM] You hear a distant click. The door is now unlocked.\n"</span></span><span>);
+    door_unlocked = </span><span><span class="hljs-number">1</span></span><span>;
+}
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">run_dialogue</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> DialogueNode *dialogue) {
+    </span><span><span class="hljs-type">int</span></span><span> current = </span><span><span class="hljs-number">0</span></span><span>;
+    </span><span><span class="hljs-keyword">while</span></span><span> (current &gt;= </span><span><span class="hljs-number">0</span></span><span>) {
+        </span><span><span class="hljs-type">const</span></span><span> DialogueNode *node = &amp;dialogue[current];
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"\n%s\n"</span></span><span>, node-&gt;npc_line);
+
+        </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; node-&gt;num_options; i++) {
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"  %d. %s\n"</span></span><span>, i + </span><span><span class="hljs-number">1</span></span><span>, node-&gt;options[i].text);
+        }
+
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Choose: "</span></span><span>);
+        </span><span><span class="hljs-type">char</span></span><span> input[</span><span><span class="hljs-number">10</span></span><span>];
+        fgets(input, </span><span><span class="hljs-keyword">sizeof</span></span><span>(input), </span><span><span class="hljs-built_in">stdin</span></span><span>);
+        </span><span><span class="hljs-type">int</span></span><span> choice = atoi(input) - </span><span><span class="hljs-number">1</span></span><span>;
+
+        </span><span><span class="hljs-keyword">if</span></span><span> (choice &gt;= </span><span><span class="hljs-number">0</span></span><span> &amp;&amp; choice &lt; node-&gt;num_options) {
+            </span><span><span class="hljs-type">const</span></span><span> DialogueOption *opt = &amp;node-&gt;options[choice];
+            </span><span><span class="hljs-keyword">if</span></span><span> (opt-&gt;effect) opt-&gt;effect();
+            current = opt-&gt;next_node;
+        } </span><span><span class="hljs-keyword">else</span></span><span> {
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Invalid choice.\n"</span></span><span>);
+        }
+    }
+}
+</span></span></code></div></div></pre>
+<hr data-start="2286" data-end="2289">
+<h3 data-start="2291" data-end="2328">🖥️ Interactable System Functions</h3>
+<pre class="overflow-visible!" data-start="2330" data-end="3102"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">interact_terminal</span></span><span><span class="hljs-params">()</span></span><span> {
+    </span><span><span class="hljs-type">int</span></span><span> running = </span><span><span class="hljs-number">1</span></span><span>;
+    </span><span><span class="hljs-keyword">while</span></span><span> (running) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"\n[Terminal Menu]\n"</span></span><span>);
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"1. Read system logs\n"</span></span><span>);
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"2. Run diagnostics\n"</span></span><span>);
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"3. Exit\n"</span></span><span>);
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Choice: "</span></span><span>);
+        </span><span><span class="hljs-type">char</span></span><span> input[</span><span><span class="hljs-number">10</span></span><span>];
+        fgets(input, </span><span><span class="hljs-keyword">sizeof</span></span><span>(input), </span><span><span class="hljs-built_in">stdin</span></span><span>);
+        </span><span><span class="hljs-type">int</span></span><span> choice = atoi(input);
+
+        </span><span><span class="hljs-keyword">switch</span></span><span> (choice) {
+            </span><span><span class="hljs-keyword">case</span></span><span> </span><span><span class="hljs-number">1</span></span><span>:
+                </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"[LOG] Unauthorized access detected in lab 3.\n"</span></span><span>);
+                </span><span><span class="hljs-keyword">break</span></span><span>;
+            </span><span><span class="hljs-keyword">case</span></span><span> </span><span><span class="hljs-number">2</span></span><span>:
+                </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Diagnostics complete: All systems nominal.\n"</span></span><span>);
+                </span><span><span class="hljs-keyword">break</span></span><span>;
+            </span><span><span class="hljs-keyword">case</span></span><span> </span><span><span class="hljs-number">3</span></span><span>:
+                running = </span><span><span class="hljs-number">0</span></span><span>;
+                </span><span><span class="hljs-keyword">break</span></span><span>;
+            </span><span><span class="hljs-keyword">default</span></span><span>:
+                </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Invalid choice.\n"</span></span><span>);
+        }
+    }
+}
+</span></span></code></div></div></pre>
+<hr data-start="3104" data-end="3107">
+<h3 data-start="3109" data-end="3127">🏗️ Data Setup</h3>
+<pre class="overflow-visible!" data-start="3129" data-end="3908"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-comment">// Dialogue</span></span><span>
+</span><span><span class="hljs-type">const</span></span><span> DialogueOption guard_node0_opts[] = {
+    { </span><span><span class="hljs-string">"Let me through!"</span></span><span>, </span><span><span class="hljs-number">1</span></span><span>, </span><span><span class="hljs-literal">NULL</span></span><span> },
+    { </span><span><span class="hljs-string">"Never mind."</span></span><span>, </span><span><span class="hljs-number">-1</span></span><span>, </span><span><span class="hljs-literal">NULL</span></span><span> }
+};
+
+</span><span><span class="hljs-type">const</span></span><span> DialogueOption guard_node1_opts[] = {
+    { </span><span><span class="hljs-string">"Thanks!"</span></span><span>, </span><span><span class="hljs-number">-1</span></span><span>, unlock_door }
+};
+
+</span><span><span class="hljs-type">const</span></span><span> DialogueNode guard_dialogue[] = {
+    { </span><span><span class="hljs-string">"Halt! No entry without clearance."</span></span><span>, guard_node0_opts, </span><span><span class="hljs-number">2</span></span><span> },
+    { </span><span><span class="hljs-string">"Fine. But I’m watching you."</span></span><span>, guard_node1_opts, </span><span><span class="hljs-number">1</span></span><span> }
+};
+
+</span><span><span class="hljs-type">const</span></span><span> NPC guard = {
+    </span><span><span class="hljs-string">"Guard"</span></span><span>,
+    guard_dialogue
+};
+
+</span><span><span class="hljs-comment">// Interactables</span></span><span>
+</span><span><span class="hljs-type">const</span></span><span> Interactable terminal = {
+    </span><span><span class="hljs-string">"terminal"</span></span><span>,
+    </span><span><span class="hljs-string">"A flickering screen shows a login prompt."</span></span><span>,
+    interact_terminal
+};
+
+</span><span><span class="hljs-comment">// Room</span></span><span>
+Room rooms[] = {
+    {
+        </span><span><span class="hljs-string">"You are in the security control room. A guard blocks the exit. A terminal glows in the corner."</span></span><span>,
+        &amp;guard,
+        { &amp;terminal },
+        </span><span><span class="hljs-number">1</span></span><span>
+    }
+};
+</span></span></code></div></div></pre>
+<hr data-start="3910" data-end="3913">
+<h3 data-start="3915" data-end="3932">🕹️ Game Loop</h3>
+<pre class="overflow-visible!" data-start="3934" data-end="5324"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_command</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> </span><span><span class="hljs-type">char</span></span><span> *command) {
+    Room *room = &amp;rooms[current_room];
+
+    </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strcmp</span></span><span>(command, </span><span><span class="hljs-string">"talk"</span></span><span>) == </span><span><span class="hljs-number">0</span></span><span>) {
+        </span><span><span class="hljs-keyword">if</span></span><span> (room-&gt;npc) {
+            run_dialogue(room-&gt;npc-&gt;dialogue);
+        } </span><span><span class="hljs-keyword">else</span></span><span> {
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"There’s no one to talk to.\n"</span></span><span>);
+        }
+
+    } </span><span><span class="hljs-keyword">else</span></span><span> </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strncmp</span></span><span>(command, </span><span><span class="hljs-string">"use "</span></span><span>, </span><span><span class="hljs-number">4</span></span><span>) == </span><span><span class="hljs-number">0</span></span><span>) {
+        </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *target = command + </span><span><span class="hljs-number">4</span></span><span>;
+        </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; room-&gt;num_interactables; i++) {
+            </span><span><span class="hljs-type">const</span></span><span> Interactable *obj = room-&gt;interactables[i];
+            </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strcmp</span></span><span>(target, obj-&gt;name) == </span><span><span class="hljs-number">0</span></span><span>) {
+                obj-&gt;interact();
+                </span><span><span class="hljs-keyword">return</span></span><span>;
+            }
+        }
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"There’s no %s here to use.\n"</span></span><span>, target);
+
+    } </span><span><span class="hljs-keyword">else</span></span><span> </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strcmp</span></span><span>(command, </span><span><span class="hljs-string">"look"</span></span><span>) == </span><span><span class="hljs-number">0</span></span><span>) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"%s\n"</span></span><span>, room-&gt;description);
+        </span><span><span class="hljs-keyword">if</span></span><span> (room-&gt;npc) {
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You see %s.\n"</span></span><span>, room-&gt;npc-&gt;name);
+        }
+        </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; room-&gt;num_interactables; i++) {
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"There is a %s: %s\n"</span></span><span>,
+                   room-&gt;interactables[i]-&gt;name,
+                   room-&gt;interactables[i]-&gt;description);
+        }
+
+    } </span><span><span class="hljs-keyword">else</span></span><span> </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strcmp</span></span><span>(command, </span><span><span class="hljs-string">"exit"</span></span><span>) == </span><span><span class="hljs-number">0</span></span><span>) {
+        </span><span><span class="hljs-keyword">if</span></span><span> (door_unlocked) {
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You leave through the now-unlocked door. Well done!\n"</span></span><span>);
+            </span><span><span class="hljs-built_in">exit</span></span><span>(</span><span><span class="hljs-number">0</span></span><span>);
+        } </span><span><span class="hljs-keyword">else</span></span><span> {
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"The door is locked.\n"</span></span><span>);
+        }
+
+    } </span><span><span class="hljs-keyword">else</span></span><span> {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Unknown command.\n"</span></span><span>);
+    }
+}
+</span></span></code></div></div></pre>
+<hr data-start="5326" data-end="5329">
+<h3 data-start="5331" data-end="5351">🏁 Main Function</h3>
+<pre class="overflow-visible!" data-start="5353" data-end="5697"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">int</span></span><span> </span><span><span class="hljs-title function_">main</span></span><span><span class="hljs-params">()</span></span><span> {
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Welcome to the adventure game!\nType 'look', 'talk', 'use &lt;thing&gt;', or 'exit'\n"</span></span><span>);
+
+    </span><span><span class="hljs-type">char</span></span><span> input[</span><span><span class="hljs-number">100</span></span><span>];
+    </span><span><span class="hljs-keyword">while</span></span><span> (</span><span><span class="hljs-number">1</span></span><span>) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"\n&gt; "</span></span><span>);
+        fgets(input, </span><span><span class="hljs-keyword">sizeof</span></span><span>(input), </span><span><span class="hljs-built_in">stdin</span></span><span>);
+        </span><span><span class="hljs-comment">// remove newline</span></span><span>
+        input[</span><span><span class="hljs-built_in">strcspn</span></span><span>(input, </span><span><span class="hljs-string">"\n"</span></span><span>)] = </span><span><span class="hljs-number">0</span></span><span>;
+
+        handle_command(input);
+    }
+
+    </span><span><span class="hljs-keyword">return</span></span><span> </span><span><span class="hljs-number">0</span></span><span>;
+}
+</span></span></code></div></div></pre>
+<hr data-start="5699" data-end="5702">
+<h2 data-start="5704" data-end="5723">✅ Output Example</h2>
+<pre class="overflow-visible!" data-start="5725" data-end="6319"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">pgsql</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre!"><span><span>&gt; look
+You are </span><span><span class="hljs-keyword">in</span></span><span> the </span><span><span class="hljs-keyword">security</span></span><span> control room. A guard blocks the </span><span><span class="hljs-keyword">exit</span></span><span>. A terminal glows </span><span><span class="hljs-keyword">in</span></span><span> the corner.
+You see Guard.
+There </span><span><span class="hljs-keyword">is</span></span><span> a terminal: A flickering screen shows a </span><span><span class="hljs-keyword">login</span></span><span> prompt.
+
+&gt; talk
+Halt! </span><span><span class="hljs-keyword">No</span></span><span> entry </span><span><span class="hljs-keyword">without</span></span><span> clearance.
+  </span><span><span class="hljs-number">1.</span></span><span> Let me through!
+  </span><span><span class="hljs-number">2.</span></span><span> Never mind.
+Choose: </span><span><span class="hljs-number">1</span></span><span>
+Fine. But I’m watching you.
+  </span><span><span class="hljs-number">1.</span></span><span> Thanks!
+Choose: </span><span><span class="hljs-number">1</span></span><span>
+[</span><span><span class="hljs-keyword">SYSTEM</span></span><span>] You hear a distant click. The door </span><span><span class="hljs-keyword">is</span></span><span> now unlocked.
+
+&gt; use terminal
+
+[Terminal Menu]
+</span><span><span class="hljs-number">1.</span></span><span> </span><span><span class="hljs-keyword">Read</span></span><span> </span><span><span class="hljs-keyword">system</span></span><span> logs
+</span><span><span class="hljs-number">2.</span></span><span> Run </span><span><span class="hljs-keyword">diagnostics</span></span><span>
+</span><span><span class="hljs-number">3.</span></span><span> </span><span><span class="hljs-keyword">Exit</span></span><span>
+Choice: </span><span><span class="hljs-number">1</span></span><span>
+[</span><span><span class="hljs-keyword">LOG</span></span><span>] Unauthorized </span><span><span class="hljs-keyword">access</span></span><span> detected </span><span><span class="hljs-keyword">in</span></span><span> lab </span><span><span class="hljs-number">3.</span></span><span>
+Choice: </span><span><span class="hljs-number">3</span></span><span>
+
+&gt; </span><span><span class="hljs-keyword">exit</span></span><span>
+You leave through the now-unlocked door. Well done!
+</span></span></code></div></div></pre>
+<hr data-start="6321" data-end="6324">
+<p data-start="6326" data-end="6400" data-is-last-node="" data-is-only-node="">Would you like to add inventory and items next? Or maybe room transitions?</p></div></div></div></div><div class="flex absolute start-0 end-0 flex justify-start"><div class="touch:-me-2 touch:-ms-3.5 -ms-2.5 -me-1 flex items-center p-1 select-none -mt-1 focus-within:transition-none hover:transition-none duration-500 group-hover/turn-messages:delay-300 pointer-events-none [mask-image:linear-gradient(to_right,black_33%,transparent_66%)] [mask-size:300%_100%] [mask-position:100%_0%] motion-safe:transition-[mask-position] group-hover/turn-messages:pointer-events-auto group-hover/turn-messages:[mask-position:0_0] group-focus-within/turn-messages:pointer-events-auto group-focus-within/turn-messages:[mask-position:0_0] has-data-[state=open]:pointer-events-auto has-data-[state=open]:[mask-position:0_0]"><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="hidden"></span><span class="" data-state="closed"></span></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-11" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="3e7ab27c-9f51-4e29-8ac7-427399d0567e" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">add in the code for an elevator/taxi that we designed earlier</div></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-12" data-scroll-anchor="false"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="e6d63009-b8e6-48aa-856d-38672595eb57" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4o"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="114">Here’s how to <strong data-start="14" data-end="41">add an elevator or taxi</strong> system using the same clean structure as the previous code. This system:</p>
+<ul data-start="116" data-end="330">
+<li data-start="116" data-end="168">
+<p data-start="118" data-end="168">✅ Presents the player with a list of destinations.</p>
+</li>
+<li data-start="169" data-end="243">
+<p data-start="171" data-end="243">✅ Lets you define different elevators/taxis with different destinations.</p>
+</li>
+<li data-start="244" data-end="330">
+<p data-start="246" data-end="330">✅ Avoids special-case logic by making elevators just another type of <code data-start="315" data-end="329">Interactable</code>.</p>
+</li>
+</ul>
+<hr data-start="332" data-end="335">
+<h3 data-start="337" data-end="376">🛗 Step 1: Add Destination Handling</h3>
+<p data-start="378" data-end="545">Extend the <code data-start="389" data-end="403">Interactable</code> system with a shared function that can handle <strong data-start="450" data-end="475">destination selection</strong>, and trigger effects such as moving the player or printing a message.</p>
+<pre class="overflow-visible!" data-start="547" data-end="798"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *name;
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *description;
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *dest_names[</span><span><span class="hljs-number">5</span></span><span>];  </span><span><span class="hljs-comment">// max 5 destinations</span></span><span>
+    </span><span><span class="hljs-type">int</span></span><span> dest_ids[</span><span><span class="hljs-number">5</span></span><span>];            </span><span><span class="hljs-comment">// corresponding room ids (or use special IDs)</span></span><span>
+    </span><span><span class="hljs-type">int</span></span><span> num_dests;
+} DestinationSelector;
+</span></span></code></div></div></pre>
+<p data-start="800" data-end="854">We'll create a handler that asks the user where to go:</p>
+<pre class="overflow-visible!" data-start="856" data-end="1716"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">interact_selector</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> DestinationSelector *selector) {
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"\n%s\n"</span></span><span>, selector-&gt;description);
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; selector-&gt;num_dests; i++) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"  %d. %s\n"</span></span><span>, i + </span><span><span class="hljs-number">1</span></span><span>, selector-&gt;dest_names[i]);
+    }
+
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Choose destination: "</span></span><span>);
+    </span><span><span class="hljs-type">char</span></span><span> input[</span><span><span class="hljs-number">10</span></span><span>];
+    fgets(input, </span><span><span class="hljs-keyword">sizeof</span></span><span>(input), </span><span><span class="hljs-built_in">stdin</span></span><span>);
+    </span><span><span class="hljs-type">int</span></span><span> choice = atoi(input) - </span><span><span class="hljs-number">1</span></span><span>;
+
+    </span><span><span class="hljs-keyword">if</span></span><span> (choice &gt;= </span><span><span class="hljs-number">0</span></span><span> &amp;&amp; choice &lt; selector-&gt;num_dests) {
+        </span><span><span class="hljs-type">int</span></span><span> dest = selector-&gt;dest_ids[choice];
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Travelling to %s...\n"</span></span><span>, selector-&gt;dest_names[choice]);
+
+        </span><span><span class="hljs-keyword">if</span></span><span> (dest &gt;= </span><span><span class="hljs-number">0</span></span><span>) {
+            current_room = dest;
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"[SYSTEM] You arrive at your destination.\n"</span></span><span>);
+            handle_command(</span><span><span class="hljs-string">"look"</span></span><span>);
+        } </span><span><span class="hljs-keyword">else</span></span><span> {
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"[SYSTEM] That destination isn't implemented yet.\n"</span></span><span>);
+        }
+    } </span><span><span class="hljs-keyword">else</span></span><span> {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Invalid choice.\n"</span></span><span>);
+    }
+}
+</span></span></code></div></div></pre>
+<hr data-start="1718" data-end="1721">
+<h3 data-start="1723" data-end="1764">🚕 Step 2: Wrap It As an Interactable</h3>
+<p data-start="1766" data-end="1852">We create a wrapper <code data-start="1786" data-end="1796">interact</code> function that can be used in the <code data-start="1830" data-end="1844">Interactable</code> struct:</p>
+<pre class="overflow-visible!" data-start="1854" data-end="2341"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-comment">// Bridge structure</span></span><span>
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> Interactable base;
+    </span><span><span class="hljs-type">const</span></span><span> DestinationSelector *selector;
+} SelectorInteractable;
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">wrapped_selector_interact</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> SelectorInteractable *wrapped) {
+    interact_selector(wrapped-&gt;selector);
+}
+
+</span><span><span class="hljs-comment">// Generic trampoline function to match Interactable signature</span></span><span>
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">generic_selector_interact</span></span><span><span class="hljs-params">(<span class="hljs-type">void</span></span></span><span>) {
+    </span><span><span class="hljs-keyword">extern</span></span><span> </span><span><span class="hljs-type">const</span></span><span> SelectorInteractable elevator_interactable;  </span><span><span class="hljs-comment">// forward</span></span><span>
+    wrapped_selector_interact(&amp;elevator_interactable);
+}
+</span></span></code></div></div></pre>
+<hr data-start="2343" data-end="2346">
+<h3 data-start="2348" data-end="2380">🗺️ Step 3: Add Another Room</h3>
+<p data-start="2382" data-end="2431">Add a second room for the elevator/taxi to go to:</p>
+<pre class="overflow-visible!" data-start="2433" data-end="2751"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span>Room rooms[] = {
+    {
+        </span><span><span class="hljs-string">"You are in the security control room. A guard blocks the exit. A terminal glows in the corner."</span></span><span>,
+        &amp;guard,
+        { &amp;terminal },
+        </span><span><span class="hljs-number">1</span></span><span>
+    },
+    {
+        </span><span><span class="hljs-string">"You arrive at the research lab. It’s quiet... too quiet."</span></span><span>,
+        </span><span><span class="hljs-literal">NULL</span></span><span>,
+        { </span><span><span class="hljs-literal">NULL</span></span><span> },
+        </span><span><span class="hljs-number">0</span></span><span>
+    }
+};
+</span></span></code></div></div></pre>
+<hr data-start="2753" data-end="2756">
+<h3 data-start="2758" data-end="2793">🏗️ Step 4: Define the Elevator</h3>
+<p data-start="2795" data-end="2850">Create the selector and bind it into an <code data-start="2835" data-end="2849">Interactable</code>:</p>
+<pre class="overflow-visible!" data-start="2852" data-end="3215"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">const</span></span><span> DestinationSelector elevator_selector = {
+    </span><span><span class="hljs-string">"Elevator"</span></span><span>,
+    </span><span><span class="hljs-string">"A metal panel shows floor buttons 1 to 2."</span></span><span>,
+    { </span><span><span class="hljs-string">"Security Control"</span></span><span>, </span><span><span class="hljs-string">"Research Lab"</span></span><span> },
+    { </span><span><span class="hljs-number">0</span></span><span>, </span><span><span class="hljs-number">1</span></span><span> },
+    </span><span><span class="hljs-number">2</span></span><span>
+};
+
+</span><span><span class="hljs-type">const</span></span><span> SelectorInteractable elevator_interactable = {
+    { </span><span><span class="hljs-string">"elevator"</span></span><span>, </span><span><span class="hljs-string">"A control panel awaits your floor selection."</span></span><span>, generic_selector_interact },
+    &amp;elevator_selector
+};
+</span></span></code></div></div></pre>
+<p data-start="3217" data-end="3249">Now add it to your initial room:</p>
+<pre class="overflow-visible!" data-start="3251" data-end="3615"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span>Room rooms[] = {
+    {
+        </span><span><span class="hljs-string">"You are in the security control room. A guard blocks the exit. A terminal glows in the corner."</span></span><span>,
+        &amp;guard,
+        { &amp;terminal, (</span><span><span class="hljs-type">const</span></span><span> Interactable *)&amp;elevator_interactable },
+        </span><span><span class="hljs-number">2</span></span><span>
+    },
+    {
+        </span><span><span class="hljs-string">"You arrive at the research lab. It’s quiet... too quiet."</span></span><span>,
+        </span><span><span class="hljs-literal">NULL</span></span><span>,
+        { </span><span><span class="hljs-literal">NULL</span></span><span> },
+        </span><span><span class="hljs-number">0</span></span><span>
+    }
+};
+</span></span></code></div></div></pre>
+<p data-start="3617" data-end="3704">You can rename <code data-start="3632" data-end="3644">"elevator"</code> to <code data-start="3648" data-end="3656">"taxi"</code> or make more of these by copying the structure.</p>
+<hr data-start="3706" data-end="3709">
+<h3 data-start="3711" data-end="3729">✅ Test Example</h3>
+<pre class="overflow-visible!" data-start="3731" data-end="3987"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">markdown</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre!"><span><span><span class="hljs-quote">&gt; use elevator</span></span><span>
+
+A metal panel shows floor buttons 1 to 2.
+</span><span><span class="hljs-bullet">  1.</span></span><span> Security Control
+</span><span><span class="hljs-bullet">  2.</span></span><span> Research Lab
+Choose destination: 2
+Travelling to Research Lab...
+[SYSTEM] You arrive at your destination.
+
+You arrive at the research lab. It’s quiet... too quiet.
+</span></span></code></div></div></pre>
+<hr data-start="3989" data-end="3992">
+<h3 data-start="3994" data-end="4009">Next Steps?</h3>
+<p data-start="4011" data-end="4021">You could:</p>
+<ul data-start="4022" data-end="4166">
+<li data-start="4022" data-end="4075">
+<p data-start="4024" data-end="4075">Allow some destinations to require unlocking first.</p>
+</li>
+<li data-start="4076" data-end="4104">
+<p data-start="4078" data-end="4104">Add a "fare" for the taxi.</p>
+</li>
+<li data-start="4105" data-end="4166">
+<p data-start="4107" data-end="4166">Share <code data-start="4113" data-end="4134">DestinationSelector</code> between multiple interactables.</p>
+</li>
+</ul>
+<p data-start="4168" data-end="4235" data-is-last-node="" data-is-only-node="">Want to see how to share selectors or make the system more modular?</p></div></div></div></div><div class="flex absolute start-0 end-0 flex justify-start"><div class="touch:-me-2 touch:-ms-3.5 -ms-2.5 -me-1 flex items-center p-1 select-none -mt-1 focus-within:transition-none hover:transition-none duration-500 group-hover/turn-messages:delay-300 pointer-events-none [mask-image:linear-gradient(to_right,black_33%,transparent_66%)] [mask-size:300%_100%] [mask-position:100%_0%] motion-safe:transition-[mask-position] group-hover/turn-messages:pointer-events-auto group-hover/turn-messages:[mask-position:0_0] group-focus-within/turn-messages:pointer-events-auto group-focus-within/turn-messages:[mask-position:0_0] has-data-[state=open]:pointer-events-auto has-data-[state=open]:[mask-position:0_0]"><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="hidden"></span><span class="" data-state="closed"></span></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-13" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="0e1767c6-2f8c-4b4f-84d0-ce8041963166" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">make it more modular and provide me with a complete code listing</div></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-14" data-scroll-anchor="true"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="47abd0a1-912c-446b-9310-e7e4f3bf00dc" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4o"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="87">Here's a <strong data-start="9" data-end="38">complete, modular version</strong> of the text adventure framework in C, including:</p>
+<ul data-start="89" data-end="224">
+<li data-start="89" data-end="115">
+<p data-start="91" data-end="115">Rooms and basic movement</p>
+</li>
+<li data-start="116" data-end="137">
+<p data-start="118" data-end="137">Interactable system</p>
+</li>
+<li data-start="138" data-end="183">
+<p data-start="140" data-end="183">Destination selectors (for elevators/taxis)</p>
+</li>
+<li data-start="184" data-end="224">
+<p data-start="186" data-end="224">Modular components with reusable logic</p>
+</li>
+</ul>
+<p data-start="226" data-end="332">It's simple, efficient, and avoids special-case logic. This will compile cleanly in <code data-start="310" data-end="315">gcc</code> on any platform.</p>
+<hr data-start="334" data-end="337">
+<h3 data-start="339" data-end="353">✅ Features</h3>
+<ul data-start="355" data-end="529">
+<li data-start="355" data-end="408">
+<p data-start="357" data-end="408">Modular interactable system with callback functions</p>
+</li>
+<li data-start="409" data-end="488">
+<p data-start="411" data-end="488">Destination selector that can be reused (for elevators, taxis, portals, etc.)</p>
+</li>
+<li data-start="489" data-end="529">
+<p data-start="491" data-end="529">Extensible design for limited hardware</p>
+</li>
+</ul>
+<hr data-start="531" data-end="534">
+<h3 data-start="536" data-end="557">🧠 Design Summary</h3>
+<ul data-start="559" data-end="749">
+<li data-start="559" data-end="598">
+<p data-start="561" data-end="598"><code data-start="561" data-end="567">Room</code> stores interactables and exits</p>
+</li>
+<li data-start="599" data-end="638">
+<p data-start="601" data-end="638"><code data-start="601" data-end="615">Interactable</code> is a generic interface</p>
+</li>
+<li data-start="639" data-end="691">
+<p data-start="641" data-end="691"><code data-start="641" data-end="662">DestinationSelector</code> holds destinations and names</p>
+</li>
+<li data-start="692" data-end="749">
+<p data-start="694" data-end="749">Selector logic is reused via a trampoline-style wrapper</p>
+</li>
+</ul>
+<hr data-start="751" data-end="754">
+<h3 data-start="756" data-end="780">💾 Full Code Listing</h3>
+<pre class="overflow-visible!" data-start="782" data-end="5101"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-meta">#<span class="hljs-keyword">include</span></span></span><span> </span><span><span class="hljs-string">&lt;stdio.h&gt;</span></span><span>
+</span><span><span class="hljs-meta">#<span class="hljs-keyword">include</span></span></span><span> </span><span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><span>
+</span><span><span class="hljs-meta">#<span class="hljs-keyword">include</span></span></span><span> </span><span><span class="hljs-string">&lt;string.h&gt;</span></span><span>
+
+</span><span><span class="hljs-meta">#<span class="hljs-keyword">define</span></span></span><span> MAX_INTERACTABLES 4
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> </span><span><span class="hljs-title">Interactable</span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *name;
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *description;
+    </span><span><span class="hljs-type">void</span></span><span> (*interact)(</span><span><span class="hljs-type">void</span></span><span>);
+} Interactable;
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> </span><span><span class="hljs-title">Room</span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *description;
+    </span><span><span class="hljs-type">const</span></span><span> Interactable *interactables[MAX_INTERACTABLES];
+    </span><span><span class="hljs-type">int</span></span><span> num_interactables;
+} Room;
+
+</span><span><span class="hljs-comment">// Forward declaration of current_room index</span></span><span>
+</span><span><span class="hljs-type">int</span></span><span> current_room = </span><span><span class="hljs-number">0</span></span><span>;
+
+</span><span><span class="hljs-comment">// ---- Destination Selector System ----</span></span><span>
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *name;
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *description;
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *dest_names[</span><span><span class="hljs-number">5</span></span><span>];
+    </span><span><span class="hljs-type">int</span></span><span> dest_ids[</span><span><span class="hljs-number">5</span></span><span>];
+    </span><span><span class="hljs-type">int</span></span><span> num_dests;
+} DestinationSelector;
+
+</span><span><span class="hljs-comment">// The generic selector logic</span></span><span>
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">interact_selector</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> DestinationSelector *selector) {
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"\n%s\n"</span></span><span>, selector-&gt;description);
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; selector-&gt;num_dests; i++) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"  %d. %s\n"</span></span><span>, i + </span><span><span class="hljs-number">1</span></span><span>, selector-&gt;dest_names[i]);
+    }
+
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Choose destination: "</span></span><span>);
+    </span><span><span class="hljs-type">char</span></span><span> input[</span><span><span class="hljs-number">10</span></span><span>];
+    fgets(input, </span><span><span class="hljs-keyword">sizeof</span></span><span>(input), </span><span><span class="hljs-built_in">stdin</span></span><span>);
+    </span><span><span class="hljs-type">int</span></span><span> choice = atoi(input) - </span><span><span class="hljs-number">1</span></span><span>;
+
+    </span><span><span class="hljs-keyword">if</span></span><span> (choice &gt;= </span><span><span class="hljs-number">0</span></span><span> &amp;&amp; choice &lt; selector-&gt;num_dests) {
+        </span><span><span class="hljs-type">int</span></span><span> dest = selector-&gt;dest_ids[choice];
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Travelling to %s...\n"</span></span><span>, selector-&gt;dest_names[choice]);
+        </span><span><span class="hljs-keyword">if</span></span><span> (dest &gt;= </span><span><span class="hljs-number">0</span></span><span>) {
+            current_room = dest;
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"[SYSTEM] You arrive at your destination.\n"</span></span><span>);
+        } </span><span><span class="hljs-keyword">else</span></span><span> {
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"[SYSTEM] That destination is unavailable.\n"</span></span><span>);
+        }
+    } </span><span><span class="hljs-keyword">else</span></span><span> {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Invalid choice.\n"</span></span><span>);
+    }
+}
+
+</span><span><span class="hljs-comment">// Struct that links selector to an interactable</span></span><span>
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    Interactable base;
+    </span><span><span class="hljs-type">const</span></span><span> DestinationSelector *selector;
+} SelectorInteractable;
+
+</span><span><span class="hljs-comment">// Global selector objects (can reuse!)</span></span><span>
+</span><span><span class="hljs-type">const</span></span><span> DestinationSelector elevator_selector = {
+    </span><span><span class="hljs-string">"elevator"</span></span><span>,
+    </span><span><span class="hljs-string">"A panel with floor buttons is glowing softly."</span></span><span>,
+    { </span><span><span class="hljs-string">"Lobby"</span></span><span>, </span><span><span class="hljs-string">"Research Lab"</span></span><span> },
+    { </span><span><span class="hljs-number">0</span></span><span>, </span><span><span class="hljs-number">1</span></span><span> },
+    </span><span><span class="hljs-number">2</span></span><span>
+};
+
+</span><span><span class="hljs-type">const</span></span><span> SelectorInteractable elevator = {
+    {
+        </span><span><span class="hljs-string">"elevator"</span></span><span>,
+        </span><span><span class="hljs-string">"A control panel for selecting a destination."</span></span><span>,
+        </span><span><span class="hljs-literal">NULL</span></span><span>  </span><span><span class="hljs-comment">// Will be set below</span></span><span>
+    },
+    &amp;elevator_selector
+};
+
+</span><span><span class="hljs-comment">// Forward declarations of interactable trampoline functions</span></span><span>
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">elevator_interact</span></span><span><span class="hljs-params">(<span class="hljs-type">void</span></span></span><span>) {
+    interact_selector(elevator.selector);
+}
+
+</span><span><span class="hljs-comment">// ---- Rooms ----</span></span><span>
+
+Room rooms[] = {
+    {
+        </span><span><span class="hljs-string">"You are in the building lobby. A dusty info board hangs on the wall."</span></span><span>,
+        { </span><span><span class="hljs-literal">NULL</span></span><span> },  </span><span><span class="hljs-comment">// We'll insert elevator later</span></span><span>
+        </span><span><span class="hljs-number">0</span></span><span>
+    },
+    {
+        </span><span><span class="hljs-string">"You are in the research lab. The smell of ozone lingers."</span></span><span>,
+        { </span><span><span class="hljs-literal">NULL</span></span><span> },
+        </span><span><span class="hljs-number">0</span></span><span>
+    }
+};
+
+</span><span><span class="hljs-comment">// ---- Game Command Handler ----</span></span><span>
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_command</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> </span><span><span class="hljs-type">char</span></span><span> *command) {
+    </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strcmp</span></span><span>(command, </span><span><span class="hljs-string">"look"</span></span><span>) == </span><span><span class="hljs-number">0</span></span><span>) {
+        Room *room = &amp;rooms[current_room];
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"\n%s\n"</span></span><span>, room-&gt;description);
+        </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; room-&gt;num_interactables; i++) {
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You see a %s here: %s\n"</span></span><span>, room-&gt;interactables[i]-&gt;name, room-&gt;interactables[i]-&gt;description);
+        }
+    } </span><span><span class="hljs-keyword">else</span></span><span> </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strncmp</span></span><span>(command, </span><span><span class="hljs-string">"use "</span></span><span>, </span><span><span class="hljs-number">4</span></span><span>) == </span><span><span class="hljs-number">0</span></span><span>) {
+        </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *target = command + </span><span><span class="hljs-number">4</span></span><span>;
+        Room *room = &amp;rooms[current_room];
+        </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; room-&gt;num_interactables; i++) {
+            </span><span><span class="hljs-keyword">if</span></span><span> (room-&gt;interactables[i] &amp;&amp; </span><span><span class="hljs-built_in">strcmp</span></span><span>(room-&gt;interactables[i]-&gt;name, target) == </span><span><span class="hljs-number">0</span></span><span>) {
+                room-&gt;interactables[i]-&gt;interact();
+                </span><span><span class="hljs-keyword">return</span></span><span>;
+            }
+        }
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"There is no '%s' to use here.\n"</span></span><span>, target);
+    } </span><span><span class="hljs-keyword">else</span></span><span> </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strcmp</span></span><span>(command, </span><span><span class="hljs-string">"help"</span></span><span>) == </span><span><span class="hljs-number">0</span></span><span>) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Available commands: look, use &lt;thing&gt;, help, quit\n"</span></span><span>);
+    } </span><span><span class="hljs-keyword">else</span></span><span> {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"I don't understand that.\n"</span></span><span>);
+    }
+}
+
+</span><span><span class="hljs-comment">// ---- Main Game Loop ----</span></span><span>
+
+</span><span><span class="hljs-type">int</span></span><span> </span><span><span class="hljs-title function_">main</span></span><span><span class="hljs-params">(<span class="hljs-type">void</span></span></span><span>) {
+    </span><span><span class="hljs-comment">// Hook up interactable function pointers at runtime</span></span><span>
+    ((Interactable *)&amp;elevator)-&gt;interact = elevator_interact;
+
+    </span><span><span class="hljs-comment">// Add elevator to both rooms</span></span><span>
+    rooms[</span><span><span class="hljs-number">0</span></span><span>].interactables[</span><span><span class="hljs-number">0</span></span><span>] = (Interactable *)&amp;elevator;
+    rooms[</span><span><span class="hljs-number">0</span></span><span>].num_interactables = </span><span><span class="hljs-number">1</span></span><span>;
+    rooms[</span><span><span class="hljs-number">1</span></span><span>].interactables[</span><span><span class="hljs-number">0</span></span><span>] = (Interactable *)&amp;elevator;
+    rooms[</span><span><span class="hljs-number">1</span></span><span>].num_interactables = </span><span><span class="hljs-number">1</span></span><span>;
+
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Welcome to the Modular Text Adventure!\n"</span></span><span>);
+    handle_command(</span><span><span class="hljs-string">"look"</span></span><span>);
+
+    </span><span><span class="hljs-type">char</span></span><span> input[</span><span><span class="hljs-number">64</span></span><span>];
+    </span><span><span class="hljs-keyword">while</span></span><span> (</span><span><span class="hljs-number">1</span></span><span>) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"\n&gt; "</span></span><span>);
+        </span><span><span class="hljs-keyword">if</span></span><span> (!fgets(input, </span><span><span class="hljs-keyword">sizeof</span></span><span>(input), </span><span><span class="hljs-built_in">stdin</span></span><span>)) </span><span><span class="hljs-keyword">break</span></span><span>;
+        input[</span><span><span class="hljs-built_in">strcspn</span></span><span>(input, </span><span><span class="hljs-string">"\n"</span></span><span>)] = </span><span><span class="hljs-number">0</span></span><span>;  </span><span><span class="hljs-comment">// Remove newline</span></span><span>
+
+        </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strcmp</span></span><span>(input, </span><span><span class="hljs-string">"quit"</span></span><span>) == </span><span><span class="hljs-number">0</span></span><span>) {
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Goodbye!\n"</span></span><span>);
+            </span><span><span class="hljs-keyword">break</span></span><span>;
+        }
+
+        handle_command(input);
+    }
+
+    </span><span><span class="hljs-keyword">return</span></span><span> </span><span><span class="hljs-number">0</span></span><span>;
+}
+</span></span></code></div></div></pre>
+<hr data-start="5103" data-end="5106">
+<h3 data-start="5108" data-end="5130">🔧 Compile and Run</h3>
+<pre class="overflow-visible!" data-start="5132" data-end="5184"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">bash</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>gcc -o adventure adventure.c
+./adventure
+</span></span></code></div></div></pre>
+<hr data-start="5186" data-end="5189">
+<h3 data-start="5191" data-end="5216">🧩 Customization Tips</h3>
+<ul data-start="5218" data-end="5456">
+<li data-start="5218" data-end="5292">
+<p data-start="5220" data-end="5292">Add more <code data-start="5229" data-end="5250">DestinationSelector</code> instances (e.g. taxi to different cities)</p>
+</li>
+<li data-start="5293" data-end="5330">
+<p data-start="5295" data-end="5330">Assign a <code data-start="5304" data-end="5310">cost</code> to each destination</p>
+</li>
+<li data-start="5331" data-end="5367">
+<p data-start="5333" data-end="5367">Add <code data-start="5337" data-end="5345">locked</code> flags to destinations</p>
+</li>
+<li data-start="5368" data-end="5456">
+<p data-start="5370" data-end="5456">Create other types of <code data-start="5392" data-end="5406">Interactable</code> by defining new structs with matching trampolines</p>
+</li>
+</ul>
+<hr data-start="5458" data-end="5461">
+<p data-start="5463" data-end="5523" data-is-last-node="" data-is-only-node="">Want to expand this with an NPC or a computer terminal next?</p></div></div></div></div><div class="flex absolute start-0 end-0 flex justify-start"><div class="touch:-me-2 touch:-ms-3.5 -ms-2.5 -me-1 flex items-center p-1 select-none -mt-1 focus-within:transition-none hover:transition-none duration-500 group-hover/turn-messages:delay-300 pointer-events-none [mask-image:linear-gradient(to_right,black_33%,transparent_66%)] [mask-size:300%_100%] [mask-position:100%_0%] motion-safe:transition-[mask-position] group-hover/turn-messages:pointer-events-auto group-hover/turn-messages:[mask-position:0_0] group-focus-within/turn-messages:pointer-events-auto group-focus-within/turn-messages:[mask-position:0_0] has-data-[state=open]:pointer-events-auto has-data-[state=open]:[mask-position:0_0]"><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="hidden"></span><span class="" data-state="closed"></span></div></div></div></div></div></div></article><div aria-hidden="true" data-edge="true" class="pointer-events-none h-px w-px"></div><div></div><div style="opacity: 1;"></div></div></div></div></div><div id="thread-bottom-container" class="isolate z-3 w-full basis-auto has-data-has-thread-error:pt-2 has-data-has-thread-error:[box-shadow:var(--sharp-edge-bottom-shadow)] md:border-transparent md:pt-0 dark:border-white/20 md:dark:border-transparent flex flex-col"><div id="thread-bottom"><div class="text-base mx-auto [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6"><div class="flex justify-center empty:hidden"></div><div class="max-xs:[--force-hide-label:none] relative z-1 flex h-full max-w-full flex-1 flex-col" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«rge»" data-state="closed"><div class="absolute start-0 end-0 bottom-full z-20"></div><form class="w-full [view-transition-name:var(--vt-composer)]" data-type="unified-composer"><div class="flex w-full cursor-text flex-col items-center justify-center rounded-[28px] bg-clip-padding contain-inline-size overflow-clip shadow-short bg-token-bg-primary dark:bg-[#303030]"><div class="relative flex w-full items-end px-3 py-3"><div class="relative flex w-full flex-auto flex-col"><div class="relative ms-1.5 grid grid-cols-[auto_minmax(0,1fr)]"><div class="items-top flex justify-center"><div style="opacity: 1;"></div></div><div class="relative flex-auto bg-transparent pt-0.5" style="margin-bottom: -20px; transform: translateY(-7px);"><div class="flex flex-col justify-start" style="min-height: 0px;"><div class="flex min-h-12 items-start"><div class="max-w-full min-w-0 flex-1"><div class="_prosemirror-parent_kfgfu_2 text-token-text-primary max-h-[25dvh] max-h-52 -mx-3 px-3 overflow-auto [scrollbar-width:thin] firefox vertical-scroll-fade-mask min-h-12 pe-3"><textarea class="text-token-text-primary placeholder:text-token-text-tertiary block h-10 w-full resize-none border-0 bg-transparent px-0 py-2 ring-0 placeholder:ps-px" placeholder="Ask anything" data-virtualkeyboard="true" style="display: none;"></textarea><script nonce="">window.__oai_logHTML?window.__oai_logHTML():window.__oai_SSR_HTML=window.__oai_SSR_HTML||Date.now();requestAnimationFrame((function(){window.__oai_logTTI?window.__oai_logTTI():window.__oai_SSR_TTI=window.__oai_SSR_TTI||Date.now()}))</script><div contenteditable="true" translate="no" class="ProseMirror" id="prompt-textarea" data-virtualkeyboard="true"><p data-placeholder="Ask anything" class="placeholder"><br class="ProseMirror-trailingBreak"></p></div></div></div></div></div></div></div><div class="justify-content-end relative ms-2 flex w-full flex-auto flex-col"><div class="flex-auto"></div></div><div style="height: 48px;"></div></div><div class="bg-primary-surface-primary absolute start-3 end-0 bottom-3 z-2 flex items-center"><div class="w-full"><div data-testid="composer-footer-actions" class="flex items-center" style="margin-right: 102px;"><div data-testid="composer-action-file-upload"><div class="relative"><div class="flex flex-col"><input multiple="" style="border: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;" tabindex="-1" class="hidden" type="file"><span class="hidden"></span><span class="flex" data-state="closed"></span><div class="w-fit" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«rgi»" data-state="closed"><div></div></div></div></div></div><div data-testid="composer-action-system-hint-button"><span class="hidden"></span></div><div></div><div></div></div><div class="absolute end-3 bottom-0 flex items-center gap-2" data-testid="composer-trailing-actions"><div class="ms-auto flex items-center gap-1.5"><span class="" data-state="closed"></span><span class="" data-state="closed"></span></div></div></div></div><div class="absolute start-4 top-3 ms-[1px] flex items-center pb-px"></div></div></div><div class="w-full"></div></form></div><input class="sr-only" aria-hidden="true" data-type="photos" id="upload-photos" accept="image/*" multiple="" type="file"><input class="sr-only" aria-hidden="true" data-type="camera" id="upload-camera" accept="image/*" capture="environment" multiple="" type="file"></div></div></div><div class="text-token-text-secondary relative mt-auto flex min-h-8 w-full items-center justify-center p-2 text-center text-xs md:px-[60px]"><div>ChatGPT can make mistakes. Check important info. See <a class="text-token-text-primary decoration-token-text-primary cursor-pointer underline">Cookie Preferences</a>.</div></div></div></div></div></main>
+                    </body>
+                    </html>

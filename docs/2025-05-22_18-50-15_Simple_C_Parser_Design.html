@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Chat Export</title>
+                        <style>
+                            body {
+                                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                                background-color: #212121;
+                                color: #ececec;
+                                margin: 0;
+                                padding: 20px;
+                                display: flex;
+                                justify-content: center;
+                            }
+                            main {
+                                max-width: 800px;
+                                margin: 20px auto;
+                                background:rgb(47, 47, 47);
+                                padding: 20px;
+                                border-radius: 10px;
+                                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                                overflow: hidden;
+                            }
+                            .message {
+                                margin-bottom: 15px;
+                                padding: 10px;
+                                border-radius: 5px;
+                            }
+                            .message.user {
+                                background-color: #2e2e2e;
+                                color: white;
+                                text-align: right;
+                                border: 2px solid #cdcdcd;
+                                box-shadow: 0 0 10px rgba(14, 117, 253, 0.23);
+                                font-weight: bold;
+                            }
+                            .message.assistant {
+                                background:rgb(47, 47, 47);
+                                color: #ececec;
+                            }
+                            pre {
+                                background: #0d0d0d;
+                                padding: 10px;
+                                border-radius: 5px;
+                                overflow-x: auto;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <main class="transition-width relative h-full w-full flex-1 overflow-auto" id="main" z-index="-1"><div id="thread" class="group/thread @container/thread h-full w-full"><div role="presentation" class="composer-parent flex flex-col focus-visible:outline-0 h-full"><div id="page-header" class="draggable no-draggable-children sticky top-0 p-3 flex items-center justify-between z-20 h-header-height bg-token-main-surface-primary pointer-events-none select-none [view-transition-name:var(--vt-page-header)] *:pointer-events-auto motion-safe:transition max-md:hidden @[84rem]/thread:absolute @[84rem]/thread:start-0 @[84rem]/thread:end-0 @[84rem]/thread:bg-transparent @[84rem]/thread:shadow-none! [box-shadow:var(--sharp-edge-top-shadow)]"><div class="absolute start-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2"></div><div class="flex items-center"></div><div class="flex items-center gap-2 pe-1 leading-[0]" id="conversation-header-actions"></div></div><div class="flex basis-auto flex-col -mb-(--composer-overlap-px) [--composer-overlap-px:24px] grow overflow-hidden"><div class="relative h-full"><div class="flex h-full flex-col overflow-y-auto [scrollbar-gutter:stable_both-edges] @[84rem]/thread:pt-(--header-height)"><div aria-hidden="true" data-edge="true" class="pointer-events-none h-px w-px"></div><div class="@thread-xl/thread:pt-header-height mt-1.5 flex flex-col text-sm pb-25"><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-1" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="5735ac94-46ac-4072-ab6b-14014d2bd615" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">I am trying to write a simple text adventure in C. I want to write the parser, which needs to be very simple. I want the commands separate to the parsing logic, and I don't want to use lots of callback functions to handle the commands.
+
+I am writing this on a machine with limited resources. I figure this should be similar to how BASIC interpreters parsed their input.</div></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-2" data-scroll-anchor="false"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="b8a394c8-7af9-4cad-ac5d-cbe3b219e06b" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4o"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="209">That’s a great approach—and yes, early BASIC interpreters and text adventures did exactly that: they kept parsing and command logic separate, used very little memory, and avoided dynamic dispatch or callbacks.</p>
+<p data-start="211" data-end="480">Here’s a structure you can use in C for a minimal, efficient command parser without callbacks. Instead of using function pointers or dynamic allocations, you'll associate command keywords with numeric codes (or enum values), and use a simple switch-case to handle them.</p>
+<hr data-start="482" data-end="485">
+<h3 data-start="487" data-end="509">✅ Key Design Goals</h3>
+<ul data-start="510" data-end="616">
+<li data-start="510" data-end="531">
+<p data-start="512" data-end="531">Simple tokenization</p>
+</li>
+<li data-start="532" data-end="553">
+<p data-start="534" data-end="553">Fixed command table</p>
+</li>
+<li data-start="554" data-end="590">
+<p data-start="556" data-end="590">Avoid callbacks and dynamic memory</p>
+</li>
+<li data-start="591" data-end="616">
+<p data-start="593" data-end="616">Minimal RAM and CPU use</p>
+</li>
+</ul>
+<hr data-start="618" data-end="621">
+<h3 data-start="623" data-end="650">🔧 Step-by-Step Example</h3>
+<h4 data-start="652" data-end="685">1. Define your command list:</h4>
+<pre class="overflow-visible!" data-start="686" data-end="932"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">enum</span></span></span><span> {
+    CMD_UNKNOWN = </span><span><span class="hljs-number">-1</span></span><span>,
+    CMD_GO,
+    CMD_LOOK,
+    CMD_TAKE,
+    CMD_USE,
+    CMD_QUIT,
+    NUM_COMMANDS
+} CommandID;
+
+</span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span>* command_table[NUM_COMMANDS] = {
+    </span><span><span class="hljs-string">"GO"</span></span><span>,
+    </span><span><span class="hljs-string">"LOOK"</span></span><span>,
+    </span><span><span class="hljs-string">"TAKE"</span></span><span>,
+    </span><span><span class="hljs-string">"USE"</span></span><span>,
+    </span><span><span class="hljs-string">"QUIT"</span></span><span>
+};
+</span></span></code></div></div></pre>
+<h4 data-start="934" data-end="975">2. Tokenize the input (very simply):</h4>
+<pre class="overflow-visible!" data-start="976" data-end="1624"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-meta">#<span class="hljs-keyword">include</span></span></span><span> </span><span><span class="hljs-string">&lt;stdio.h&gt;</span></span><span>
+</span><span><span class="hljs-meta">#<span class="hljs-keyword">include</span></span></span><span> </span><span><span class="hljs-string">&lt;string.h&gt;</span></span><span>
+</span><span><span class="hljs-meta">#<span class="hljs-keyword">include</span></span></span><span> </span><span><span class="hljs-string">&lt;ctype.h&gt;</span></span><span>
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">to_upper</span></span><span><span class="hljs-params">(<span class="hljs-type">char</span></span></span><span>* s) {
+    </span><span><span class="hljs-keyword">while</span></span><span> (*s) {
+        *s = </span><span><span class="hljs-built_in">toupper</span></span><span>((</span><span><span class="hljs-type">unsigned</span></span><span> </span><span><span class="hljs-type">char</span></span><span>)*s);
+        s++;
+    }
+}
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">parse_input</span></span><span><span class="hljs-params">(<span class="hljs-type">char</span></span></span><span>* input, </span><span><span class="hljs-type">char</span></span><span>* verb, </span><span><span class="hljs-type">char</span></span><span>* noun) {
+    </span><span><span class="hljs-comment">// Convert to uppercase for case-insensitive matching</span></span><span>
+    to_upper(input);
+
+    </span><span><span class="hljs-comment">// Tokenize into verb and noun</span></span><span>
+    </span><span><span class="hljs-type">char</span></span><span>* token = strtok(input, </span><span><span class="hljs-string">" \t\n"</span></span><span>);
+    </span><span><span class="hljs-keyword">if</span></span><span> (token) {
+        </span><span><span class="hljs-built_in">strcpy</span></span><span>(verb, token);
+        token = strtok(</span><span><span class="hljs-literal">NULL</span></span><span>, </span><span><span class="hljs-string">" \t\n"</span></span><span>);
+        </span><span><span class="hljs-keyword">if</span></span><span> (token) {
+            </span><span><span class="hljs-built_in">strcpy</span></span><span>(noun, token);
+        } </span><span><span class="hljs-keyword">else</span></span><span> {
+            noun[</span><span><span class="hljs-number">0</span></span><span>] = </span><span><span class="hljs-string">'\0'</span></span><span>;
+        }
+    } </span><span><span class="hljs-keyword">else</span></span><span> {
+        verb[</span><span><span class="hljs-number">0</span></span><span>] = </span><span><span class="hljs-string">'\0'</span></span><span>;
+        noun[</span><span><span class="hljs-number">0</span></span><span>] = </span><span><span class="hljs-string">'\0'</span></span><span>;
+    }
+}
+</span></span></code></div></div></pre>
+<h4 data-start="1626" data-end="1662">3. Match the verb to a command:</h4>
+<pre class="overflow-visible!" data-start="1663" data-end="1887"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span>CommandID </span><span><span class="hljs-title function_">lookup_command</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> </span><span><span class="hljs-type">char</span></span><span>* verb) {
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; NUM_COMMANDS; i++) {
+        </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strcmp</span></span><span>(verb, command_table[i]) == </span><span><span class="hljs-number">0</span></span><span>) {
+            </span><span><span class="hljs-keyword">return</span></span><span> (CommandID)i;
+        }
+    }
+    </span><span><span class="hljs-keyword">return</span></span><span> CMD_UNKNOWN;
+}
+</span></span></code></div></div></pre>
+<h4 data-start="1889" data-end="1916">4. Handle the command:</h4>
+<pre class="overflow-visible!" data-start="1917" data-end="2535"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">execute_command</span></span><span><span class="hljs-params">(CommandID cmd, <span class="hljs-type">const</span></span></span><span> </span><span><span class="hljs-type">char</span></span><span>* noun) {
+    </span><span><span class="hljs-keyword">switch</span></span><span> (cmd) {
+        </span><span><span class="hljs-keyword">case</span></span><span> CMD_GO:
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You try to go %s.\n"</span></span><span>, noun);
+            </span><span><span class="hljs-keyword">break</span></span><span>;
+        </span><span><span class="hljs-keyword">case</span></span><span> CMD_LOOK:
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You look around.\n"</span></span><span>);
+            </span><span><span class="hljs-keyword">break</span></span><span>;
+        </span><span><span class="hljs-keyword">case</span></span><span> CMD_TAKE:
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You try to take %s.\n"</span></span><span>, noun);
+            </span><span><span class="hljs-keyword">break</span></span><span>;
+        </span><span><span class="hljs-keyword">case</span></span><span> CMD_USE:
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You try to use %s.\n"</span></span><span>, noun);
+            </span><span><span class="hljs-keyword">break</span></span><span>;
+        </span><span><span class="hljs-keyword">case</span></span><span> CMD_QUIT:
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Goodbye!\n"</span></span><span>);
+            </span><span><span class="hljs-keyword">break</span></span><span>;
+        </span><span><span class="hljs-keyword">default</span></span><span>:
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"I don't understand that command.\n"</span></span><span>);
+            </span><span><span class="hljs-keyword">break</span></span><span>;
+    }
+}
+</span></span></code></div></div></pre>
+<h4 data-start="2537" data-end="2555">5. Main loop:</h4>
+<pre class="overflow-visible!" data-start="2556" data-end="2959"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">int</span></span><span> </span><span><span class="hljs-title function_">main</span></span><span><span class="hljs-params">()</span></span><span> {
+    </span><span><span class="hljs-type">char</span></span><span> input[</span><span><span class="hljs-number">64</span></span><span>];
+    </span><span><span class="hljs-type">char</span></span><span> verb[</span><span><span class="hljs-number">32</span></span><span>], noun[</span><span><span class="hljs-number">32</span></span><span>];
+
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Welcome to the Adventure!\n"</span></span><span>);
+    </span><span><span class="hljs-keyword">while</span></span><span> (</span><span><span class="hljs-number">1</span></span><span>) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"&gt; "</span></span><span>);
+        </span><span><span class="hljs-keyword">if</span></span><span> (!fgets(input, </span><span><span class="hljs-keyword">sizeof</span></span><span>(input), </span><span><span class="hljs-built_in">stdin</span></span><span>)) </span><span><span class="hljs-keyword">break</span></span><span>;
+
+        parse_input(input, verb, noun);
+        CommandID cmd = lookup_command(verb);
+        execute_command(cmd, noun);
+
+        </span><span><span class="hljs-keyword">if</span></span><span> (cmd == CMD_QUIT)
+            </span><span><span class="hljs-keyword">break</span></span><span>;
+    }
+
+    </span><span><span class="hljs-keyword">return</span></span><span> </span><span><span class="hljs-number">0</span></span><span>;
+}
+</span></span></code></div></div></pre>
+<hr data-start="2961" data-end="2964">
+<h3 data-start="2966" data-end="2978">🧠 Notes</h3>
+<ul data-start="2979" data-end="3276">
+<li data-start="2979" data-end="3103">
+<p data-start="2981" data-end="3103">This is <em data-start="2989" data-end="3001">very close</em> to what a BASIC interpreter would do: simple token scanning, table lookup, and dispatch via <code data-start="3094" data-end="3102">switch</code>.</p>
+</li>
+<li data-start="3104" data-end="3178">
+<p data-start="3106" data-end="3178">You could easily expand this to support synonyms or multi-word commands.</p>
+</li>
+<li data-start="3179" data-end="3276">
+<p data-start="3181" data-end="3276">Memory use is minimal, no dynamic allocation, and all logic is centralized and easily testable.</p>
+</li>
+</ul>
+<p data-start="3278" data-end="3426">If you want to go even <em data-start="3301" data-end="3314">lower-level</em> like early 8-bit games, you can replace <code data-start="3355" data-end="3363">strcmp</code> with your own ASCII comparison to save space and dependencies.</p>
+<p data-start="3428" data-end="3550" data-is-last-node="" data-is-only-node="">Would you like an example of a compact synonym system or one-word parser to simulate something like <code data-start="3528" data-end="3538">INPUT A$</code> from BASIC?</p></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-3" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="23bd37c0-4464-41d2-ae98-1b7415074231" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">can we remove the switch statement from the execute_command function. Later this code will be used as part of something else, and I don't want to make execute_command have access to the rest of the game logic.</div></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-4" data-scroll-anchor="false"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="1ea9a001-4108-4382-9740-a151c10b24e5" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4o"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="203">Yes—you can remove the <code data-start="23" data-end="31">switch</code> from <code data-start="37" data-end="54">execute_command</code> by instead treating it as a generic dispatcher that <strong data-start="107" data-end="146">returns the command ID and argument</strong>, letting <strong data-start="156" data-end="202">another part of your game handle the logic</strong>.</p>
+<p data-start="205" data-end="384">This means your <code data-start="221" data-end="240">execute_command()</code> function becomes something like <code data-start="273" data-end="290">parse_command()</code> that doesn’t know or care about the game logic—it just parses and categorizes the user input.</p>
+<hr data-start="386" data-end="389">
+<h3 data-start="391" data-end="417">✅ Refactored Structure</h3>
+<p data-start="419" data-end="468">You’ll separate parsing from execution like this:</p>
+<h4 data-start="470" data-end="526">1. <strong data-start="478" data-end="525">Define a struct to hold parsed command data</strong>:</h4>
+<pre class="overflow-visible!" data-start="527" data-end="606"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    CommandID id;
+    </span><span><span class="hljs-type">char</span></span><span> noun[</span><span><span class="hljs-number">32</span></span><span>];
+} ParsedCommand;
+</span></span></code></div></div></pre>
+<h4 data-start="608" data-end="670">2. <strong data-start="616" data-end="669">Rename and refactor <code data-start="638" data-end="655">execute_command</code> to a parser</strong>:</h4>
+<pre class="overflow-visible!" data-start="671" data-end="1197"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span>ParsedCommand </span><span><span class="hljs-title function_">parse_command</span></span><span><span class="hljs-params">(<span class="hljs-type">char</span></span></span><span>* input) {
+    ParsedCommand result;
+    </span><span><span class="hljs-type">char</span></span><span> verb[</span><span><span class="hljs-number">32</span></span><span>];
+    result.id = CMD_UNKNOWN;
+    result.noun[</span><span><span class="hljs-number">0</span></span><span>] = </span><span><span class="hljs-string">'\0'</span></span><span>;
+
+    to_upper(input);
+    </span><span><span class="hljs-type">char</span></span><span>* token = strtok(input, </span><span><span class="hljs-string">" \t\n"</span></span><span>);
+    </span><span><span class="hljs-keyword">if</span></span><span> (token) {
+        </span><span><span class="hljs-built_in">strcpy</span></span><span>(verb, token);
+        token = strtok(</span><span><span class="hljs-literal">NULL</span></span><span>, </span><span><span class="hljs-string">" \t\n"</span></span><span>);
+        </span><span><span class="hljs-keyword">if</span></span><span> (token) {
+            </span><span><span class="hljs-built_in">strncpy</span></span><span>(result.noun, token, </span><span><span class="hljs-keyword">sizeof</span></span><span>(result.noun) - </span><span><span class="hljs-number">1</span></span><span>);
+            result.noun[</span><span><span class="hljs-keyword">sizeof</span></span><span>(result.noun) - </span><span><span class="hljs-number">1</span></span><span>] = </span><span><span class="hljs-string">'\0'</span></span><span>;
+        }
+
+        result.id = lookup_command(verb);
+    }
+
+    </span><span><span class="hljs-keyword">return</span></span><span> result;
+}
+</span></span></code></div></div></pre>
+<h4 data-start="1199" data-end="1262">3. <strong data-start="1207" data-end="1261">Main loop now returns parsed command to game logic</strong>:</h4>
+<pre class="overflow-visible!" data-start="1263" data-end="1810"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">int</span></span><span> </span><span><span class="hljs-title function_">main</span></span><span><span class="hljs-params">()</span></span><span> {
+    </span><span><span class="hljs-type">char</span></span><span> input[</span><span><span class="hljs-number">64</span></span><span>];
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Welcome to the Adventure!\n"</span></span><span>);
+
+    </span><span><span class="hljs-keyword">while</span></span><span> (</span><span><span class="hljs-number">1</span></span><span>) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"&gt; "</span></span><span>);
+        </span><span><span class="hljs-keyword">if</span></span><span> (!fgets(input, </span><span><span class="hljs-keyword">sizeof</span></span><span>(input), </span><span><span class="hljs-built_in">stdin</span></span><span>)) </span><span><span class="hljs-keyword">break</span></span><span>;
+
+        ParsedCommand cmd = parse_command(input);
+
+        </span><span><span class="hljs-comment">// Let main game logic handle it</span></span><span>
+        </span><span><span class="hljs-keyword">if</span></span><span> (cmd.id == CMD_QUIT) {
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Goodbye!\n"</span></span><span>);
+            </span><span><span class="hljs-keyword">break</span></span><span>;
+        }
+
+        </span><span><span class="hljs-comment">// You now dispatch from outside:</span></span><span>
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Command ID: %d, Noun: %s\n"</span></span><span>, cmd.id, cmd.noun);
+        </span><span><span class="hljs-comment">// E.g., call game_handle_command(cmd);</span></span><span>
+    }
+
+    </span><span><span class="hljs-keyword">return</span></span><span> </span><span><span class="hljs-number">0</span></span><span>;
+}
+</span></span></code></div></div></pre>
+<hr data-start="1812" data-end="1815">
+<h3 data-start="1817" data-end="1843">🧠 Why This Works Well</h3>
+<ul data-start="1845" data-end="2148">
+<li data-start="1845" data-end="1950">
+<p data-start="1847" data-end="1950"><strong data-start="1847" data-end="1873">Separation of concerns</strong>: The parser <em data-start="1886" data-end="1899">just parses</em>. It doesn’t know how to “go north” or “take lamp”.</p>
+</li>
+<li data-start="1951" data-end="2059">
+<p data-start="1953" data-end="2059"><strong data-start="1953" data-end="1968">Testability</strong>: You can write tests for just the parser without needing to simulate the whole game world.</p>
+</li>
+<li data-start="2060" data-end="2148">
+<p data-start="2062" data-end="2148"><strong data-start="2062" data-end="2077">Flexibility</strong>: You can now plug this parser into any game system or scripting layer.</p>
+</li>
+</ul>
+<hr data-start="2150" data-end="2153">
+<p data-start="2155" data-end="2340" data-is-last-node="" data-is-only-node="">If you want even more BASIC-like feel (like tokenising lines into IDs for pre-scanning), I can show a system that returns tokens or even indexes into a bytecode-style list. Let me know!</p></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-5" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="f3ad46ae-65eb-45fa-8758-11ae86ef6bac" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">show me all the code as a complete example</div></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-6" data-scroll-anchor="true"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="ac3101c7-bfbc-48da-940c-b7a579c32b2e" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4o"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="125">Here’s the complete, self-contained version of a minimal <strong data-start="57" data-end="90">text adventure command parser</strong> in C, following your requirements:</p>
+<ul data-start="127" data-end="315">
+<li data-start="127" data-end="145">
+<p data-start="129" data-end="145"><strong data-start="129" data-end="145">No callbacks</strong></p>
+</li>
+<li data-start="146" data-end="177">
+<p data-start="148" data-end="177"><strong data-start="148" data-end="177">No <code data-start="153" data-end="161">switch</code> in the parser</strong></p>
+</li>
+<li data-start="178" data-end="223">
+<p data-start="180" data-end="223"><strong data-start="180" data-end="223">Separation of parsing and command logic</strong></p>
+</li>
+<li data-start="224" data-end="269">
+<p data-start="226" data-end="269"><strong data-start="226" data-end="269">Efficient for limited-resource machines</strong></p>
+</li>
+<li data-start="270" data-end="315">
+<p data-start="272" data-end="315"><strong data-start="272" data-end="315">Similar in spirit to BASIC interpreters</strong></p>
+</li>
+</ul>
+<hr data-start="317" data-end="320">
+<h3 data-start="322" data-end="348">✅ Full Working Example</h3>
+<pre class="overflow-visible!" data-start="350" data-end="2764"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-meta">#<span class="hljs-keyword">include</span></span></span><span> </span><span><span class="hljs-string">&lt;stdio.h&gt;</span></span><span>
+</span><span><span class="hljs-meta">#<span class="hljs-keyword">include</span></span></span><span> </span><span><span class="hljs-string">&lt;string.h&gt;</span></span><span>
+</span><span><span class="hljs-meta">#<span class="hljs-keyword">include</span></span></span><span> </span><span><span class="hljs-string">&lt;ctype.h&gt;</span></span><span>
+
+</span><span><span class="hljs-comment">// ---------- Command List ----------</span></span><span>
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">enum</span></span></span><span> {
+    CMD_UNKNOWN = </span><span><span class="hljs-number">-1</span></span><span>,
+    CMD_GO,
+    CMD_LOOK,
+    CMD_TAKE,
+    CMD_USE,
+    CMD_QUIT,
+    NUM_COMMANDS
+} CommandID;
+
+</span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span>* command_table[NUM_COMMANDS] = {
+    </span><span><span class="hljs-string">"GO"</span></span><span>,
+    </span><span><span class="hljs-string">"LOOK"</span></span><span>,
+    </span><span><span class="hljs-string">"TAKE"</span></span><span>,
+    </span><span><span class="hljs-string">"USE"</span></span><span>,
+    </span><span><span class="hljs-string">"QUIT"</span></span><span>
+};
+
+</span><span><span class="hljs-comment">// ---------- Parsed Command ----------</span></span><span>
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    CommandID id;
+    </span><span><span class="hljs-type">char</span></span><span> noun[</span><span><span class="hljs-number">32</span></span><span>];
+} ParsedCommand;
+
+</span><span><span class="hljs-comment">// ---------- Utility Functions ----------</span></span><span>
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">to_upper</span></span><span><span class="hljs-params">(<span class="hljs-type">char</span></span></span><span>* s) {
+    </span><span><span class="hljs-keyword">while</span></span><span> (*s) {
+        *s = </span><span><span class="hljs-built_in">toupper</span></span><span>((</span><span><span class="hljs-type">unsigned</span></span><span> </span><span><span class="hljs-type">char</span></span><span>)*s);
+        s++;
+    }
+}
+
+CommandID </span><span><span class="hljs-title function_">lookup_command</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> </span><span><span class="hljs-type">char</span></span><span>* verb) {
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; NUM_COMMANDS; i++) {
+        </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strcmp</span></span><span>(verb, command_table[i]) == </span><span><span class="hljs-number">0</span></span><span>) {
+            </span><span><span class="hljs-keyword">return</span></span><span> (CommandID)i;
+        }
+    }
+    </span><span><span class="hljs-keyword">return</span></span><span> CMD_UNKNOWN;
+}
+
+</span><span><span class="hljs-comment">// ---------- Command Parser ----------</span></span><span>
+ParsedCommand </span><span><span class="hljs-title function_">parse_command</span></span><span><span class="hljs-params">(<span class="hljs-type">char</span></span></span><span>* input) {
+    ParsedCommand result;
+    </span><span><span class="hljs-type">char</span></span><span> verb[</span><span><span class="hljs-number">32</span></span><span>] = </span><span><span class="hljs-string">""</span></span><span>;
+    result.id = CMD_UNKNOWN;
+    result.noun[</span><span><span class="hljs-number">0</span></span><span>] = </span><span><span class="hljs-string">'\0'</span></span><span>;
+
+    to_upper(input);
+    </span><span><span class="hljs-type">char</span></span><span>* token = strtok(input, </span><span><span class="hljs-string">" \t\n"</span></span><span>);
+    </span><span><span class="hljs-keyword">if</span></span><span> (token) {
+        </span><span><span class="hljs-built_in">strncpy</span></span><span>(verb, token, </span><span><span class="hljs-keyword">sizeof</span></span><span>(verb) - </span><span><span class="hljs-number">1</span></span><span>);
+        verb[</span><span><span class="hljs-keyword">sizeof</span></span><span>(verb) - </span><span><span class="hljs-number">1</span></span><span>] = </span><span><span class="hljs-string">'\0'</span></span><span>;
+
+        token = strtok(</span><span><span class="hljs-literal">NULL</span></span><span>, </span><span><span class="hljs-string">" \t\n"</span></span><span>);
+        </span><span><span class="hljs-keyword">if</span></span><span> (token) {
+            </span><span><span class="hljs-built_in">strncpy</span></span><span>(result.noun, token, </span><span><span class="hljs-keyword">sizeof</span></span><span>(result.noun) - </span><span><span class="hljs-number">1</span></span><span>);
+            result.noun[</span><span><span class="hljs-keyword">sizeof</span></span><span>(result.noun) - </span><span><span class="hljs-number">1</span></span><span>] = </span><span><span class="hljs-string">'\0'</span></span><span>;
+        }
+
+        result.id = lookup_command(verb);
+    }
+
+    </span><span><span class="hljs-keyword">return</span></span><span> result;
+}
+
+</span><span><span class="hljs-comment">// ---------- Main Game Loop ----------</span></span><span>
+</span><span><span class="hljs-type">int</span></span><span> </span><span><span class="hljs-title function_">main</span></span><span><span class="hljs-params">()</span></span><span> {
+    </span><span><span class="hljs-type">char</span></span><span> input[</span><span><span class="hljs-number">64</span></span><span>];
+
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Welcome to the Adventure!\n"</span></span><span>);
+
+    </span><span><span class="hljs-keyword">while</span></span><span> (</span><span><span class="hljs-number">1</span></span><span>) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"&gt; "</span></span><span>);
+        </span><span><span class="hljs-keyword">if</span></span><span> (!fgets(input, </span><span><span class="hljs-keyword">sizeof</span></span><span>(input), </span><span><span class="hljs-built_in">stdin</span></span><span>)) </span><span><span class="hljs-keyword">break</span></span><span>;
+
+        ParsedCommand cmd = parse_command(input);
+
+        </span><span><span class="hljs-comment">// Game logic handles it</span></span><span>
+        </span><span><span class="hljs-keyword">switch</span></span><span> (cmd.id) {
+            </span><span><span class="hljs-keyword">case</span></span><span> CMD_GO:
+                </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You try to go %s.\n"</span></span><span>, cmd.noun);
+                </span><span><span class="hljs-keyword">break</span></span><span>;
+            </span><span><span class="hljs-keyword">case</span></span><span> CMD_LOOK:
+                </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You look around.\n"</span></span><span>);
+                </span><span><span class="hljs-keyword">break</span></span><span>;
+            </span><span><span class="hljs-keyword">case</span></span><span> CMD_TAKE:
+                </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You try to take %s.\n"</span></span><span>, cmd.noun);
+                </span><span><span class="hljs-keyword">break</span></span><span>;
+            </span><span><span class="hljs-keyword">case</span></span><span> CMD_USE:
+                </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You try to use %s.\n"</span></span><span>, cmd.noun);
+                </span><span><span class="hljs-keyword">break</span></span><span>;
+            </span><span><span class="hljs-keyword">case</span></span><span> CMD_QUIT:
+                </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Goodbye!\n"</span></span><span>);
+                </span><span><span class="hljs-keyword">return</span></span><span> </span><span><span class="hljs-number">0</span></span><span>;
+            </span><span><span class="hljs-keyword">default</span></span><span>:
+                </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"I don't understand that command.\n"</span></span><span>);
+                </span><span><span class="hljs-keyword">break</span></span><span>;
+        }
+    }
+
+    </span><span><span class="hljs-keyword">return</span></span><span> </span><span><span class="hljs-number">0</span></span><span>;
+}
+</span></span></code></div></div></pre>
+<hr data-start="2766" data-end="2769">
+<h3 data-start="2771" data-end="2806">🔄 How You Might Use This Later</h3>
+<p data-start="2808" data-end="2996">When you integrate this into a larger game, the <code data-start="2856" data-end="2873">parse_command()</code> function stays unchanged. The <code data-start="2904" data-end="2919">ParsedCommand</code> struct is passed to your game loop or scene logic, which decides what to do.</p>
+<hr data-start="2998" data-end="3001">
+<p data-start="3003" data-end="3182" data-is-last-node="" data-is-only-node="">Would you like a version where the command word can be more than one word (<code data-start="3078" data-end="3088">GO NORTH</code>, <code data-start="3090" data-end="3104">LOOK AT DOOR</code>, etc.), or something that builds a token list like a BASIC interpreter might?</p></div></div></div></div><div class="flex absolute start-0 end-0 flex justify-start"><div class="touch:-me-2 touch:-ms-3.5 -ms-2.5 -me-1 flex items-center p-1 select-none -mt-1 focus-within:transition-none hover:transition-none duration-500 group-hover/turn-messages:delay-300 pointer-events-none [mask-image:linear-gradient(to_right,black_33%,transparent_66%)] [mask-size:300%_100%] [mask-position:100%_0%] motion-safe:transition-[mask-position] group-hover/turn-messages:pointer-events-auto group-hover/turn-messages:[mask-position:0_0] group-focus-within/turn-messages:pointer-events-auto group-focus-within/turn-messages:[mask-position:0_0] has-data-[state=open]:pointer-events-auto has-data-[state=open]:[mask-position:0_0]"><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="hidden"></span><span class="" data-state="closed"></span></div></div></div></div></div></div></article><div aria-hidden="true" data-edge="true" class="pointer-events-none h-px w-px"></div><div></div><div style="opacity: 1;"></div></div></div></div></div><div id="thread-bottom-container" class="isolate z-3 w-full basis-auto has-data-has-thread-error:pt-2 has-data-has-thread-error:[box-shadow:var(--sharp-edge-bottom-shadow)] md:border-transparent md:pt-0 dark:border-white/20 md:dark:border-transparent flex flex-col"><div id="thread-bottom"><div class="text-base mx-auto [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6"><div class="flex justify-center empty:hidden"></div><div class="max-xs:[--force-hide-label:none] relative z-1 flex h-full max-w-full flex-1 flex-col" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«rth»" data-state="closed"><div class="absolute start-0 end-0 bottom-full z-20"></div><form class="w-full [view-transition-name:var(--vt-composer)]" data-type="unified-composer"><div class="flex w-full cursor-text flex-col items-center justify-center rounded-[28px] bg-clip-padding contain-inline-size overflow-clip shadow-short bg-token-bg-primary dark:bg-[#303030]"><div class="relative flex w-full items-end px-3 py-3"><div class="relative flex w-full flex-auto flex-col"><div class="relative ms-1.5 grid grid-cols-[auto_minmax(0,1fr)]"><div class="items-top flex justify-center"><div style="opacity: 1;"></div></div><div class="relative flex-auto bg-transparent pt-0.5" style="margin-bottom: -20px; transform: translateY(-7px);"><div class="flex flex-col justify-start" style="min-height: 0px;"><div class="flex min-h-12 items-start"><div class="max-w-full min-w-0 flex-1"><div class="_prosemirror-parent_kfgfu_2 text-token-text-primary max-h-[25dvh] max-h-52 -mx-3 px-3 overflow-auto [scrollbar-width:thin] firefox vertical-scroll-fade-mask min-h-12 pe-3"><textarea class="text-token-text-primary placeholder:text-token-text-tertiary block h-10 w-full resize-none border-0 bg-transparent px-0 py-2 ring-0 placeholder:ps-px" placeholder="Ask anything" data-virtualkeyboard="true" style="display: none;"></textarea><script nonce="">window.__oai_logHTML?window.__oai_logHTML():window.__oai_SSR_HTML=window.__oai_SSR_HTML||Date.now();requestAnimationFrame((function(){window.__oai_logTTI?window.__oai_logTTI():window.__oai_SSR_TTI=window.__oai_SSR_TTI||Date.now()}))</script><div contenteditable="true" translate="no" class="ProseMirror ProseMirror-focused" id="prompt-textarea" data-virtualkeyboard="true"><p data-placeholder="Ask anything" class="placeholder"><br class="ProseMirror-trailingBreak"></p></div></div></div></div></div></div></div><div class="justify-content-end relative ms-2 flex w-full flex-auto flex-col"><div class="flex-auto"></div></div><div style="height: 48px;"></div></div><div class="bg-primary-surface-primary absolute start-3 end-0 bottom-3 z-2 flex items-center"><div class="w-full"><div data-testid="composer-footer-actions" class="flex items-center" style="margin-right: 102px;"><div data-testid="composer-action-file-upload"><div class="relative"><div class="flex flex-col"><input multiple="" style="border: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;" tabindex="-1" class="hidden" type="file"><span class="hidden"></span><span class="flex" data-state="closed"></span><div class="w-fit" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«rtl»" data-state="closed"><div></div></div></div></div></div><div data-testid="composer-action-system-hint-button"><span class="hidden"></span></div><div></div><div></div></div><div class="absolute end-3 bottom-0 flex items-center gap-2" data-testid="composer-trailing-actions"><div class="ms-auto flex items-center gap-1.5"><span class="" data-state="closed"></span><span class="" data-state="closed"></span></div></div></div></div><div class="absolute start-4 top-3 ms-[1px] flex items-center pb-px"></div></div></div><div class="w-full"></div></form></div><input class="sr-only" aria-hidden="true" data-type="photos" id="upload-photos" accept="image/*" multiple="" type="file"><input class="sr-only" aria-hidden="true" data-type="camera" id="upload-camera" accept="image/*" capture="environment" multiple="" type="file"></div></div></div><div class="text-token-text-secondary relative mt-auto flex min-h-8 w-full items-center justify-center p-2 text-center text-xs md:px-[60px]"><div>ChatGPT can make mistakes. Check important info. See <a class="text-token-text-primary decoration-token-text-primary cursor-pointer underline">Cookie Preferences</a>.</div></div></div></div></div></main>
+                    </body>
+                    </html>

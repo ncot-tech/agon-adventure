@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Chat Export</title>
+                        <style>
+                            body {
+                                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                                background-color: #212121;
+                                color: #ececec;
+                                margin: 0;
+                                padding: 20px;
+                                display: flex;
+                                justify-content: center;
+                            }
+                            main {
+                                max-width: 800px;
+                                margin: 20px auto;
+                                background:rgb(47, 47, 47);
+                                padding: 20px;
+                                border-radius: 10px;
+                                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                                overflow: hidden;
+                            }
+                            .message {
+                                margin-bottom: 15px;
+                                padding: 10px;
+                                border-radius: 5px;
+                            }
+                            .message.user {
+                                background-color: #2e2e2e;
+                                color: white;
+                                text-align: right;
+                                border: 2px solid #cdcdcd;
+                                box-shadow: 0 0 10px rgba(14, 117, 253, 0.23);
+                                font-weight: bold;
+                            }
+                            .message.assistant {
+                                background:rgb(47, 47, 47);
+                                color: #ececec;
+                            }
+                            pre {
+                                background: #0d0d0d;
+                                padding: 10px;
+                                border-radius: 5px;
+                                overflow-x: auto;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <main class="transition-width relative h-full w-full flex-1 overflow-auto" id="main" z-index="-1"><div id="thread" class="group/thread @container/thread h-full w-full"><div role="presentation" class="composer-parent flex flex-col focus-visible:outline-0 h-full"><div id="page-header" class="draggable no-draggable-children sticky top-0 p-3 flex items-center justify-between z-20 h-header-height bg-token-main-surface-primary pointer-events-none select-none [view-transition-name:var(--vt-page-header)] *:pointer-events-auto motion-safe:transition max-md:hidden @[84rem]/thread:absolute @[84rem]/thread:start-0 @[84rem]/thread:end-0 @[84rem]/thread:bg-transparent @[84rem]/thread:shadow-none! [box-shadow:var(--sharp-edge-top-shadow-placeholder)]"><div class="absolute start-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2"></div><div class="flex items-center"></div><div class="flex items-center gap-2 pe-1 leading-[0]" id="conversation-header-actions"></div></div><div class="flex basis-auto flex-col -mb-(--composer-overlap-px) [--composer-overlap-px:24px] grow overflow-hidden"><div class="relative h-full"><div class="flex h-full flex-col overflow-y-auto [scrollbar-gutter:stable_both-edges] @[84rem]/thread:pt-(--header-height)"><div aria-hidden="true" data-edge="true" class="pointer-events-none h-px w-px"></div><div class="@thread-xl/thread:pt-header-height mt-1.5 flex flex-col text-sm pb-25"><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-1" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="da7eaaf6-31eb-41b7-b333-93f559934700" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">I am create a basic text adventure in C for a low powered computer. I have a parser that works so far. I need help designing the game itself.
+
+For example, my parser can recognise commands like "OPEN DOOR" and currently just prints "You opened the door" using a callback function.
+
+I need a way to define the game world. For example what a "room" is, what items exist in the game, how rooms are connected to each other, and which specific doors need which specific key so I can make puzzles. Also some extendable way to have items that can be interacted with in interesting ways.
+
+I want to use arrays and structs and enums as much as possible, rather than pointers to structs.</div></div></div></div></div><div class="flex absolute start-0 end-0 flex justify-end"><div class="touch:-me-2 touch:-ms-3.5 -ms-2.5 -me-1 flex items-center p-1 select-none focus-within:transition-none hover:transition-none duration-300 group-hover/turn-messages:delay-300 pointer-events-none opacity-0 motion-safe:transition-opacity group-hover/turn-messages:pointer-events-auto group-hover/turn-messages:opacity-100 group-focus-within/turn-messages:pointer-events-auto group-focus-within/turn-messages:opacity-100 has-data-[state=open]:pointer-events-auto has-data-[state=open]:opacity-100"><span class="" data-state="closed"></span><span class="" data-state="closed"></span></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-2" data-scroll-anchor="false"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex items-center"><div class="w-fit" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«rof»" data-state="closed"><div style="width: 1px; height: 1px;"></div></div><div class="inline-block"></div></div><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="168e2084-7120-4910-971d-597e31e51278" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4o"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="136">Here's a simple but flexible system to define a text adventure world in C using enums, structs, and arrays, with no pointers to structs:</p>
+<hr data-start="138" data-end="141">
+<h3 data-start="143" data-end="177">1. <strong data-start="150" data-end="177">Enums for Game Concepts</strong></h3>
+<pre class="overflow-visible!" data-start="179" data-end="474"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">enum</span></span></span><span> {
+    DIR_NORTH, DIR_SOUTH, DIR_EAST, DIR_WEST, DIR_UP, DIR_DOWN,
+    DIR_COUNT
+} Direction;
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">enum</span></span></span><span> {
+    ITEM_NONE, ITEM_KEY, ITEM_LAMP, ITEM_NOTE,
+    ITEM_COUNT
+} ItemType;
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">enum</span></span></span><span> {
+    OBJ_NONE, OBJ_DOOR, OBJ_CHEST, OBJ_BUTTON,
+    OBJ_COUNT
+} ObjectType;
+</span></span></code></div></div></pre>
+<hr data-start="476" data-end="479">
+<h3 data-start="481" data-end="506">2. <strong data-start="488" data-end="506">Item Structure</strong></h3>
+<pre class="overflow-visible!" data-start="508" data-end="600"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    ItemType type;
+    </span><span><span class="hljs-type">int</span></span><span> is_pickable;
+    </span><span><span class="hljs-type">int</span></span><span> is_usable;
+} Item;
+</span></span></code></div></div></pre>
+<hr data-start="602" data-end="605">
+<h3 data-start="607" data-end="670">3. <strong data-start="614" data-end="670">Interactive Object Structure (like doors or buttons)</strong></h3>
+<pre class="overflow-visible!" data-start="672" data-end="849"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    ObjectType type;
+    </span><span><span class="hljs-type">int</span></span><span> is_open;
+    ItemType required_item;  </span><span><span class="hljs-comment">// e.g. a key to unlock</span></span><span>
+    </span><span><span class="hljs-type">int</span></span><span> leads_to_room;       </span><span><span class="hljs-comment">// for doors only</span></span><span>
+} GameObject;
+</span></span></code></div></div></pre>
+<hr data-start="851" data-end="854">
+<h3 data-start="856" data-end="881">4. <strong data-start="863" data-end="881">Room Structure</strong></h3>
+<pre class="overflow-visible!" data-start="883" data-end="1161"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-meta">#<span class="hljs-keyword">define</span></span></span><span> MAX_ROOM_ITEMS 4
+</span><span><span class="hljs-meta">#<span class="hljs-keyword">define</span></span></span><span> MAX_ROOM_OBJECTS 4
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span>* name;
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span>* description;
+    </span><span><span class="hljs-type">int</span></span><span> exits[DIR_COUNT];  </span><span><span class="hljs-comment">// index of other rooms, or -1 for none</span></span><span>
+    Item items[MAX_ROOM_ITEMS];
+    GameObject objects[MAX_ROOM_OBJECTS];
+} Room;
+</span></span></code></div></div></pre>
+<hr data-start="1163" data-end="1166">
+<h3 data-start="1168" data-end="1195">5. <strong data-start="1175" data-end="1195">World Definition</strong></h3>
+<pre class="overflow-visible!" data-start="1197" data-end="1250"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-meta">#<span class="hljs-keyword">define</span></span></span><span> MAX_ROOMS 10
+
+Room world[MAX_ROOMS];
+</span></span></code></div></div></pre>
+<hr data-start="1252" data-end="1255">
+<h3 data-start="1257" data-end="1281">6. <strong data-start="1264" data-end="1281">Example Setup</strong></h3>
+<pre class="overflow-visible!" data-start="1283" data-end="1845"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">init_world</span></span><span><span class="hljs-params">()</span></span><span> {
+    </span><span><span class="hljs-comment">// Room 0 - Hallway</span></span><span>
+    world[</span><span><span class="hljs-number">0</span></span><span>].name = </span><span><span class="hljs-string">"Hallway"</span></span><span>;
+    world[</span><span><span class="hljs-number">0</span></span><span>].description = </span><span><span class="hljs-string">"A narrow hallway with a locked door to the east."</span></span><span>;
+    world[</span><span><span class="hljs-number">0</span></span><span>].exits[DIR_NORTH] = </span><span><span class="hljs-number">-1</span></span><span>;
+    world[</span><span><span class="hljs-number">0</span></span><span>].exits[DIR_EAST] = </span><span><span class="hljs-number">1</span></span><span>;
+    world[</span><span><span class="hljs-number">0</span></span><span>].items[</span><span><span class="hljs-number">0</span></span><span>] = (Item){ ITEM_KEY, </span><span><span class="hljs-number">1</span></span><span>, </span><span><span class="hljs-number">0</span></span><span> };
+    world[</span><span><span class="hljs-number">0</span></span><span>].objects[</span><span><span class="hljs-number">0</span></span><span>] = (GameObject){ OBJ_DOOR, </span><span><span class="hljs-number">0</span></span><span>, ITEM_KEY, </span><span><span class="hljs-number">1</span></span><span> };
+
+    </span><span><span class="hljs-comment">// Room 1 - Storage</span></span><span>
+    world[</span><span><span class="hljs-number">1</span></span><span>].name = </span><span><span class="hljs-string">"Storage Room"</span></span><span>;
+    world[</span><span><span class="hljs-number">1</span></span><span>].description = </span><span><span class="hljs-string">"Dusty old room filled with boxes."</span></span><span>;
+    world[</span><span><span class="hljs-number">1</span></span><span>].exits[DIR_WEST] = </span><span><span class="hljs-number">0</span></span><span>;
+    world[</span><span><span class="hljs-number">1</span></span><span>].items[</span><span><span class="hljs-number">0</span></span><span>] = (Item){ ITEM_LAMP, </span><span><span class="hljs-number">1</span></span><span>, </span><span><span class="hljs-number">1</span></span><span> };
+}
+</span></span></code></div></div></pre>
+<hr data-start="1847" data-end="1850">
+<h3 data-start="1852" data-end="1889">7. <strong data-start="1859" data-end="1889">Sample Callback: OPEN DOOR</strong></h3>
+<pre class="overflow-visible!" data-start="1891" data-end="2498"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">open_door</span></span><span><span class="hljs-params">(<span class="hljs-type">int</span></span></span><span> room_index) {
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; MAX_ROOM_OBJECTS; i++) {
+        GameObject* obj = &amp;world[room_index].objects[i];
+        </span><span><span class="hljs-keyword">if</span></span><span> (obj-&gt;type == OBJ_DOOR &amp;&amp; !obj-&gt;is_open) {
+            </span><span><span class="hljs-comment">// Check if player has the required item</span></span><span>
+            </span><span><span class="hljs-keyword">if</span></span><span> (player_has_item(obj-&gt;required_item)) {
+                obj-&gt;is_open = </span><span><span class="hljs-number">1</span></span><span>;
+                </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You opened the door.\n"</span></span><span>);
+                </span><span><span class="hljs-keyword">return</span></span><span>;
+            } </span><span><span class="hljs-keyword">else</span></span><span> {
+                </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"The door is locked. You need a key.\n"</span></span><span>);
+                </span><span><span class="hljs-keyword">return</span></span><span>;
+            }
+        }
+    }
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"There is no door here to open.\n"</span></span><span>);
+}
+</span></span></code></div></div></pre>
+<hr data-start="2500" data-end="2503">
+<h3 data-start="2505" data-end="2545">8. <strong data-start="2512" data-end="2545">Player Inventory (Simplified)</strong></h3>
+<pre class="overflow-visible!" data-start="2547" data-end="2789"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-meta">#<span class="hljs-keyword">define</span></span></span><span> MAX_INVENTORY 8
+Item inventory[MAX_INVENTORY];
+
+</span><span><span class="hljs-type">int</span></span><span> </span><span><span class="hljs-title function_">player_has_item</span></span><span><span class="hljs-params">(ItemType item)</span></span><span> {
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; MAX_INVENTORY; i++) {
+        </span><span><span class="hljs-keyword">if</span></span><span> (inventory[i].type == item) {
+            </span><span><span class="hljs-keyword">return</span></span><span> </span><span><span class="hljs-number">1</span></span><span>;
+        }
+    }
+    </span><span><span class="hljs-keyword">return</span></span><span> </span><span><span class="hljs-number">0</span></span><span>;
+}
+</span></span></code></div></div></pre>
+<hr data-start="2791" data-end="2794">
+<h3 data-start="2796" data-end="2821">Extending This Later:</h3>
+<ul data-start="2822" data-end="3004">
+<li data-start="2822" data-end="2918">
+<p data-start="2824" data-end="2918">Add <code data-start="2828" data-end="2838">on_use()</code> callbacks via a function pointer table (indexed by <code data-start="2890" data-end="2900">ItemType</code> or <code data-start="2904" data-end="2916">ObjectType</code>).</p>
+</li>
+<li data-start="2919" data-end="3004">
+<p data-start="2921" data-end="3004">Implement conditional events by tracking flags (<code data-start="2969" data-end="2990">int world_state[64]</code>) or booleans.</p>
+</li>
+</ul>
+<p data-start="3006" data-end="3204" data-is-last-node="" data-is-only-node="">Would you like a fully working minimal prototype using this design (e.g., a main loop with room movement and item pickup), or are you more interested in puzzle design patterns within this structure?</p></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-3" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="05287c8b-cc15-4946-92c6-eb6d16dd96c9" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">puzzles</div></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-4" data-scroll-anchor="false"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="6a3bb3aa-96b9-4b8b-8c87-0108751e8a89" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4o"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="192">Great — puzzles are the heart of any good text adventure. Here’s how to design and implement a <strong data-start="95" data-end="112">puzzle system</strong> using only <code data-start="124" data-end="132">struct</code>s, <code data-start="135" data-end="141">enum</code>s, and arrays — still avoiding pointers to structs.</p>
+<hr data-start="194" data-end="197">
+<h2 data-start="199" data-end="224">🧩 Puzzle Design Goals</h2>
+<p data-start="226" data-end="249">You want to be able to:</p>
+<ol data-start="251" data-end="595">
+<li data-start="251" data-end="316">
+<p data-start="254" data-end="316"><strong data-start="254" data-end="293">Require an item to unlock an object</strong> (e.g., key opens door)</p>
+</li>
+<li data-start="317" data-end="409">
+<p data-start="320" data-end="409"><strong data-start="320" data-end="360">Trigger an effect by using an object</strong> (e.g., pressing a button opens a hidden passage)</p>
+</li>
+<li data-start="410" data-end="509">
+<p data-start="413" data-end="509"><strong data-start="413" data-end="432">Sequence events</strong> (e.g., turning on generator → lights activate → new room becomes accessible)</p>
+</li>
+<li data-start="510" data-end="595">
+<p data-start="513" data-end="595"><strong data-start="513" data-end="557">Track global flags or game state changes</strong> (e.g., chest opened, bridge extended)</p>
+</li>
+</ol>
+<hr data-start="597" data-end="600">
+<h2 data-start="602" data-end="630">✅ Add Global Puzzle Flags</h2>
+<pre class="overflow-visible!" data-start="632" data-end="863"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-meta">#<span class="hljs-keyword">define</span></span></span><span> MAX_FLAGS 32
+</span><span><span class="hljs-type">int</span></span><span> puzzle_flags[MAX_FLAGS];  </span><span><span class="hljs-comment">// 0 = false, 1 = true</span></span><span>
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">enum</span></span></span><span> {
+    FLAG_DOOR_UNLOCKED,
+    FLAG_GENERATOR_ONLINE,
+    FLAG_SECRET_PASSAGE_REVEALED,
+    FLAG_CHEST_OPENED,
+    </span><span><span class="hljs-comment">// ...</span></span><span>
+} PuzzleFlag;
+</span></span></code></div></div></pre>
+<hr data-start="865" data-end="868">
+<h2 data-start="870" data-end="893">🧱 Extend GameObject</h2>
+<p data-start="895" data-end="919">Add support for puzzles:</p>
+<pre class="overflow-visible!" data-start="921" data-end="1184"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    ObjectType type;
+    </span><span><span class="hljs-type">int</span></span><span> is_open;
+    ItemType required_item;
+    </span><span><span class="hljs-type">int</span></span><span> leads_to_room;
+
+    </span><span><span class="hljs-comment">// Puzzle logic</span></span><span>
+    PuzzleFlag trigger_flag;   </span><span><span class="hljs-comment">// Set when used/opened</span></span><span>
+    PuzzleFlag required_flag;  </span><span><span class="hljs-comment">// Must be true to interact</span></span><span>
+} GameObject;
+</span></span></code></div></div></pre>
+<p data-start="1186" data-end="1197">This means:</p>
+<ul data-start="1198" data-end="1340">
+<li data-start="1198" data-end="1250">
+<p data-start="1200" data-end="1250">You can block an interaction unless a flag is true</p>
+</li>
+<li data-start="1251" data-end="1301">
+<p data-start="1253" data-end="1301">You can set a flag when something is used/opened</p>
+</li>
+<li data-start="1302" data-end="1340">
+<p data-start="1304" data-end="1340">This gives you chainable event logic</p>
+</li>
+</ul>
+<hr data-start="1342" data-end="1345">
+<h2 data-start="1347" data-end="1368">🎮 Puzzle Examples</h2>
+<h3 data-start="1370" data-end="1430">🔐 Door that requires a key, and sets a flag when opened</h3>
+<pre class="overflow-visible!" data-start="1432" data-end="1638"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span>world[</span><span><span class="hljs-number">0</span></span><span>].objects[</span><span><span class="hljs-number">0</span></span><span>] = (GameObject){
+    .type = OBJ_DOOR,
+    .is_open = </span><span><span class="hljs-number">0</span></span><span>,
+    .required_item = ITEM_KEY,
+    .leads_to_room = </span><span><span class="hljs-number">1</span></span><span>,
+    .trigger_flag = FLAG_DOOR_UNLOCKED,
+    .required_flag = </span><span><span class="hljs-number">-1</span></span><span>
+};
+</span></span></code></div></div></pre>
+<h3 data-start="1640" data-end="1683">🔘 Button that reveals a secret passage</h3>
+<pre class="overflow-visible!" data-start="1685" data-end="1940"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span>world[</span><span><span class="hljs-number">1</span></span><span>].objects[</span><span><span class="hljs-number">1</span></span><span>] = (GameObject){
+    .type = OBJ_BUTTON,
+    .is_open = </span><span><span class="hljs-number">0</span></span><span>,
+    .required_item = ITEM_NONE,
+    .leads_to_room = </span><span><span class="hljs-number">-1</span></span><span>,  </span><span><span class="hljs-comment">// Doesn't lead anywhere directly</span></span><span>
+    .trigger_flag = FLAG_SECRET_PASSAGE_REVEALED,
+    .required_flag = </span><span><span class="hljs-number">-1</span></span><span>
+};
+</span></span></code></div></div></pre>
+<h3 data-start="1942" data-end="1993">🚪 Secret door that only opens if a flag is set</h3>
+<pre class="overflow-visible!" data-start="1995" data-end="2212"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span>world[</span><span><span class="hljs-number">2</span></span><span>].objects[</span><span><span class="hljs-number">0</span></span><span>] = (GameObject){
+    .type = OBJ_DOOR,
+    .is_open = </span><span><span class="hljs-number">0</span></span><span>,
+    .required_item = ITEM_NONE,
+    .leads_to_room = </span><span><span class="hljs-number">3</span></span><span>,
+    .trigger_flag = </span><span><span class="hljs-number">-1</span></span><span>,
+    .required_flag = FLAG_SECRET_PASSAGE_REVEALED
+};
+</span></span></code></div></div></pre>
+<hr data-start="2214" data-end="2217">
+<h2 data-start="2219" data-end="2234">🔧 Use Logic</h2>
+<pre class="overflow-visible!" data-start="2236" data-end="2964"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">use_object</span></span><span><span class="hljs-params">(GameObject* obj)</span></span><span> {
+    </span><span><span class="hljs-comment">// Check if flag blocks access</span></span><span>
+    </span><span><span class="hljs-keyword">if</span></span><span> (obj-&gt;required_flag != </span><span><span class="hljs-number">-1</span></span><span> &amp;&amp; !puzzle_flags[obj-&gt;required_flag]) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Nothing happens.\n"</span></span><span>);
+        </span><span><span class="hljs-keyword">return</span></span><span>;
+    }
+
+    </span><span><span class="hljs-comment">// Check item requirement</span></span><span>
+    </span><span><span class="hljs-keyword">if</span></span><span> (obj-&gt;required_item != ITEM_NONE &amp;&amp; !player_has_item(obj-&gt;required_item)) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You need something to use this.\n"</span></span><span>);
+        </span><span><span class="hljs-keyword">return</span></span><span>;
+    }
+
+    </span><span><span class="hljs-comment">// Toggle state</span></span><span>
+    </span><span><span class="hljs-keyword">if</span></span><span> (obj-&gt;type == OBJ_DOOR) {
+        obj-&gt;is_open = </span><span><span class="hljs-number">1</span></span><span>;
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You opened the door.\n"</span></span><span>);
+    } </span><span><span class="hljs-keyword">else</span></span><span> </span><span><span class="hljs-keyword">if</span></span><span> (obj-&gt;type == OBJ_BUTTON) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You press the button.\n"</span></span><span>);
+    }
+
+    </span><span><span class="hljs-comment">// Set flag if needed</span></span><span>
+    </span><span><span class="hljs-keyword">if</span></span><span> (obj-&gt;trigger_flag != </span><span><span class="hljs-number">-1</span></span><span>) {
+        puzzle_flags[obj-&gt;trigger_flag] = </span><span><span class="hljs-number">1</span></span><span>;
+    }
+}
+</span></span></code></div></div></pre>
+<hr data-start="2966" data-end="2969">
+<h2 data-start="2971" data-end="2989">🧠 Puzzle Ideas</h2>
+<div class="_tableContainer_16hzy_1"><div tabindex="-1" class="_tableWrapper_16hzy_14 group flex w-fit flex-col-reverse"><table data-start="2991" data-end="3837" class="w-fit min-w-(--thread-content-width)"><thead data-start="2991" data-end="3095"><tr data-start="2991" data-end="3095"><th data-start="2991" data-end="3013" data-col-size="sm">Puzzle Type</th><th data-start="3013" data-end="3095" data-col-size="md">Implementation</th></tr></thead><tbody data-start="3202" data-end="3837"><tr data-start="3202" data-end="3307"><td data-start="3202" data-end="3225" data-col-size="sm">Key unlocks door</td><td data-start="3225" data-end="3307" data-col-size="md"><code data-start="3227" data-end="3253">required_item = ITEM_KEY</code></td></tr><tr data-start="3308" data-end="3413"><td data-start="3308" data-end="3331" data-col-size="sm">Button opens secret</td><td data-start="3331" data-end="3413" data-col-size="md">Button sets a flag, secret door checks the flag</td></tr><tr data-start="3414" data-end="3519"><td data-start="3414" data-end="3437" data-col-size="sm">Use item on object</td><td data-start="3437" data-end="3519" data-col-size="md">Player uses an item in inventory, object looks for <code data-start="3490" data-end="3505">required_item</code></td></tr><tr data-start="3520" data-end="3625"><td data-start="3520" data-end="3543" data-col-size="sm">Conditional use</td><td data-start="3543" data-end="3625" data-col-size="md">Object checks <code data-start="3559" data-end="3574">required_flag</code> before responding</td></tr><tr data-start="3626" data-end="3731"><td data-start="3626" data-end="3649" data-col-size="sm">Multi-step puzzle</td><td data-start="3649" data-end="3731" data-col-size="md">Multiple objects all toggle or check flags</td></tr><tr data-start="3732" data-end="3837"><td data-start="3732" data-end="3755" data-col-size="sm">Timed event (bonus)</td><td data-start="3755" data-end="3837" data-col-size="md">You can simulate by setting a “step counter” or flag and checking later</td></tr></tbody></table><div class="sticky end-(--thread-content-margin) h-0 self-end select-none"><div class="absolute end-0 flex items-end" style="height: 33px;"><span class="" data-state="closed"></span></div></div></div></div>
+<hr data-start="3839" data-end="3842">
+<p data-start="3844" data-end="4056" data-is-last-node="" data-is-only-node="">Would you like a walkthrough of designing a full example puzzle sequence (e.g., find key → unlock generator → activate button → open final room), or help wiring this into your main loop and parser callback logic?</p></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-5" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="fcff62bb-2863-45eb-b437-9b3a46131d21" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">what larger computer science concepts are being used in this example. world states and flags and so on feel like a higher level computing concept that can be applied to a wide range of other programming tasks</div></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-6" data-scroll-anchor="false"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="50f99f52-461f-4059-82b3-a2fd96d0306d" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4o"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="262">You're absolutely right — beneath the retro charm of a text adventure lies a rich set of foundational computer science concepts. Here's a breakdown of the <strong data-start="155" data-end="184">larger computing concepts</strong> embedded in your example, with notes on how they generalize to other domains:</p>
+<hr data-start="264" data-end="267">
+<h3 data-start="269" data-end="311">🔄 1. <strong data-start="279" data-end="311">Finite State Machines (FSMs)</strong></h3>
+<ul data-start="313" data-end="596">
+<li data-start="313" data-end="421">
+<p data-start="315" data-end="421"><strong data-start="315" data-end="331">In your game</strong>: Doors can be locked/unlocked, buttons pressed/unpressed, flags toggled. Each is a state.</p>
+</li>
+<li data-start="422" data-end="596">
+<p data-start="424" data-end="596"><strong data-start="424" data-end="443">Broader concept</strong>: FSMs model any system that transitions between discrete states based on input — e.g. elevators, vending machines, UI menus, protocol handling, game AI.</p>
+</li>
+</ul>
+<p data-start="598" data-end="615"><strong data-start="598" data-end="614">Applications</strong>:</p>
+<ul data-start="616" data-end="723">
+<li data-start="616" data-end="654">
+<p data-start="618" data-end="654">Network protocols (e.g., TCP states)</p>
+</li>
+<li data-start="655" data-end="682">
+<p data-start="657" data-end="682">Traffic light controllers</p>
+</li>
+<li data-start="683" data-end="704">
+<p data-start="685" data-end="704">Game enemy behavior</p>
+</li>
+<li data-start="705" data-end="723">
+<p data-start="707" data-end="723">Workflow engines</p>
+</li>
+</ul>
+<hr data-start="725" data-end="728">
+<h3 data-start="730" data-end="774">🧠 2. <strong data-start="740" data-end="774">State Management / World State</strong></h3>
+<ul data-start="776" data-end="989">
+<li data-start="776" data-end="876">
+<p data-start="778" data-end="876"><strong data-start="778" data-end="794">In your game</strong>: <code data-start="796" data-end="812">puzzle_flags[]</code> stores the current world state (door opened, generator online).</p>
+</li>
+<li data-start="877" data-end="989">
+<p data-start="879" data-end="989"><strong data-start="879" data-end="898">Broader concept</strong>: Managing state is essential in systems that react to user input or environmental changes.</p>
+</li>
+</ul>
+<p data-start="991" data-end="1008"><strong data-start="991" data-end="1007">Applications</strong>:</p>
+<ul data-start="1009" data-end="1143">
+<li data-start="1009" data-end="1053">
+<p data-start="1011" data-end="1053">UI frameworks (e.g., React’s state system)</p>
+</li>
+<li data-start="1054" data-end="1074">
+<p data-start="1056" data-end="1074">Simulation engines</p>
+</li>
+<li data-start="1075" data-end="1099">
+<p data-start="1077" data-end="1099">Save/load game systems</p>
+</li>
+<li data-start="1100" data-end="1143">
+<p data-start="1102" data-end="1143">Real-time strategy (RTS) game world state</p>
+</li>
+</ul>
+<hr data-start="1145" data-end="1148">
+<h3 data-start="1150" data-end="1183">🗃️ 3. <strong data-start="1161" data-end="1183">Data-Driven Design</strong></h3>
+<ul data-start="1185" data-end="1430">
+<li data-start="1185" data-end="1314">
+<p data-start="1187" data-end="1314"><strong data-start="1187" data-end="1203">In your game</strong>: Rooms, items, and objects are structs in arrays — the logic interprets the data, rather than being hardcoded.</p>
+</li>
+<li data-start="1315" data-end="1430">
+<p data-start="1317" data-end="1430"><strong data-start="1317" data-end="1336">Broader concept</strong>: Separate the “what” (data) from the “how” (logic), allowing for easy modification and reuse.</p>
+</li>
+</ul>
+<p data-start="1432" data-end="1449"><strong data-start="1432" data-end="1448">Applications</strong>:</p>
+<ul data-start="1450" data-end="1610">
+<li data-start="1450" data-end="1496">
+<p data-start="1452" data-end="1496">Configuration files (e.g., JSON-driven apps)</p>
+</li>
+<li data-start="1497" data-end="1517">
+<p data-start="1499" data-end="1517">Game level editors</p>
+</li>
+<li data-start="1518" data-end="1565">
+<p data-start="1520" data-end="1565">Dependency injection in software architecture</p>
+</li>
+<li data-start="1566" data-end="1610">
+<p data-start="1568" data-end="1610">Low-level interpreters or virtual machines</p>
+</li>
+</ul>
+<hr data-start="1612" data-end="1615">
+<h3 data-start="1617" data-end="1658">🧱 4. <strong data-start="1627" data-end="1658">Abstraction &amp; Encapsulation</strong></h3>
+<ul data-start="1660" data-end="1897">
+<li data-start="1660" data-end="1793">
+<p data-start="1662" data-end="1793"><strong data-start="1662" data-end="1678">In your game</strong>: Rooms, items, and objects encapsulate data and behavior. You don’t need to know how <code data-start="1764" data-end="1776">GameObject</code> works to use it.</p>
+</li>
+<li data-start="1794" data-end="1897">
+<p data-start="1796" data-end="1897"><strong data-start="1796" data-end="1815">Broader concept</strong>: Abstracting and hiding internal details makes programs modular and maintainable.</p>
+</li>
+</ul>
+<p data-start="1899" data-end="1916"><strong data-start="1899" data-end="1915">Applications</strong>:</p>
+<ul data-start="1917" data-end="2057">
+<li data-start="1917" data-end="1952">
+<p data-start="1919" data-end="1952">Object-oriented programming (OOP)</p>
+</li>
+<li data-start="1953" data-end="2026">
+<p data-start="1955" data-end="2026">Library design (e.g., you use <code data-start="1985" data-end="1995">printf()</code> without knowing its internals)</p>
+</li>
+<li data-start="2027" data-end="2057">
+<p data-start="2029" data-end="2057">API design and microservices</p>
+</li>
+</ul>
+<hr data-start="2059" data-end="2062">
+<h3 data-start="2064" data-end="2102">🎭 5. <strong data-start="2074" data-end="2102">Event-Driven Programming</strong></h3>
+<ul data-start="2104" data-end="2330">
+<li data-start="2104" data-end="2227">
+<p data-start="2106" data-end="2227"><strong data-start="2106" data-end="2122">In your game</strong>: Parser triggers actions (like “open door”), which update state and potentially cause cascading effects.</p>
+</li>
+<li data-start="2228" data-end="2330">
+<p data-start="2230" data-end="2330"><strong data-start="2230" data-end="2249">Broader concept</strong>: Events trigger logic in GUIs, embedded systems, and modern frontend frameworks.</p>
+</li>
+</ul>
+<p data-start="2332" data-end="2349"><strong data-start="2332" data-end="2348">Applications</strong>:</p>
+<ul data-start="2350" data-end="2483">
+<li data-start="2350" data-end="2394">
+<p data-start="2352" data-end="2394">GUI toolkits (click buttons → run handler)</p>
+</li>
+<li data-start="2395" data-end="2416">
+<p data-start="2397" data-end="2416">JavaScript web apps</p>
+</li>
+<li data-start="2417" data-end="2448">
+<p data-start="2419" data-end="2448">Game loops and input handling</p>
+</li>
+<li data-start="2449" data-end="2483">
+<p data-start="2451" data-end="2483">Interrupt-based embedded systems</p>
+</li>
+</ul>
+<hr data-start="2485" data-end="2488">
+<h3 data-start="2490" data-end="2523">📦 6. <strong data-start="2500" data-end="2523">Resource Management</strong></h3>
+<ul data-start="2525" data-end="2746">
+<li data-start="2525" data-end="2626">
+<p data-start="2527" data-end="2626"><strong data-start="2527" data-end="2543">In your game</strong>: The player’s inventory is a limited list of items that can be added/used/removed.</p>
+</li>
+<li data-start="2627" data-end="2746">
+<p data-start="2629" data-end="2746"><strong data-start="2629" data-end="2648">Broader concept</strong>: Resource management is central to everything from memory allocation to real-time strategy games.</p>
+</li>
+</ul>
+<p data-start="2748" data-end="2765"><strong data-start="2748" data-end="2764">Applications</strong>:</p>
+<ul data-start="2766" data-end="2905">
+<li data-start="2766" data-end="2812">
+<p data-start="2768" data-end="2812">Operating systems (memory, files, processes)</p>
+</li>
+<li data-start="2813" data-end="2857">
+<p data-start="2815" data-end="2857">Simulations (inventory systems, economies)</p>
+</li>
+<li data-start="2858" data-end="2905">
+<p data-start="2860" data-end="2905">Embedded systems (sensor/actuator allocation)</p>
+</li>
+</ul>
+<hr data-start="2907" data-end="2910">
+<h3 data-start="2912" data-end="2954">🔗 7. <strong data-start="2922" data-end="2954">Graphs / Connectivity Models</strong></h3>
+<ul data-start="2956" data-end="3147">
+<li data-start="2956" data-end="3056">
+<p data-start="2958" data-end="3056"><strong data-start="2958" data-end="2974">In your game</strong>: The rooms and exits form a directed graph (each room has connections to others).</p>
+</li>
+<li data-start="3057" data-end="3147">
+<p data-start="3059" data-end="3147"><strong data-start="3059" data-end="3078">Broader concept</strong>: Graphs are everywhere — networks, maps, social media, dependencies.</p>
+</li>
+</ul>
+<p data-start="3149" data-end="3166"><strong data-start="3149" data-end="3165">Applications</strong>:</p>
+<ul data-start="3167" data-end="3272">
+<li data-start="3167" data-end="3198">
+<p data-start="3169" data-end="3198">Pathfinding (e.g., A* search)</p>
+</li>
+<li data-start="3199" data-end="3221">
+<p data-start="3201" data-end="3221">Networking (routing)</p>
+</li>
+<li data-start="3222" data-end="3252">
+<p data-start="3224" data-end="3252">Compiler dependency analysis</p>
+</li>
+<li data-start="3253" data-end="3272">
+<p data-start="3255" data-end="3272">AI decision trees</p>
+</li>
+</ul>
+<hr data-start="3274" data-end="3277">
+<h3 data-start="3279" data-end="3332">🧩 8. <strong data-start="3289" data-end="3332">Constraint Satisfaction &amp; Logic Systems</strong></h3>
+<ul data-start="3334" data-end="3557">
+<li data-start="3334" data-end="3461">
+<p data-start="3336" data-end="3461"><strong data-start="3336" data-end="3352">In your game</strong>: Puzzles are effectively constraint-based logic (e.g., “Door can only open if key is used and flag is set”).</p>
+</li>
+<li data-start="3462" data-end="3557">
+<p data-start="3464" data-end="3557"><strong data-start="3464" data-end="3483">Broader concept</strong>: This is similar to how logic programming, SAT solvers, and game AI work.</p>
+</li>
+</ul>
+<p data-start="3559" data-end="3576"><strong data-start="3559" data-end="3575">Applications</strong>:</p>
+<ul data-start="3577" data-end="3713">
+<li data-start="3577" data-end="3593">
+<p data-start="3579" data-end="3593">Sudoku solvers</p>
+</li>
+<li data-start="3594" data-end="3626">
+<p data-start="3596" data-end="3626">Prolog-style logic programming</p>
+</li>
+<li data-start="3627" data-end="3661">
+<p data-start="3629" data-end="3661">Puzzle games (e.g., The Witness)</p>
+</li>
+<li data-start="3662" data-end="3713">
+<p data-start="3664" data-end="3713">Configuration systems (e.g., Linux kernel config)</p>
+</li>
+</ul>
+<hr data-start="3715" data-end="3718">
+<h3 data-start="3720" data-end="3785">🗃️ 9. <strong data-start="3731" data-end="3785">Serialization and Persistence (if saving is added)</strong></h3>
+<ul data-start="3787" data-end="3980">
+<li data-start="3787" data-end="3892">
+<p data-start="3789" data-end="3892"><strong data-start="3789" data-end="3805">In your game</strong>: To support save/load, you’d serialize <code data-start="3845" data-end="3854">world[]</code>, <code data-start="3856" data-end="3869">inventory[]</code>, and <code data-start="3875" data-end="3891">puzzle_flags[]</code>.</p>
+</li>
+<li data-start="3893" data-end="3980">
+<p data-start="3895" data-end="3980"><strong data-start="3895" data-end="3914">Broader concept</strong>: Persisting program state is essential in databases, games, apps.</p>
+</li>
+</ul>
+<p data-start="3982" data-end="3999"><strong data-start="3982" data-end="3998">Applications</strong>:</p>
+<ul data-start="4000" data-end="4111">
+<li data-start="4000" data-end="4017">
+<p data-start="4002" data-end="4017">Game save files</p>
+</li>
+<li data-start="4018" data-end="4036">
+<p data-start="4020" data-end="4036">Database records</p>
+</li>
+<li data-start="4037" data-end="4085">
+<p data-start="4039" data-end="4085">Object serialization (e.g., in Java or Python)</p>
+</li>
+<li data-start="4086" data-end="4111">
+<p data-start="4088" data-end="4111">Undo systems in editors</p>
+</li>
+</ul>
+<hr data-start="4113" data-end="4116">
+<h3 data-start="4118" data-end="4138">🚀 Summary Table</h3>
+<div class="_tableContainer_16hzy_1"><div tabindex="-1" class="_tableWrapper_16hzy_14 group flex w-fit flex-col-reverse"><table data-start="4140" data-end="5448" class="w-fit min-w-(--thread-content-width)"><thead data-start="4140" data-end="4259"><tr data-start="4140" data-end="4259"><th data-start="4140" data-end="4170" data-col-size="sm">Concept</th><th data-start="4170" data-end="4203" data-col-size="sm">In Game</th><th data-start="4203" data-end="4259" data-col-size="md">Real-World Examples</th></tr></thead><tbody data-start="4379" data-end="5448"><tr data-start="4379" data-end="4497"><td data-start="4379" data-end="4409" data-col-size="sm">Finite State Machines</td><td data-start="4409" data-end="4442" data-col-size="sm">Doors, buttons, flags</td><td data-start="4442" data-end="4497" data-col-size="md">UI flow, network protocols, AI</td></tr><tr data-start="4498" data-end="4616"><td data-start="4498" data-end="4528" data-col-size="sm">State Management</td><td data-start="4528" data-end="4561" data-col-size="sm"><code data-start="4530" data-end="4546">puzzle_flags[]</code>, object state</td><td data-start="4561" data-end="4616" data-col-size="md">GUIs, simulations, real-time apps</td></tr><tr data-start="4617" data-end="4735"><td data-start="4617" data-end="4647" data-col-size="sm">Data-Driven Design</td><td data-start="4647" data-end="4680" data-col-size="sm"><code data-start="4649" data-end="4655">Room</code>, <code data-start="4657" data-end="4663">Item</code>, <code data-start="4665" data-end="4673">Object</code> arrays</td><td data-start="4680" data-end="4735" data-col-size="md">Game engines, config systems</td></tr><tr data-start="4736" data-end="4853"><td data-start="4736" data-end="4765" data-col-size="sm">Abstraction &amp; Encapsulation</td><td data-start="4765" data-end="4798" data-col-size="sm">Struct interfaces</td><td data-start="4798" data-end="4853" data-col-size="md">Libraries, APIs, software design</td></tr><tr data-start="4854" data-end="4972"><td data-start="4854" data-end="4884" data-col-size="sm">Event-Driven Programming</td><td data-start="4884" data-end="4917" data-col-size="sm">Parser triggers action</td><td data-start="4917" data-end="4972" data-col-size="md">GUIs, web apps, embedded systems</td></tr><tr data-start="4973" data-end="5091"><td data-start="4973" data-end="5003" data-col-size="sm">Resource Management</td><td data-start="5003" data-end="5036" data-col-size="sm">Player inventory</td><td data-start="5036" data-end="5091" data-col-size="md">OS memory, logistics systems</td></tr><tr data-start="5092" data-end="5210"><td data-start="5092" data-end="5122" data-col-size="sm">Graph Structures</td><td data-start="5122" data-end="5155" data-col-size="sm">Room connectivity</td><td data-start="5155" data-end="5210" data-col-size="md">Maps, networking, dependency graphs</td></tr><tr data-start="5211" data-end="5329"><td data-start="5211" data-end="5241" data-col-size="sm">Logic / Constraint Systems</td><td data-start="5241" data-end="5274" data-col-size="sm">Puzzle rules and requirements</td><td data-start="5274" data-end="5329" data-col-size="md">SAT solvers, puzzle games, rule-based systems</td></tr><tr data-start="5330" data-end="5448"><td data-start="5330" data-end="5360" data-col-size="sm">Serialization (optional)</td><td data-start="5360" data-end="5393" data-col-size="sm">Saving/loading world state</td><td data-start="5393" data-end="5448" data-col-size="md">Save files, backups, web state persistence</td></tr></tbody></table><div class="sticky end-(--thread-content-margin) h-0 self-end select-none"><div class="absolute end-0 flex items-end" style="height: 33px;"><span class="" data-state="closed"></span></div></div></div></div>
+<hr data-start="5450" data-end="5453">
+<p data-start="5455" data-end="5567">If you're using this as a teaching tool or just want to stretch it further into CS territory, I can show how to:</p>
+<ul data-start="5568" data-end="5758">
+<li data-start="5568" data-end="5638">
+<p data-start="5570" data-end="5638">Represent world state as a compressed bitfield for memory efficiency</p>
+</li>
+<li data-start="5639" data-end="5689">
+<p data-start="5641" data-end="5689">Create a generic rule system for dynamic puzzles</p>
+</li>
+<li data-start="5690" data-end="5758">
+<p data-start="5692" data-end="5758">Write a scripting-like engine for cutscenes or object interactions</p>
+</li>
+</ul>
+<p data-start="5760" data-end="5801" data-is-last-node="" data-is-only-node="">Want to dig into any of those ideas next?</p></div></div></div></div><div class="flex absolute start-0 end-0 flex justify-start"><div class="touch:-me-2 touch:-ms-3.5 -ms-2.5 -me-1 flex items-center p-1 select-none -mt-1 focus-within:transition-none hover:transition-none duration-500 group-hover/turn-messages:delay-300 pointer-events-none [mask-image:linear-gradient(to_right,black_33%,transparent_66%)] [mask-size:300%_100%] [mask-position:100%_0%] motion-safe:transition-[mask-position] group-hover/turn-messages:pointer-events-auto group-hover/turn-messages:[mask-position:0_0] group-focus-within/turn-messages:pointer-events-auto group-focus-within/turn-messages:[mask-position:0_0] has-data-[state=open]:pointer-events-auto has-data-[state=open]:[mask-position:0_0]"><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="hidden"></span><span class="" data-state="closed"></span></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-7" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="4f3324e2-c366-43e0-9fab-e8fa0a611c93" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">genric rule system</div></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-8" data-scroll-anchor="false"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="8489a5cf-98a6-40fa-b75d-6fb900a9ec9a" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4o"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="326">Great choice — a <strong data-start="17" data-end="40">generic rule system</strong> is a powerful abstraction. It lets you define game logic <em data-start="98" data-end="107">outside</em> your main codebase, almost like a mini scripting engine. This is ideal for adding complexity (e.g., multi-step puzzles, conditional effects) without needing tons of <code data-start="273" data-end="277">if</code>/<code data-start="278" data-end="284">else</code> statements hardcoded into your game loop.</p>
+<p data-start="328" data-end="452">Let’s build a lightweight rule system suitable for your constraints: <strong data-start="397" data-end="451">arrays, structs, enums, and no pointers to structs</strong>.</p>
+<hr data-start="454" data-end="457">
+<h2 data-start="459" data-end="472">🧠 Concept</h2>
+<p data-start="474" data-end="489">A <strong data-start="476" data-end="484">rule</strong> has:</p>
+<ul data-start="490" data-end="708">
+<li data-start="490" data-end="600">
+<p data-start="492" data-end="600"><strong data-start="492" data-end="506">Conditions</strong>: Things that must be true for it to run (e.g., "player has a key", or "generator is online").</p>
+</li>
+<li data-start="601" data-end="708">
+<p data-start="603" data-end="708"><strong data-start="603" data-end="614">Actions</strong>: Things that happen if the conditions are met (e.g., "unlock door", "set flag", "give item").</p>
+</li>
+</ul>
+<p data-start="710" data-end="729">This is similar to:</p>
+<ul data-start="730" data-end="849">
+<li data-start="730" data-end="749">
+<p data-start="732" data-end="749">Logic programming</p>
+</li>
+<li data-start="750" data-end="796">
+<p data-start="752" data-end="796">Rule engines (like production systems in AI)</p>
+</li>
+<li data-start="797" data-end="849">
+<p data-start="799" data-end="849">Trigger-based game design (e.g., RPG Maker events)</p>
+</li>
+</ul>
+<hr data-start="851" data-end="854">
+<h2 data-start="856" data-end="878">🗂️ Data Structures</h2>
+<h3 data-start="880" data-end="916">Enums for Conditions and Actions</h3>
+<pre class="overflow-visible!" data-start="918" data-end="1178"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">enum</span></span></span><span> {
+    COND_FLAG_SET,
+    COND_HAS_ITEM,
+    COND_OBJECT_OPEN,
+    </span><span><span class="hljs-comment">// Add more as needed</span></span><span>
+} ConditionType;
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">enum</span></span></span><span> {
+    ACT_SET_FLAG,
+    ACT_GIVE_ITEM,
+    ACT_OPEN_OBJECT,
+    ACT_PRINT_TEXT,
+    </span><span><span class="hljs-comment">// Add more as needed</span></span><span>
+} ActionType;
+</span></span></code></div></div></pre>
+<hr data-start="1180" data-end="1183">
+<h3 data-start="1185" data-end="1217">Condition and Action Structs</h3>
+<pre class="overflow-visible!" data-start="1219" data-end="1502"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    ConditionType type;
+    </span><span><span class="hljs-type">int</span></span><span> param1;  </span><span><span class="hljs-comment">// e.g., flag ID, item ID, object index</span></span><span>
+} Condition;
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    ActionType type;
+    </span><span><span class="hljs-type">int</span></span><span> param1;  </span><span><span class="hljs-comment">// e.g., flag ID, item ID, object index</span></span><span>
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span>* text; </span><span><span class="hljs-comment">// optional text for ACT_PRINT_TEXT</span></span><span>
+} Action;
+</span></span></code></div></div></pre>
+<hr data-start="1504" data-end="1507">
+<h3 data-start="1509" data-end="1528">The Rule Struct</h3>
+<pre class="overflow-visible!" data-start="1530" data-end="1752"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-meta">#<span class="hljs-keyword">define</span></span></span><span> MAX_RULE_CONDITIONS 4
+</span><span><span class="hljs-meta">#<span class="hljs-keyword">define</span></span></span><span> MAX_RULE_ACTIONS 4
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    Condition conditions[MAX_RULE_CONDITIONS];
+    </span><span><span class="hljs-type">int</span></span><span> num_conditions;
+
+    Action actions[MAX_RULE_ACTIONS];
+    </span><span><span class="hljs-type">int</span></span><span> num_actions;
+} Rule;
+</span></span></code></div></div></pre>
+<hr data-start="1754" data-end="1757">
+<h2 data-start="1759" data-end="1788">🏗️ Rule Evaluation Engine</h2>
+<pre class="overflow-visible!" data-start="1790" data-end="3120"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">int</span></span><span> </span><span><span class="hljs-title function_">check_condition</span></span><span><span class="hljs-params">(Condition cond)</span></span><span> {
+    </span><span><span class="hljs-keyword">switch</span></span><span> (cond.type) {
+        </span><span><span class="hljs-keyword">case</span></span><span> COND_FLAG_SET:
+            </span><span><span class="hljs-keyword">return</span></span><span> puzzle_flags[cond.param1];
+        </span><span><span class="hljs-keyword">case</span></span><span> COND_HAS_ITEM:
+            </span><span><span class="hljs-keyword">return</span></span><span> player_has_item(cond.param1);
+        </span><span><span class="hljs-keyword">case</span></span><span> COND_OBJECT_OPEN:
+            </span><span><span class="hljs-keyword">return</span></span><span> world[current_room].objects[cond.param1].is_open;
+        </span><span><span class="hljs-keyword">default</span></span><span>:
+            </span><span><span class="hljs-keyword">return</span></span><span> </span><span><span class="hljs-number">0</span></span><span>;
+    }
+}
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">perform_action</span></span><span><span class="hljs-params">(Action act)</span></span><span> {
+    </span><span><span class="hljs-keyword">switch</span></span><span> (act.type) {
+        </span><span><span class="hljs-keyword">case</span></span><span> ACT_SET_FLAG:
+            puzzle_flags[act.param1] = </span><span><span class="hljs-number">1</span></span><span>;
+            </span><span><span class="hljs-keyword">break</span></span><span>;
+        </span><span><span class="hljs-keyword">case</span></span><span> ACT_GIVE_ITEM:
+            add_item_to_inventory(act.param1);
+            </span><span><span class="hljs-keyword">break</span></span><span>;
+        </span><span><span class="hljs-keyword">case</span></span><span> ACT_OPEN_OBJECT:
+            world[current_room].objects[act.param1].is_open = </span><span><span class="hljs-number">1</span></span><span>;
+            </span><span><span class="hljs-keyword">break</span></span><span>;
+        </span><span><span class="hljs-keyword">case</span></span><span> ACT_PRINT_TEXT:
+            </span><span><span class="hljs-keyword">if</span></span><span> (act.text) </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"%s\n"</span></span><span>, act.text);
+            </span><span><span class="hljs-keyword">break</span></span><span>;
+    }
+}
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">run_rules</span></span><span><span class="hljs-params">(Rule* rules, <span class="hljs-type">int</span></span></span><span> num_rules) {
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; num_rules; i++) {
+        Rule* rule = &amp;rules[i];
+        </span><span><span class="hljs-type">int</span></span><span> all_met = </span><span><span class="hljs-number">1</span></span><span>;
+        </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> j = </span><span><span class="hljs-number">0</span></span><span>; j &lt; rule-&gt;num_conditions; j++) {
+            </span><span><span class="hljs-keyword">if</span></span><span> (!check_condition(rule-&gt;conditions[j])) {
+                all_met = </span><span><span class="hljs-number">0</span></span><span>;
+                </span><span><span class="hljs-keyword">break</span></span><span>;
+            }
+        }
+        </span><span><span class="hljs-keyword">if</span></span><span> (all_met) {
+            </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> j = </span><span><span class="hljs-number">0</span></span><span>; j &lt; rule-&gt;num_actions; j++) {
+                perform_action(rule-&gt;actions[j]);
+            }
+        }
+    }
+}
+</span></span></code></div></div></pre>
+<hr data-start="3122" data-end="3125">
+<h2 data-start="3127" data-end="3145">🧪 Example Rule</h2>
+<p data-start="3147" data-end="3246"><strong data-start="3147" data-end="3246">"If the generator is online and the player has the wrench, open the panel and print a message."</strong></p>
+<pre class="overflow-visible!" data-start="3248" data-end="3627"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span>Rule rules[] = {
+    {
+        .conditions = {
+            {COND_FLAG_SET, FLAG_GENERATOR_ONLINE},
+            {COND_HAS_ITEM, ITEM_WRENCH}
+        },
+        .num_conditions = </span><span><span class="hljs-number">2</span></span><span>,
+        .actions = {
+            {ACT_OPEN_OBJECT, </span><span><span class="hljs-number">1</span></span><span>, </span><span><span class="hljs-literal">NULL</span></span><span>}, </span><span><span class="hljs-comment">// object index 1</span></span><span>
+            {ACT_PRINT_TEXT, </span><span><span class="hljs-number">0</span></span><span>, </span><span><span class="hljs-string">"You open the maintenance panel."</span></span><span>}
+        },
+        .num_actions = </span><span><span class="hljs-number">2</span></span><span>
+    }
+};
+</span></span></code></div></div></pre>
+<hr data-start="3629" data-end="3632">
+<h2 data-start="3634" data-end="3658">🧩 How You'd Use This</h2>
+<ol data-start="3660" data-end="3935">
+<li data-start="3660" data-end="3686">
+<p data-start="3663" data-end="3686">Create a list of rules.</p>
+</li>
+<li data-start="3687" data-end="3767">
+<p data-start="3690" data-end="3767">After player actions (e.g. “USE WRENCH”), call <code data-start="3737" data-end="3767">run_rules(rules, num_rules);</code></p>
+</li>
+<li data-start="3768" data-end="3837">
+<p data-start="3771" data-end="3837">The rules will evaluate conditions and apply any matching effects.</p>
+</li>
+<li data-start="3838" data-end="3935">
+<p data-start="3841" data-end="3935">Actions like unlocking doors or setting flags can now be handled via rules — not custom logic.</p>
+</li>
+</ol>
+<hr data-start="3937" data-end="3940">
+<h2 data-start="3942" data-end="3956">🚀 Benefits</h2>
+<ul data-start="3958" data-end="4237">
+<li data-start="3958" data-end="4038">
+<p data-start="3960" data-end="4038"><strong data-start="3960" data-end="3974">Extendable</strong>: Add new <code data-start="3984" data-end="3999">ConditionType</code> or <code data-start="4003" data-end="4015">ActionType</code> to expand your system.</p>
+</li>
+<li data-start="4039" data-end="4126">
+<p data-start="4041" data-end="4126"><strong data-start="4041" data-end="4060">Decoupled logic</strong>: Keep world logic in <code data-start="4082" data-end="4091">rules[]</code>, not in tangled <code data-start="4108" data-end="4112">if</code>/<code data-start="4113" data-end="4119">else</code> trees.</p>
+</li>
+<li data-start="4127" data-end="4237">
+<p data-start="4129" data-end="4237"><strong data-start="4129" data-end="4144">Script-like</strong>: Easy to debug, design, or even externally author one day (e.g., via a tool or config file).</p>
+</li>
+</ul>
+<hr data-start="4239" data-end="4242">
+<p data-start="4244" data-end="4463" data-is-last-node="" data-is-only-node="">Would you like a working mini example of a rule file and player input that triggers a multi-step chain? Or a suggestion on how to optimize it for extremely low-resource systems (e.g., using bitmasks or indexing tricks)?</p></div></div></div></div><div class="flex absolute start-0 end-0 flex justify-start"><div class="touch:-me-2 touch:-ms-3.5 -ms-2.5 -me-1 flex items-center p-1 select-none -mt-1 focus-within:transition-none hover:transition-none duration-500 group-hover/turn-messages:delay-300 pointer-events-none [mask-image:linear-gradient(to_right,black_33%,transparent_66%)] [mask-size:300%_100%] [mask-position:100%_0%] motion-safe:transition-[mask-position] group-hover/turn-messages:pointer-events-auto group-hover/turn-messages:[mask-position:0_0] group-focus-within/turn-messages:pointer-events-auto group-focus-within/turn-messages:[mask-position:0_0] has-data-[state=open]:pointer-events-auto has-data-[state=open]:[mask-position:0_0]"><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="hidden"></span><span class="" data-state="closed"></span></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-9" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="219e8061-b6d2-4bb7-8f8a-53915eb5e050" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">with the above code, how do I move between rooms, and store which room I am currently in?</div></div></div></div></div><div class="flex absolute start-0 end-0 flex justify-end"><div class="touch:-me-2 touch:-ms-3.5 -ms-2.5 -me-1 flex items-center p-1 select-none focus-within:transition-none hover:transition-none duration-300 group-hover/turn-messages:delay-300 pointer-events-none opacity-0 motion-safe:transition-opacity group-hover/turn-messages:pointer-events-auto group-hover/turn-messages:opacity-100 group-focus-within/turn-messages:pointer-events-auto group-focus-within/turn-messages:opacity-100 has-data-[state=open]:pointer-events-auto has-data-[state=open]:opacity-100"><span class="" data-state="closed"></span><span class="" data-state="closed"></span></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-10" data-scroll-anchor="true"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="eabd410d-eaef-4963-9a22-23de5b0cc171" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4o"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="142">Great follow-up — moving between rooms is core to any text adventure, and with your current system, it's straightforward to implement cleanly.</p>
+<hr data-start="144" data-end="147">
+<h2 data-start="149" data-end="180">🧭 Tracking the Current Room</h2>
+<p data-start="182" data-end="251">You'll need a global variable that stores the <strong data-start="228" data-end="250">current room index</strong>:</p>
+<pre class="overflow-visible!" data-start="253" data-end="313"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">int</span></span><span> current_room = </span><span><span class="hljs-number">0</span></span><span>; </span><span><span class="hljs-comment">// e.g., index into `world[]`</span></span><span>
+</span></span></code></div></div></pre>
+<hr data-start="315" data-end="318">
+<h2 data-start="320" data-end="346">🗺️ Defining Room Exits</h2>
+<p data-start="348" data-end="448">Each <code data-start="353" data-end="359">Room</code> needs a way to define its <strong data-start="386" data-end="395">exits</strong> — basically a mapping from direction to destination.</p>
+<h3 data-start="450" data-end="477">Example: Direction Enum</h3>
+<pre class="overflow-visible!" data-start="479" data-end="592"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">enum</span></span></span><span> {
+    DIR_NORTH,
+    DIR_EAST,
+    DIR_SOUTH,
+    DIR_WEST,
+    NUM_DIRECTIONS
+} Direction;
+</span></span></code></div></div></pre>
+<hr data-start="594" data-end="597">
+<h3 data-start="599" data-end="632">Define Room Struct with Exits</h3>
+<p data-start="634" data-end="678">Each room has an array of exit room indices:</p>
+<pre class="overflow-visible!" data-start="680" data-end="901"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span>* name;
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span>* description;
+    </span><span><span class="hljs-type">int</span></span><span> exits[NUM_DIRECTIONS]; </span><span><span class="hljs-comment">// Index of destination room, or -1 if no exit</span></span><span>
+    </span><span><span class="hljs-type">int</span></span><span> objects[MAX_OBJECTS_IN_ROOM];
+    </span><span><span class="hljs-type">int</span></span><span> num_objects;
+} Room;
+</span></span></code></div></div></pre>
+<p data-start="903" data-end="950"><strong data-start="903" data-end="922">Initialize with</strong> <code data-start="923" data-end="927">-1</code> where there's no exit.</p>
+<hr data-start="952" data-end="955">
+<h3 data-start="957" data-end="1004">Move Command: <code data-start="975" data-end="985">GO NORTH</code>, <code data-start="987" data-end="998">MOVE EAST</code>, etc.</h3>
+<p data-start="1006" data-end="1049">Your parser would recognize something like:</p>
+<pre class="overflow-visible!" data-start="1051" data-end="1335"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">go_direction</span></span><span><span class="hljs-params">(Direction dir)</span></span><span> {
+    </span><span><span class="hljs-type">int</span></span><span> dest = world[current_room].exits[dir];
+    </span><span><span class="hljs-keyword">if</span></span><span> (dest != </span><span><span class="hljs-number">-1</span></span><span>) {
+        current_room = dest;
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You go %s.\n"</span></span><span>, direction_name(dir));
+        describe_room();
+    } </span><span><span class="hljs-keyword">else</span></span><span> {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You can't go that way.\n"</span></span><span>);
+    }
+}
+</span></span></code></div></div></pre>
+<hr data-start="1337" data-end="1340">
+<h3 data-start="1342" data-end="1362">Room Description</h3>
+<p data-start="1364" data-end="1438">When entering a new room, show its name, description, and visible objects:</p>
+<pre class="overflow-visible!" data-start="1440" data-end="1758"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">describe_room</span></span><span><span class="hljs-params">()</span></span><span> {
+    Room* r = &amp;world[current_room];
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"%s\n%s\n"</span></span><span>, r-&gt;name, r-&gt;description);
+
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; r-&gt;num_objects; i++) {
+        </span><span><span class="hljs-type">int</span></span><span> obj_index = r-&gt;objects[i];
+        </span><span><span class="hljs-keyword">if</span></span><span> (!objects[obj_index].hidden)
+            </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You see %s here.\n"</span></span><span>, objects[obj_index].name);
+    }
+}
+</span></span></code></div></div></pre>
+<hr data-start="1760" data-end="1763">
+<h2 data-start="1765" data-end="1789">🧱 Example Room Setup</h2>
+<pre class="overflow-visible!" data-start="1791" data-end="2263"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span>Room world[MAX_ROOMS] = {
+    {
+        .name = </span><span><span class="hljs-string">"Control Room"</span></span><span>,
+        .description = </span><span><span class="hljs-string">"A dim room filled with old monitors."</span></span><span>,
+        .exits = {</span><span><span class="hljs-number">1</span></span><span>, </span><span><span class="hljs-number">-1</span></span><span>, </span><span><span class="hljs-number">-1</span></span><span>, </span><span><span class="hljs-number">-1</span></span><span>}, </span><span><span class="hljs-comment">// north = Room 1</span></span><span>
+        .objects = {</span><span><span class="hljs-number">0</span></span><span>},  </span><span><span class="hljs-comment">// has object 0</span></span><span>
+        .num_objects = </span><span><span class="hljs-number">1</span></span><span>
+    },
+    {
+        .name = </span><span><span class="hljs-string">"Generator Room"</span></span><span>,
+        .description = </span><span><span class="hljs-string">"The hum of machinery fills the air."</span></span><span>,
+        .exits = {</span><span><span class="hljs-number">-1</span></span><span>, </span><span><span class="hljs-number">-1</span></span><span>, </span><span><span class="hljs-number">0</span></span><span>, </span><span><span class="hljs-number">-1</span></span><span>}, </span><span><span class="hljs-comment">// south = Room 0</span></span><span>
+        .objects = {</span><span><span class="hljs-number">1</span></span><span>},
+        .num_objects = </span><span><span class="hljs-number">1</span></span><span>
+    }
+};
+</span></span></code></div></div></pre>
+<hr data-start="2265" data-end="2268">
+<h2 data-start="2270" data-end="2308">🧠 Integration with the Rule System</h2>
+<p data-start="2310" data-end="2397">You can create a rule that <strong data-start="2337" data-end="2371">moves the player automatically</strong> under certain conditions:</p>
+<pre class="overflow-visible!" data-start="2399" data-end="2814"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span>Rule auto_move[] = {
+    {
+        .conditions = {
+            {COND_FLAG_SET, FLAG_TELEPORT_ENABLED}
+        },
+        .num_conditions = </span><span><span class="hljs-number">1</span></span><span>,
+        .actions = {
+            {ACT_PRINT_TEXT, </span><span><span class="hljs-number">0</span></span><span>, </span><span><span class="hljs-string">"You feel yourself being pulled elsewhere..."</span></span><span>},
+            {ACT_SET_FLAG, FLAG_TELEPORT_ENABLED}, </span><span><span class="hljs-comment">// could unset too</span></span><span>
+            {ACT_MOVE_PLAYER, ROOM_CONTROL_ROOM}
+        },
+        .num_actions = </span><span><span class="hljs-number">3</span></span><span>
+    }
+};
+</span></span></code></div></div></pre>
+<p data-start="2816" data-end="2872">To support this, you'd just define an extra action type:</p>
+<pre class="overflow-visible!" data-start="2874" data-end="3149"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-meta">#<span class="hljs-keyword">define</span></span></span><span> ACT_MOVE_PLAYER 100 </span><span><span class="hljs-comment">// or add to your enum</span></span><span>
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">perform_action</span></span><span><span class="hljs-params">(Action act)</span></span><span> {
+    </span><span><span class="hljs-keyword">switch</span></span><span> (act.type) {
+        </span><span><span class="hljs-comment">// ...existing cases...</span></span><span>
+        </span><span><span class="hljs-keyword">case</span></span><span> ACT_MOVE_PLAYER:
+            current_room = act.param1;
+            describe_room();
+            </span><span><span class="hljs-keyword">break</span></span><span>;
+    }
+}
+</span></span></code></div></div></pre>
+<hr data-start="3151" data-end="3154">
+<h2 data-start="3156" data-end="3169">🧭 Summary</h2>
+<div class="_tableContainer_16hzy_1"><div tabindex="-1" class="_tableWrapper_16hzy_14 group flex w-fit flex-col-reverse"><table data-start="3171" data-end="3664" class="w-fit min-w-(--thread-content-width)"><thead data-start="3171" data-end="3231"><tr data-start="3171" data-end="3231"><th data-start="3171" data-end="3193" data-col-size="sm">Element</th><th data-start="3193" data-end="3231" data-col-size="sm">Code Feature</th></tr></thead><tbody data-start="3293" data-end="3664"><tr data-start="3293" data-end="3353"><td data-start="3293" data-end="3315" data-col-size="sm">Player location</td><td data-start="3315" data-end="3353" data-col-size="sm"><code data-start="3317" data-end="3335">int current_room</code></td></tr><tr data-start="3354" data-end="3414"><td data-start="3354" data-end="3376" data-col-size="sm">Movement</td><td data-start="3376" data-end="3414" data-col-size="sm"><code data-start="3378" data-end="3403">go_direction(Direction)</code></td></tr><tr data-start="3415" data-end="3475"><td data-start="3415" data-end="3437" data-col-size="sm">Room structure</td><td data-start="3437" data-end="3475" data-col-size="sm"><code data-start="3439" data-end="3467">Room.exits[NUM_DIRECTIONS]</code></td></tr><tr data-start="3476" data-end="3536"><td data-start="3476" data-end="3498" data-col-size="sm">Descriptions</td><td data-start="3498" data-end="3536" data-col-size="sm"><code data-start="3500" data-end="3517">describe_room()</code></td></tr><tr data-start="3537" data-end="3603"><td data-start="3537" data-end="3559" data-col-size="sm">Parser integration</td><td data-start="3559" data-end="3603" data-col-size="sm"><code data-start="3561" data-end="3573">"GO NORTH"</code> → <code data-start="3576" data-end="3601">go_direction(DIR_NORTH)</code></td></tr><tr data-start="3604" data-end="3664"><td data-start="3604" data-end="3626" data-col-size="sm">Rule-based movement</td><td data-start="3626" data-end="3664" data-col-size="sm"><code data-start="3628" data-end="3645">ACT_MOVE_PLAYER</code></td></tr></tbody></table><div class="sticky end-(--thread-content-margin) h-0 self-end select-none"><div class="absolute end-0 flex items-end" style="height: 33px;"><span class="" data-state="closed"></span></div></div></div></div>
+<hr data-start="3666" data-end="3669">
+<p data-start="3671" data-end="3828" data-is-last-node="" data-is-only-node="">Would you like help writing the parser command recognition for <code data-start="3734" data-end="3744">GO NORTH</code>, <code data-start="3746" data-end="3757">OPEN DOOR</code>, etc., or building an interactive game loop that ties it all together?</p></div></div></div></div><div class="flex absolute start-0 end-0 flex justify-start"><div class="touch:-me-2 touch:-ms-3.5 -ms-2.5 -me-1 flex items-center p-1 select-none -mt-1 focus-within:transition-none hover:transition-none duration-500 group-hover/turn-messages:delay-300 pointer-events-none [mask-image:linear-gradient(to_right,black_33%,transparent_66%)] [mask-size:300%_100%] [mask-position:100%_0%] motion-safe:transition-[mask-position] group-hover/turn-messages:pointer-events-auto group-hover/turn-messages:[mask-position:0_0] group-focus-within/turn-messages:pointer-events-auto group-focus-within/turn-messages:[mask-position:0_0] has-data-[state=open]:pointer-events-auto has-data-[state=open]:[mask-position:0_0]"><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="hidden"></span><span class="" data-state="closed"></span></div></div></div></div></div></div></article><div aria-hidden="true" data-edge="true" class="pointer-events-none h-px w-px"></div><div></div><div style="opacity: 1;"></div></div></div></div></div><div id="thread-bottom-container" class="isolate z-3 w-full basis-auto has-data-has-thread-error:pt-2 has-data-has-thread-error:[box-shadow:var(--sharp-edge-bottom-shadow)] md:border-transparent md:pt-0 dark:border-white/20 md:dark:border-transparent flex flex-col"><div id="thread-bottom"><div class="text-base mx-auto [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6"><div class="flex justify-center empty:hidden"></div><div class="max-xs:[--force-hide-label:none] relative z-1 flex h-full max-w-full flex-1 flex-col" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«ro4»" data-state="closed"><div class="absolute start-0 end-0 bottom-full z-20"></div><form class="w-full [view-transition-name:var(--vt-composer)]" data-type="unified-composer"><div class="flex w-full cursor-text flex-col items-center justify-center rounded-[28px] bg-clip-padding contain-inline-size overflow-clip shadow-short bg-token-bg-primary dark:bg-[#303030]"><div class="relative flex w-full items-end px-3 py-3"><div class="relative flex w-full flex-auto flex-col"><div class="relative ms-1.5 grid grid-cols-[auto_minmax(0,1fr)]"><div class="items-top flex justify-center"><div style="opacity: 1;"></div></div><div class="relative flex-auto bg-transparent pt-0.5" style="margin-bottom: -20px; transform: translateY(-7px);"><div class="flex flex-col justify-start" style="min-height: 0px;"><div class="flex min-h-12 items-start"><div class="max-w-full min-w-0 flex-1"><div class="_prosemirror-parent_kfgfu_2 text-token-text-primary max-h-[25dvh] max-h-52 -mx-3 px-3 overflow-auto [scrollbar-width:thin] firefox vertical-scroll-fade-mask min-h-12 pe-3"><textarea class="text-token-text-primary placeholder:text-token-text-tertiary block h-10 w-full resize-none border-0 bg-transparent px-0 py-2 ring-0 placeholder:ps-px" placeholder="Ask anything" data-virtualkeyboard="true" style="display: none;"></textarea><script nonce="">window.__oai_logHTML?window.__oai_logHTML():window.__oai_SSR_HTML=window.__oai_SSR_HTML||Date.now();requestAnimationFrame((function(){window.__oai_logTTI?window.__oai_logTTI():window.__oai_SSR_TTI=window.__oai_SSR_TTI||Date.now()}))</script><div contenteditable="true" translate="no" class="ProseMirror ProseMirror-focused" id="prompt-textarea" data-virtualkeyboard="true"><p data-placeholder="Ask anything" class="placeholder"><br class="ProseMirror-trailingBreak"></p></div></div></div></div></div></div></div><div class="justify-content-end relative ms-2 flex w-full flex-auto flex-col"><div class="flex-auto"></div></div><div style="height: 48px;"></div></div><div class="bg-primary-surface-primary absolute start-3 end-0 bottom-3 z-2 flex items-center"><div class="w-full"><div data-testid="composer-footer-actions" class="flex items-center" style="margin-right: 102px;"><div data-testid="composer-action-file-upload"><div class="relative"><div class="flex flex-col"><input multiple="" style="border: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;" tabindex="-1" class="hidden" type="file"><span class="hidden"></span><span class="flex" data-state="closed"></span><div class="w-fit" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«ro8»" data-state="closed"><div></div></div></div></div></div><div data-testid="composer-action-system-hint-button"><span class="hidden"></span></div><div></div><div></div></div><div class="absolute end-3 bottom-0 flex items-center gap-2" data-testid="composer-trailing-actions"><div class="ms-auto flex items-center gap-1.5"><span class="" data-state="closed"></span><span class="" data-state="closed"></span></div></div></div></div><div class="absolute start-4 top-3 ms-[1px] flex items-center pb-px"></div></div></div><div class="w-full"></div></form></div><input class="sr-only" aria-hidden="true" data-type="photos" id="upload-photos" accept="image/*" multiple="" type="file"><input class="sr-only" aria-hidden="true" data-type="camera" id="upload-camera" accept="image/*" capture="environment" multiple="" type="file"></div></div></div><div class="text-token-text-secondary relative mt-auto flex min-h-8 w-full items-center justify-center p-2 text-center text-xs md:px-[60px]"><div>ChatGPT can make mistakes. Check important info. See <a class="text-token-text-primary decoration-token-text-primary cursor-pointer underline">Cookie Preferences</a>.</div></div></div></div></div></main>
+                    </body>
+                    </html>

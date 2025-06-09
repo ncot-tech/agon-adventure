@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Chat Export</title>
+                        <style>
+                            body {
+                                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                                background-color: #212121;
+                                color: #ececec;
+                                margin: 0;
+                                padding: 20px;
+                                display: flex;
+                                justify-content: center;
+                            }
+                            main {
+                                max-width: 800px;
+                                margin: 20px auto;
+                                background:rgb(47, 47, 47);
+                                padding: 20px;
+                                border-radius: 10px;
+                                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                                overflow: hidden;
+                            }
+                            .message {
+                                margin-bottom: 15px;
+                                padding: 10px;
+                                border-radius: 5px;
+                            }
+                            .message.user {
+                                background-color: #2e2e2e;
+                                color: white;
+                                text-align: right;
+                                border: 2px solid #cdcdcd;
+                                box-shadow: 0 0 10px rgba(14, 117, 253, 0.23);
+                                font-weight: bold;
+                            }
+                            .message.assistant {
+                                background:rgb(47, 47, 47);
+                                color: #ececec;
+                            }
+                            pre {
+                                background: #0d0d0d;
+                                padding: 10px;
+                                border-radius: 5px;
+                                overflow-x: auto;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <main class="transition-width relative h-full w-full flex-1 overflow-auto" id="main" z-index="-1"><div id="thread" class="group/thread @container/thread h-full w-full"><div role="presentation" class="composer-parent flex flex-col focus-visible:outline-0 h-full"><div id="page-header" class="draggable no-draggable-children sticky top-0 p-3 flex items-center justify-between z-20 h-header-height bg-token-main-surface-primary pointer-events-none select-none [view-transition-name:var(--vt-page-header)] *:pointer-events-auto motion-safe:transition max-md:hidden @[84rem]/thread:absolute @[84rem]/thread:start-0 @[84rem]/thread:end-0 @[84rem]/thread:bg-transparent @[84rem]/thread:shadow-none! [box-shadow:var(--sharp-edge-top-shadow-placeholder)]"><div class="absolute start-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2"></div><div class="flex items-center"></div><div class="flex items-center gap-2 pe-1 leading-[0]" id="conversation-header-actions"></div></div><div class="flex basis-auto flex-col -mb-(--composer-overlap-px) [--composer-overlap-px:24px] grow overflow-hidden"><div class="relative h-full"><div class="flex h-full flex-col overflow-y-auto [scrollbar-gutter:stable_both-edges] @[84rem]/thread:pt-(--header-height)"><div aria-hidden="true" data-edge="true" class="pointer-events-none h-px w-px"></div><div class="@thread-xl/thread:pt-header-height mt-1.5 flex flex-col text-sm pb-25"><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-1" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="37948c60-559d-42f4-9e71-b4c7fc790dbe" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">I am writing a simple text adventure in C for a low power computer. I have a parser, but want a way to easily define the verbs, nouns and how they link together without needing to edit lots of code.
+
+I like using tables of data and enums</div></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-2" data-scroll-anchor="false"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="4c83cece-fd5e-484f-bb79-58e918eea30e" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4-1-mini"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="153">Nice! Using tables and enums for verbs and nouns in a text adventure parser is a classic and clean approach, especially for low-power environments and C.</p>
+<p data-start="155" data-end="376">Here’s a simple, extendable pattern you could follow — it keeps your verbs, nouns, and their possible interactions separate from your main code, so adding new actions or objects doesn’t mean rewriting big chunks of logic.</p>
+<hr data-start="378" data-end="381">
+<h3 data-start="383" data-end="427">Step 1: Define enums for verbs and nouns</h3>
+<pre class="overflow-visible!" data-start="429" data-end="673"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">enum</span></span></span><span> {
+    VERB_LOOK,
+    VERB_TAKE,
+    VERB_USE,
+    VERB_OPEN,
+    VERB_CLOSE,
+    VERB_INVENTORY,
+    VERB_UNKNOWN
+} Verb;
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">enum</span></span></span><span> {
+    NOUN_DOOR,
+    NOUN_KEY,
+    NOUN_ROOM,
+    NOUN_CHEST,
+    NOUN_UNKNOWN
+} Noun;
+</span></span></code></div></div></pre>
+<hr data-start="675" data-end="678">
+<h3 data-start="680" data-end="745">Step 2: Define string tables for easy mapping from user input</h3>
+<pre class="overflow-visible!" data-start="747" data-end="1308"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *name;
+    Verb verb;
+} VerbEntry;
+
+</span><span><span class="hljs-type">static</span></span><span> </span><span><span class="hljs-type">const</span></span><span> VerbEntry verbs[] = {
+    {</span><span><span class="hljs-string">"look"</span></span><span>, VERB_LOOK},
+    {</span><span><span class="hljs-string">"take"</span></span><span>, VERB_TAKE},
+    {</span><span><span class="hljs-string">"use"</span></span><span>, VERB_USE},
+    {</span><span><span class="hljs-string">"open"</span></span><span>, VERB_OPEN},
+    {</span><span><span class="hljs-string">"close"</span></span><span>, VERB_CLOSE},
+    {</span><span><span class="hljs-string">"inventory"</span></span><span>, VERB_INVENTORY},
+    {</span><span><span class="hljs-literal">NULL</span></span><span>, VERB_UNKNOWN}  </span><span><span class="hljs-comment">// terminator</span></span><span>
+};
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *name;
+    Noun noun;
+} NounEntry;
+
+</span><span><span class="hljs-type">static</span></span><span> </span><span><span class="hljs-type">const</span></span><span> NounEntry nouns[] = {
+    {</span><span><span class="hljs-string">"door"</span></span><span>, NOUN_DOOR},
+    {</span><span><span class="hljs-string">"key"</span></span><span>, NOUN_KEY},
+    {</span><span><span class="hljs-string">"room"</span></span><span>, NOUN_ROOM},
+    {</span><span><span class="hljs-string">"chest"</span></span><span>, NOUN_CHEST},
+    {</span><span><span class="hljs-literal">NULL</span></span><span>, NOUN_UNKNOWN}  </span><span><span class="hljs-comment">// terminator</span></span><span>
+};
+</span></span></code></div></div></pre>
+<hr data-start="1310" data-end="1313">
+<h3 data-start="1315" data-end="1370">Step 3: Parsing helpers to convert strings to enums</h3>
+<pre class="overflow-visible!" data-start="1372" data-end="1807"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span>Verb </span><span><span class="hljs-title function_">parse_verb</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> </span><span><span class="hljs-type">char</span></span><span> *input) {
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; verbs[i].name != </span><span><span class="hljs-literal">NULL</span></span><span>; i++) {
+        </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strcmp</span></span><span>(input, verbs[i].name) == </span><span><span class="hljs-number">0</span></span><span>) {
+            </span><span><span class="hljs-keyword">return</span></span><span> verbs[i].verb;
+        }
+    }
+    </span><span><span class="hljs-keyword">return</span></span><span> VERB_UNKNOWN;
+}
+
+Noun </span><span><span class="hljs-title function_">parse_noun</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> </span><span><span class="hljs-type">char</span></span><span> *input) {
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; nouns[i].name != </span><span><span class="hljs-literal">NULL</span></span><span>; i++) {
+        </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strcmp</span></span><span>(input, nouns[i].name) == </span><span><span class="hljs-number">0</span></span><span>) {
+            </span><span><span class="hljs-keyword">return</span></span><span> nouns[i].noun;
+        }
+    }
+    </span><span><span class="hljs-keyword">return</span></span><span> NOUN_UNKNOWN;
+}
+</span></span></code></div></div></pre>
+<hr data-start="1809" data-end="1812">
+<h3 data-start="1814" data-end="1894">Step 4: Define a command table linking verb-noun combos to handler functions</h3>
+<pre class="overflow-visible!" data-start="1896" data-end="2034"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-title function_">void</span></span><span> </span><span><span class="hljs-params">(*CommandHandler)</span></span><span><span class="hljs-params">(<span class="hljs-type">void</span></span></span><span>);
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    Verb verb;
+    Noun noun;
+    CommandHandler handler;
+} CommandEntry;
+</span></span></code></div></div></pre>
+<hr data-start="2036" data-end="2039">
+<h3 data-start="2041" data-end="2087">Step 5: Example handlers and command table</h3>
+<pre class="overflow-visible!" data-start="2089" data-end="2548"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_look_door</span></span><span><span class="hljs-params">(<span class="hljs-type">void</span></span></span><span>) {
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"The door is old and creaky.\n"</span></span><span>);
+}
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_take_key</span></span><span><span class="hljs-params">(<span class="hljs-type">void</span></span></span><span>) {
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You pick up the rusty key.\n"</span></span><span>);
+}
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_unknown</span></span><span><span class="hljs-params">(<span class="hljs-type">void</span></span></span><span>) {
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You can't do that.\n"</span></span><span>);
+}
+
+</span><span><span class="hljs-type">static</span></span><span> </span><span><span class="hljs-type">const</span></span><span> CommandEntry commands[] = {
+    {VERB_LOOK, NOUN_DOOR, handle_look_door},
+    {VERB_TAKE, NOUN_KEY, handle_take_key},
+    </span><span><span class="hljs-comment">// Add more combinations here</span></span><span>
+    {VERB_UNKNOWN, NOUN_UNKNOWN, handle_unknown}  </span><span><span class="hljs-comment">// fallback</span></span><span>
+};
+</span></span></code></div></div></pre>
+<hr data-start="2550" data-end="2553">
+<h3 data-start="2555" data-end="2584">Step 6: Running a command</h3>
+<pre class="overflow-visible!" data-start="2586" data-end="2855"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">run_command</span></span><span><span class="hljs-params">(Verb v, Noun n)</span></span><span> {
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; </span><span><span class="hljs-keyword">sizeof</span></span><span>(commands)/</span><span><span class="hljs-keyword">sizeof</span></span><span>(commands[</span><span><span class="hljs-number">0</span></span><span>]); i++) {
+        </span><span><span class="hljs-keyword">if</span></span><span> (commands[i].verb == v &amp;&amp; commands[i].noun == n) {
+            commands[i].handler();
+            </span><span><span class="hljs-keyword">return</span></span><span>;
+        }
+    }
+    handle_unknown();
+}
+</span></span></code></div></div></pre>
+<hr data-start="2857" data-end="2860">
+<h3 data-start="2862" data-end="2876">How to use</h3>
+<pre class="overflow-visible!" data-start="2878" data-end="3110"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">int</span></span><span> </span><span><span class="hljs-title function_">main</span></span><span><span class="hljs-params">()</span></span><span> {
+    </span><span><span class="hljs-type">char</span></span><span> verb_str[</span><span><span class="hljs-number">20</span></span><span>], noun_str[</span><span><span class="hljs-number">20</span></span><span>];
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"&gt; "</span></span><span>);
+    </span><span><span class="hljs-built_in">scanf</span></span><span>(</span><span><span class="hljs-string">"%19s %19s"</span></span><span>, verb_str, noun_str);
+
+    Verb v = parse_verb(verb_str);
+    Noun n = parse_noun(noun_str);
+
+    run_command(v, n);
+
+    </span><span><span class="hljs-keyword">return</span></span><span> </span><span><span class="hljs-number">0</span></span><span>;
+}
+</span></span></code></div></div></pre>
+<hr data-start="3112" data-end="3115">
+<h3 data-start="3117" data-end="3131">Advantages</h3>
+<ul data-start="3133" data-end="3335">
+<li data-start="3133" data-end="3252">
+<p data-start="3135" data-end="3252">You only edit the <code data-start="3153" data-end="3162">verbs[]</code>, <code data-start="3164" data-end="3173">nouns[]</code>, and <code data-start="3179" data-end="3191">commands[]</code> tables to add or modify your game’s vocabulary or behaviors.</p>
+</li>
+<li data-start="3253" data-end="3305">
+<p data-start="3255" data-end="3305">Clear separation of parsing, data, and game logic.</p>
+</li>
+<li data-start="3306" data-end="3335">
+<p data-start="3308" data-end="3335">Easy to scale and optimize.</p>
+</li>
+</ul>
+<hr data-start="3337" data-end="3340">
+<p data-start="3342" data-end="3469" data-is-last-node="" data-is-only-node="">Want me to help you write a minimal working example or improve this with more features (like synonyms, or verbs with no nouns)?</p></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-3" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="46749726-f9c6-4ca8-b00c-c58c28071a55" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">I want the nouns to store data about themselves - description, attribute bitfields, etc so it doesn't need hard coding</div></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-4" data-scroll-anchor="false"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="1900441e-1d9b-4996-a2d2-bcd78a5be12b" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4-1-mini"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="224">Got it — you want the nouns to be more data-rich, holding things like descriptions, attributes, and other info in a structured way. That’s perfect for a text adventure, and it fits nicely with the enum + data table approach.</p>
+<p data-start="226" data-end="442">Here’s a design that adds a <strong data-start="254" data-end="269">noun struct</strong> with extra fields, and a lookup table that ties the enum ID to its data. This lets you keep all noun-related info in one place, easily editable without changing code logic.</p>
+<hr data-start="444" data-end="447">
+<h3 data-start="449" data-end="495">Step 1: Define noun attributes as bitflags</h3>
+<pre class="overflow-visible!" data-start="497" data-end="770"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">enum</span></span></span><span> {
+    ATTR_NONE      = </span><span><span class="hljs-number">0</span></span><span>,
+    ATTR_CONTAINER = </span><span><span class="hljs-number">1</span></span><span> &lt;&lt; </span><span><span class="hljs-number">0</span></span><span>,  </span><span><span class="hljs-comment">// e.g., chest, can hold stuff</span></span><span>
+    ATTR_LOCKED    = </span><span><span class="hljs-number">1</span></span><span> &lt;&lt; </span><span><span class="hljs-number">1</span></span><span>,  </span><span><span class="hljs-comment">// door or chest can be locked</span></span><span>
+    ATTR_PICKABLE  = </span><span><span class="hljs-number">1</span></span><span> &lt;&lt; </span><span><span class="hljs-number">2</span></span><span>,  </span><span><span class="hljs-comment">// can be picked up, e.g. key</span></span><span>
+    </span><span><span class="hljs-comment">// add more as needed</span></span><span>
+} NounAttributes;
+</span></span></code></div></div></pre>
+<hr data-start="772" data-end="775">
+<h3 data-start="777" data-end="814">Step 2: Define a noun data struct</h3>
+<pre class="overflow-visible!" data-start="816" data-end="1086"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    Noun id;                </span><span><span class="hljs-comment">// enum ID, for quick reference</span></span><span>
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *name;       </span><span><span class="hljs-comment">// user input string, e.g. "door"</span></span><span>
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *description;</span><span><span class="hljs-comment">// long description to show on look</span></span><span>
+    NounAttributes attrs;   </span><span><span class="hljs-comment">// attribute flags</span></span><span>
+} NounData;
+</span></span></code></div></div></pre>
+<hr data-start="1088" data-end="1091">
+<h3 data-start="1093" data-end="1133">Step 3: Populate the noun data table</h3>
+<pre class="overflow-visible!" data-start="1135" data-end="1576"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">static</span></span><span> </span><span><span class="hljs-type">const</span></span><span> NounData noun_data[] = {
+    {NOUN_DOOR,  </span><span><span class="hljs-string">"door"</span></span><span>,  </span><span><span class="hljs-string">"An old wooden door with rusty hinges."</span></span><span>, ATTR_CONTAINER | ATTR_LOCKED},
+    {NOUN_KEY,   </span><span><span class="hljs-string">"key"</span></span><span>,   </span><span><span class="hljs-string">"A small rusty key."</span></span><span>, ATTR_PICKABLE},
+    {NOUN_ROOM,  </span><span><span class="hljs-string">"room"</span></span><span>,  </span><span><span class="hljs-string">"You are in a dimly lit stone room."</span></span><span>, ATTR_NONE},
+    {NOUN_CHEST, </span><span><span class="hljs-string">"chest"</span></span><span>, </span><span><span class="hljs-string">"A large wooden chest bound with iron."</span></span><span>, ATTR_CONTAINER | ATTR_LOCKED},
+    {NOUN_UNKNOWN, </span><span><span class="hljs-literal">NULL</span></span><span>,  </span><span><span class="hljs-literal">NULL</span></span><span>, ATTR_NONE}  </span><span><span class="hljs-comment">// sentinel</span></span><span>
+};
+</span></span></code></div></div></pre>
+<hr data-start="1578" data-end="1581">
+<h3 data-start="1583" data-end="1640">Step 4: Parsing noun now returns pointer to noun data</h3>
+<p data-start="1642" data-end="1721">Change <code data-start="1649" data-end="1661">parse_noun</code> to return a pointer to <code data-start="1685" data-end="1695">NounData</code> instead of just the enum:</p>
+<pre class="overflow-visible!" data-start="1723" data-end="1972"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">const</span></span><span> NounData *</span><span><span class="hljs-title function_">parse_noun</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> </span><span><span class="hljs-type">char</span></span><span> *input) {
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; noun_data[i].name != </span><span><span class="hljs-literal">NULL</span></span><span>; i++) {
+        </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strcmp</span></span><span>(input, noun_data[i].name) == </span><span><span class="hljs-number">0</span></span><span>) {
+            </span><span><span class="hljs-keyword">return</span></span><span> &amp;noun_data[i];
+        }
+    }
+    </span><span><span class="hljs-keyword">return</span></span><span> </span><span><span class="hljs-literal">NULL</span></span><span>;  </span><span><span class="hljs-comment">// unknown noun</span></span><span>
+}
+</span></span></code></div></div></pre>
+<hr data-start="1974" data-end="1977">
+<h3 data-start="1979" data-end="2049">Step 5: Modify command table to use noun enum or NounData pointer?</h3>
+<p data-start="2051" data-end="2177">Usually commands can still be matched by enum, but when running the command, you can pass the full noun data for flexible use.</p>
+<p data-start="2179" data-end="2201">Example command entry:</p>
+<pre class="overflow-visible!" data-start="2203" data-end="2353"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-title function_">void</span></span><span> </span><span><span class="hljs-params">(*CommandHandler)</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> NounData *);
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    Verb verb;
+    Noun noun;
+    CommandHandler handler;
+} CommandEntry;
+</span></span></code></div></div></pre>
+<p data-start="2355" data-end="2398">Example handler using the noun description:</p>
+<pre class="overflow-visible!" data-start="2400" data-end="2495"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_look_door</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> NounData *noun) {
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"%s\n"</span></span><span>, noun-&gt;description);
+}
+</span></span></code></div></div></pre>
+<hr data-start="2497" data-end="2500">
+<h3 data-start="2502" data-end="2543">Step 6: Command runner with noun data</h3>
+<pre class="overflow-visible!" data-start="2545" data-end="2967"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">run_command</span></span><span><span class="hljs-params">(Verb v, <span class="hljs-type">const</span></span></span><span> NounData *noun) {
+    </span><span><span class="hljs-keyword">if</span></span><span> (!noun) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"I don't understand that noun.\n"</span></span><span>);
+        </span><span><span class="hljs-keyword">return</span></span><span>;
+    }
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; </span><span><span class="hljs-keyword">sizeof</span></span><span>(commands)/</span><span><span class="hljs-keyword">sizeof</span></span><span>(commands[</span><span><span class="hljs-number">0</span></span><span>]); i++) {
+        </span><span><span class="hljs-keyword">if</span></span><span> (commands[i].verb == v &amp;&amp; commands[i].noun == noun-&gt;id) {
+            commands[i].handler(noun);
+            </span><span><span class="hljs-keyword">return</span></span><span>;
+        }
+    }
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You can't do that with the %s.\n"</span></span><span>, noun-&gt;name);
+}
+</span></span></code></div></div></pre>
+<hr data-start="2969" data-end="2972">
+<h3 data-start="2974" data-end="2985">Summary</h3>
+<ul data-start="2987" data-end="3332">
+<li data-start="2987" data-end="3068">
+<p data-start="2989" data-end="3068"><strong data-start="2989" data-end="3001">NounData</strong> stores all noun info in one place (name, description, attributes).</p>
+</li>
+<li data-start="3069" data-end="3152">
+<p data-start="3071" data-end="3152"><code data-start="3071" data-end="3085">parse_noun()</code> returns pointer to the noun data, which your game logic can query.</p>
+</li>
+<li data-start="3153" data-end="3244">
+<p data-start="3155" data-end="3244">Handlers get the noun data and can customize behavior based on attributes or description.</p>
+</li>
+<li data-start="3245" data-end="3332">
+<p data-start="3247" data-end="3332">Adding new nouns is just adding to the <code data-start="3286" data-end="3297">noun_data</code> table — no code changes elsewhere.</p>
+</li>
+</ul>
+<hr data-start="3334" data-end="3337">
+<p data-start="3339" data-end="3490" data-is-last-node="" data-is-only-node="">Want me to help you with an example that shows interaction based on these attributes? Like blocking opening a locked chest unless the player has a key?</p></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-5" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="bd4ce78e-3856-4994-bf14-52eca4e64921" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">I am trying to save resource, make this not return pointers. indexes into tables is what I want</div></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-6" data-scroll-anchor="false"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="c3795905-034e-49d4-881c-475be3568c15" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4-1-mini"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="141">Perfect — using <strong data-start="16" data-end="39">indexes into arrays</strong> instead of pointers is a smart way to save memory and avoid pointer overhead on low-resource systems.</p>
+<p data-start="143" data-end="328">Here’s how you can do it by returning and passing around <strong data-start="200" data-end="216">noun indexes</strong> (integers) instead of pointers. You still get all the benefits of structured data but keep it light and simple.</p>
+<hr data-start="330" data-end="333">
+<h3 data-start="335" data-end="399">Step 1: Define noun data array (same as before, but indexed)</h3>
+<pre class="overflow-visible!" data-start="401" data-end="922"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *name;
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *description;
+    NounAttributes attrs;
+} NounData;
+
+</span><span><span class="hljs-type">static</span></span><span> </span><span><span class="hljs-type">const</span></span><span> NounData noun_data[] = {
+    {</span><span><span class="hljs-string">"door"</span></span><span>,  </span><span><span class="hljs-string">"An old wooden door with rusty hinges."</span></span><span>, ATTR_CONTAINER | ATTR_LOCKED},
+    {</span><span><span class="hljs-string">"key"</span></span><span>,   </span><span><span class="hljs-string">"A small rusty key."</span></span><span>, ATTR_PICKABLE},
+    {</span><span><span class="hljs-string">"room"</span></span><span>,  </span><span><span class="hljs-string">"You are in a dimly lit stone room."</span></span><span>, ATTR_NONE},
+    {</span><span><span class="hljs-string">"chest"</span></span><span>, </span><span><span class="hljs-string">"A large wooden chest bound with iron."</span></span><span>, ATTR_CONTAINER | ATTR_LOCKED},
+};
+</span><span><span class="hljs-type">static</span></span><span> </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">int</span></span><span> NOUN_DATA_COUNT = </span><span><span class="hljs-keyword">sizeof</span></span><span>(noun_data) / </span><span><span class="hljs-keyword">sizeof</span></span><span>(noun_data[</span><span><span class="hljs-number">0</span></span><span>]);
+</span></span></code></div></div></pre>
+<hr data-start="924" data-end="927">
+<h3 data-start="929" data-end="990">Step 2: Define noun enum indexes matching noun_data order</h3>
+<pre class="overflow-visible!" data-start="992" data-end="1109"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">enum</span></span></span><span> {
+    NOUN_DOOR = </span><span><span class="hljs-number">0</span></span><span>,
+    NOUN_KEY,
+    NOUN_ROOM,
+    NOUN_CHEST,
+    NOUN_UNKNOWN = </span><span><span class="hljs-number">-1</span></span><span>
+} Noun;
+</span></span></code></div></div></pre>
+<p data-start="1111" data-end="1182">Make sure the enum order <strong data-start="1136" data-end="1147">matches</strong> the noun_data array order exactly.</p>
+<hr data-start="1184" data-end="1187">
+<h3 data-start="1189" data-end="1258">Step 3: <code data-start="1201" data-end="1215">parse_noun()</code> returns an index (enum) instead of pointer</h3>
+<pre class="overflow-visible!" data-start="1260" data-end="1477"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span>Noun </span><span><span class="hljs-title function_">parse_noun</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> </span><span><span class="hljs-type">char</span></span><span> *input) {
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; NOUN_DATA_COUNT; i++) {
+        </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strcmp</span></span><span>(input, noun_data[i].name) == </span><span><span class="hljs-number">0</span></span><span>) {
+            </span><span><span class="hljs-keyword">return</span></span><span> (Noun)i;
+        }
+    }
+    </span><span><span class="hljs-keyword">return</span></span><span> NOUN_UNKNOWN;
+}
+</span></span></code></div></div></pre>
+<hr data-start="1479" data-end="1482">
+<h3 data-start="1484" data-end="1533">Step 4: Access noun info by index when needed</h3>
+<p data-start="1535" data-end="1543">Example:</p>
+<pre class="overflow-visible!" data-start="1545" data-end="1729"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">describe_noun</span></span><span><span class="hljs-params">(Noun n)</span></span><span> {
+    </span><span><span class="hljs-keyword">if</span></span><span> (n == NOUN_UNKNOWN) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"I don't know what that is.\n"</span></span><span>);
+        </span><span><span class="hljs-keyword">return</span></span><span>;
+    }
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"%s\n"</span></span><span>, noun_data[n].description);
+}
+</span></span></code></div></div></pre>
+<hr data-start="1731" data-end="1734">
+<h3 data-start="1736" data-end="1787">Step 5: Command handler typedef with noun index</h3>
+<pre class="overflow-visible!" data-start="1789" data-end="1840"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-title function_">void</span></span><span> </span><span><span class="hljs-params">(*CommandHandler)</span></span><span><span class="hljs-params">(Noun noun)</span></span><span>;
+</span></span></code></div></div></pre>
+<hr data-start="1842" data-end="1845">
+<h3 data-start="1847" data-end="1880">Step 6: Command table example</h3>
+<pre class="overflow-visible!" data-start="1882" data-end="2304"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_look_door</span></span><span><span class="hljs-params">(Noun noun)</span></span><span> {
+    describe_noun(noun);
+}
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_take_key</span></span><span><span class="hljs-params">(Noun noun)</span></span><span> {
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You pick up the %s.\n"</span></span><span>, noun_data[noun].name);
+}
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_unknown</span></span><span><span class="hljs-params">(Noun noun)</span></span><span> {
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You can't do that.\n"</span></span><span>);
+}
+
+</span><span><span class="hljs-type">static</span></span><span> </span><span><span class="hljs-type">const</span></span><span> CommandEntry commands[] = {
+    {VERB_LOOK, NOUN_DOOR, handle_look_door},
+    {VERB_TAKE, NOUN_KEY, handle_take_key},
+    {VERB_UNKNOWN, NOUN_UNKNOWN, handle_unknown}
+};
+</span></span></code></div></div></pre>
+<hr data-start="2306" data-end="2309">
+<h3 data-start="2311" data-end="2340">Step 7: Running a command</h3>
+<pre class="overflow-visible!" data-start="2342" data-end="2613"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">run_command</span></span><span><span class="hljs-params">(Verb v, Noun n)</span></span><span> {
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; </span><span><span class="hljs-keyword">sizeof</span></span><span>(commands)/</span><span><span class="hljs-keyword">sizeof</span></span><span>(commands[</span><span><span class="hljs-number">0</span></span><span>]); i++) {
+        </span><span><span class="hljs-keyword">if</span></span><span> (commands[i].verb == v &amp;&amp; commands[i].noun == n) {
+            commands[i].handler(n);
+            </span><span><span class="hljs-keyword">return</span></span><span>;
+        }
+    }
+    handle_unknown(n);
+}
+</span></span></code></div></div></pre>
+<hr data-start="2615" data-end="2618">
+<h3 data-start="2620" data-end="2643">Why this works well</h3>
+<ul data-start="2645" data-end="2907">
+<li data-start="2645" data-end="2711">
+<p data-start="2647" data-end="2711"><strong data-start="2647" data-end="2662">No pointers</strong>, just small integers — saves RAM and CPU cycles.</p>
+</li>
+<li data-start="2712" data-end="2768">
+<p data-start="2714" data-end="2768">All noun data stored contiguously in one static array.</p>
+</li>
+<li data-start="2769" data-end="2836">
+<p data-start="2771" data-end="2836">Easy to add or remove nouns: just update enum and array together.</p>
+</li>
+<li data-start="2837" data-end="2907">
+<p data-start="2839" data-end="2907">Handlers get a small integer index to reference noun data as needed.</p>
+</li>
+</ul>
+<hr data-start="2909" data-end="2912">
+<p data-start="2914" data-end="3004" data-is-last-node="" data-is-only-node="">If you want, I can help you write a compact example to test this approach in your project!</p></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-7" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="0e0a5c9d-70f6-42ca-ac2e-9d8e04831398" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">I want the commands to be linked to the verb, not the item. I.e I don't want to make a handler for every item that I can take in the game. Taking should check if the item can be taken, same with looking and so on</div></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-8" data-scroll-anchor="false"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="c8c0af2a-e030-4a5b-a72a-2dc523bc816f" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4o"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="282">Perfect — you're aiming for <strong data-start="28" data-end="53">general verb handlers</strong> that work across all items, with item-specific behavior governed by the <strong data-start="126" data-end="141">item’s data</strong> (e.g. attributes), not by hardcoding handlers for each item. That’s the right abstraction for a scalable text adventure on limited hardware.</p>
+<p data-start="284" data-end="394">Here’s how to structure that cleanly using <strong data-start="327" data-end="350">verb-based handlers</strong>, while still keeping nouns as indexed data:</p>
+<hr data-start="396" data-end="399">
+<h3 data-start="401" data-end="439">✅ Step 1: General handler per verb</h3>
+<p data-start="441" data-end="515">You define <strong data-start="452" data-end="476">one handler per verb</strong>, which inspects the noun’s attributes.</p>
+<pre class="overflow-visible!" data-start="517" data-end="565"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-title function_">void</span></span><span> </span><span><span class="hljs-params">(*VerbHandler)</span></span><span><span class="hljs-params">(Noun noun)</span></span><span>;
+</span></span></code></div></div></pre>
+<hr data-start="567" data-end="570">
+<h3 data-start="572" data-end="624">✅ Step 2: Command table with verb → handler only</h3>
+<pre class="overflow-visible!" data-start="626" data-end="960"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    Verb verb;
+    VerbHandler handler;
+} CommandEntry;
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_look</span></span><span><span class="hljs-params">(Noun noun)</span></span><span>;
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_take</span></span><span><span class="hljs-params">(Noun noun)</span></span><span>;
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_open</span></span><span><span class="hljs-params">(Noun noun)</span></span><span>;
+
+</span><span><span class="hljs-type">static</span></span><span> </span><span><span class="hljs-type">const</span></span><span> CommandEntry command_table[] = {
+    {VERB_LOOK, handle_look},
+    {VERB_TAKE, handle_take},
+    {VERB_OPEN, handle_open},
+    {VERB_UNKNOWN, </span><span><span class="hljs-literal">NULL</span></span><span>}
+};
+</span></span></code></div></div></pre>
+<hr data-start="962" data-end="965">
+<h3 data-start="967" data-end="1015">✅ Step 3: Example noun attribute-based logic</h3>
+<pre class="overflow-visible!" data-start="1017" data-end="1948"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_look</span></span><span><span class="hljs-params">(Noun noun)</span></span><span> {
+    </span><span><span class="hljs-keyword">if</span></span><span> (noun == NOUN_UNKNOWN) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Look at what?\n"</span></span><span>);
+        </span><span><span class="hljs-keyword">return</span></span><span>;
+    }
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"%s\n"</span></span><span>, noun_data[noun].description);
+}
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_take</span></span><span><span class="hljs-params">(Noun noun)</span></span><span> {
+    </span><span><span class="hljs-keyword">if</span></span><span> (noun == NOUN_UNKNOWN) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Take what?\n"</span></span><span>);
+        </span><span><span class="hljs-keyword">return</span></span><span>;
+    }
+
+    </span><span><span class="hljs-keyword">if</span></span><span> (!(noun_data[noun].attrs &amp; ATTR_PICKABLE)) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You can't take the %s.\n"</span></span><span>, noun_data[noun].name);
+    } </span><span><span class="hljs-keyword">else</span></span><span> {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You pick up the %s.\n"</span></span><span>, noun_data[noun].name);
+    }
+}
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_open</span></span><span><span class="hljs-params">(Noun noun)</span></span><span> {
+    </span><span><span class="hljs-keyword">if</span></span><span> (noun == NOUN_UNKNOWN) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Open what?\n"</span></span><span>);
+        </span><span><span class="hljs-keyword">return</span></span><span>;
+    }
+
+    </span><span><span class="hljs-keyword">if</span></span><span> (!(noun_data[noun].attrs &amp; ATTR_CONTAINER)) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You can't open the %s.\n"</span></span><span>, noun_data[noun].name);
+    } </span><span><span class="hljs-keyword">else</span></span><span> </span><span><span class="hljs-keyword">if</span></span><span> (noun_data[noun].attrs &amp; ATTR_LOCKED) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"The %s is locked.\n"</span></span><span>, noun_data[noun].name);
+    } </span><span><span class="hljs-keyword">else</span></span><span> {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You open the %s.\n"</span></span><span>, noun_data[noun].name);
+    }
+}
+</span></span></code></div></div></pre>
+<hr data-start="1950" data-end="1953">
+<h3 data-start="1955" data-end="1992">✅ Step 4: Run the command by verb</h3>
+<pre class="overflow-visible!" data-start="1994" data-end="2272"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">run_command</span></span><span><span class="hljs-params">(Verb verb, Noun noun)</span></span><span> {
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; command_table[i].verb != VERB_UNKNOWN; i++) {
+        </span><span><span class="hljs-keyword">if</span></span><span> (command_table[i].verb == verb) {
+            command_table[i].handler(noun);
+            </span><span><span class="hljs-keyword">return</span></span><span>;
+        }
+    }
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You can't do that.\n"</span></span><span>);
+}
+</span></span></code></div></div></pre>
+<hr data-start="2274" data-end="2277">
+<h3 data-start="2279" data-end="2292">✅ Summary</h3>
+<p data-start="2294" data-end="2307">You now have:</p>
+<ul data-start="2309" data-end="2501">
+<li data-start="2309" data-end="2366">
+<p data-start="2311" data-end="2366">A <strong data-start="2313" data-end="2340">single handler per verb</strong>, not per verb–noun combo.</p>
+</li>
+<li data-start="2367" data-end="2436">
+<p data-start="2369" data-end="2436">Each handler uses <strong data-start="2387" data-end="2406">noun attributes</strong> to determine what is allowed.</p>
+</li>
+<li data-start="2437" data-end="2501">
+<p data-start="2439" data-end="2501">Clean, data-driven noun definitions — no duplication or bloat.</p>
+</li>
+</ul>
+<p data-start="2503" data-end="2567">This scales really well: 100+ nouns, only 5–10 general handlers.</p>
+<hr data-start="2569" data-end="2572">
+<p data-start="2574" data-end="2716" data-is-last-node="" data-is-only-node="">Would you like a complete sample with input parsing to tie it all together, or is your parser already set up to feed in <code data-start="2694" data-end="2700">Verb</code> + <code data-start="2703" data-end="2709">Noun</code> enums?</p></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-9" data-scroll-anchor="false"><h5 class="sr-only">You said:</h5><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="user" data-message-id="b455650b-21e0-43e8-8d9b-95b0e085dd54" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5"><div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start"><div class="relative max-w-[var(--user-chat-width,70%)] bg-token-message-surface rounded-3xl px-5 py-2.5"><div class="whitespace-pre-wrap">show me a complete code listing as an example</div></div></div></div></div></div></div></div></div></article><article class="text-token-text-primary w-full" dir="auto" data-testid="conversation-turn-10" data-scroll-anchor="true"><h6 class="sr-only">ChatGPT said:</h6><div class="text-base my-auto mx-auto py-5 [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6 group/turn-messages focus-visible:outline-hidden" tabindex="-1"><div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn"><div class="relative flex-col gap-1 md:gap-3"><div class="flex max-w-full flex-col grow"><div data-message-author-role="assistant" data-message-id="bcb002c7-0754-446d-a891-5a7c950f8453" dir="auto" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal [.text-message+&amp;]:mt-5" data-message-model-slug="gpt-4o"><div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]"><div class="markdown prose dark:prose-invert w-full break-words light"><p data-start="0" data-end="71">Here's a complete minimal <strong data-start="26" data-end="64">text adventure command system in C</strong> using:</p>
+<ul data-start="73" data-end="263">
+<li data-start="73" data-end="113">
+<p data-start="75" data-end="113"><code data-start="75" data-end="81">enum</code>-based <strong data-start="88" data-end="97">verbs</strong> and <strong data-start="102" data-end="111">nouns</strong></p>
+</li>
+<li data-start="114" data-end="155">
+<p data-start="116" data-end="155">Attribute bitfields for item behavior</p>
+</li>
+<li data-start="156" data-end="209">
+<p data-start="158" data-end="209">One <strong data-start="162" data-end="182">handler per verb</strong>, shared across all items</p>
+</li>
+<li data-start="210" data-end="263">
+<p data-start="212" data-end="263">A <strong data-start="214" data-end="238">data-driven approach</strong> to defining game content</p>
+</li>
+</ul>
+<p data-start="265" data-end="348">Designed for <strong data-start="278" data-end="303">low-resource machines</strong> (no dynamic memory, no pointers to structs).</p>
+<hr data-start="350" data-end="353">
+<h3 data-start="355" data-end="377">✅ Complete Example</h3>
+<pre class="overflow-visible!" data-start="379" data-end="4119"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">c</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-c"><span><span><span class="hljs-meta">#<span class="hljs-keyword">include</span></span></span><span> </span><span><span class="hljs-string">&lt;stdio.h&gt;</span></span><span>
+</span><span><span class="hljs-meta">#<span class="hljs-keyword">include</span></span></span><span> </span><span><span class="hljs-string">&lt;string.h&gt;</span></span><span>
+
+</span><span><span class="hljs-comment">// === Verb system ===</span></span><span>
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">enum</span></span></span><span> {
+    VERB_LOOK,
+    VERB_TAKE,
+    VERB_OPEN,
+    VERB_UNKNOWN
+} Verb;
+
+</span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *verb_names[] = {
+    </span><span><span class="hljs-string">"look"</span></span><span>,
+    </span><span><span class="hljs-string">"take"</span></span><span>,
+    </span><span><span class="hljs-string">"open"</span></span><span>
+};
+
+</span><span><span class="hljs-comment">// === Noun system ===</span></span><span>
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">enum</span></span></span><span> {
+    NOUN_DOOR,
+    NOUN_KEY,
+    NOUN_CHEST,
+    NOUN_ROOM,
+    NOUN_UNKNOWN = </span><span><span class="hljs-number">-1</span></span><span>
+} Noun;
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">enum</span></span></span><span> {
+    ATTR_NONE      = </span><span><span class="hljs-number">0</span></span><span>,
+    ATTR_CONTAINER = </span><span><span class="hljs-number">1</span></span><span> &lt;&lt; </span><span><span class="hljs-number">0</span></span><span>,
+    ATTR_LOCKED    = </span><span><span class="hljs-number">1</span></span><span> &lt;&lt; </span><span><span class="hljs-number">1</span></span><span>,
+    ATTR_PICKABLE  = </span><span><span class="hljs-number">1</span></span><span> &lt;&lt; </span><span><span class="hljs-number">2</span></span><span>
+} NounAttributes;
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *name;
+    </span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">char</span></span><span> *description;
+    NounAttributes attrs;
+} NounData;
+
+</span><span><span class="hljs-type">const</span></span><span> NounData noun_data[] = {
+    {</span><span><span class="hljs-string">"door"</span></span><span>,  </span><span><span class="hljs-string">"An old wooden door with rusty hinges."</span></span><span>, ATTR_CONTAINER | ATTR_LOCKED},
+    {</span><span><span class="hljs-string">"key"</span></span><span>,   </span><span><span class="hljs-string">"A small rusty key."</span></span><span>, ATTR_PICKABLE},
+    {</span><span><span class="hljs-string">"chest"</span></span><span>, </span><span><span class="hljs-string">"A large wooden chest bound with iron."</span></span><span>, ATTR_CONTAINER | ATTR_LOCKED},
+    {</span><span><span class="hljs-string">"room"</span></span><span>,  </span><span><span class="hljs-string">"You are in a dimly lit stone room."</span></span><span>, ATTR_NONE}
+};
+
+</span><span><span class="hljs-type">const</span></span><span> </span><span><span class="hljs-type">int</span></span><span> NOUN_COUNT = </span><span><span class="hljs-keyword">sizeof</span></span><span>(noun_data) / </span><span><span class="hljs-keyword">sizeof</span></span><span>(noun_data[</span><span><span class="hljs-number">0</span></span><span>]);
+
+</span><span><span class="hljs-comment">// === Parser functions ===</span></span><span>
+
+Verb </span><span><span class="hljs-title function_">parse_verb</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> </span><span><span class="hljs-type">char</span></span><span> *word) {
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; VERB_UNKNOWN; i++) {
+        </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strcmp</span></span><span>(word, verb_names[i]) == </span><span><span class="hljs-number">0</span></span><span>) {
+            </span><span><span class="hljs-keyword">return</span></span><span> (Verb)i;
+        }
+    }
+    </span><span><span class="hljs-keyword">return</span></span><span> VERB_UNKNOWN;
+}
+
+Noun </span><span><span class="hljs-title function_">parse_noun</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> </span><span><span class="hljs-type">char</span></span><span> *word) {
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; i &lt; NOUN_COUNT; i++) {
+        </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">strcmp</span></span><span>(word, noun_data[i].name) == </span><span><span class="hljs-number">0</span></span><span>) {
+            </span><span><span class="hljs-keyword">return</span></span><span> (Noun)i;
+        }
+    }
+    </span><span><span class="hljs-keyword">return</span></span><span> NOUN_UNKNOWN;
+}
+
+</span><span><span class="hljs-comment">// === Verb handlers ===</span></span><span>
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_look</span></span><span><span class="hljs-params">(Noun noun)</span></span><span> {
+    </span><span><span class="hljs-keyword">if</span></span><span> (noun == NOUN_UNKNOWN) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Look at what?\n"</span></span><span>);
+        </span><span><span class="hljs-keyword">return</span></span><span>;
+    }
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"%s\n"</span></span><span>, noun_data[noun].description);
+}
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_take</span></span><span><span class="hljs-params">(Noun noun)</span></span><span> {
+    </span><span><span class="hljs-keyword">if</span></span><span> (noun == NOUN_UNKNOWN) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Take what?\n"</span></span><span>);
+        </span><span><span class="hljs-keyword">return</span></span><span>;
+    }
+    </span><span><span class="hljs-keyword">if</span></span><span> (noun_data[noun].attrs &amp; ATTR_PICKABLE) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You pick up the %s.\n"</span></span><span>, noun_data[noun].name);
+    } </span><span><span class="hljs-keyword">else</span></span><span> {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You can't take the %s.\n"</span></span><span>, noun_data[noun].name);
+    }
+}
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">handle_open</span></span><span><span class="hljs-params">(Noun noun)</span></span><span> {
+    </span><span><span class="hljs-keyword">if</span></span><span> (noun == NOUN_UNKNOWN) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Open what?\n"</span></span><span>);
+        </span><span><span class="hljs-keyword">return</span></span><span>;
+    }
+    </span><span><span class="hljs-keyword">if</span></span><span> (!(noun_data[noun].attrs &amp; ATTR_CONTAINER)) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You can't open the %s.\n"</span></span><span>, noun_data[noun].name);
+    } </span><span><span class="hljs-keyword">else</span></span><span> </span><span><span class="hljs-keyword">if</span></span><span> (noun_data[noun].attrs &amp; ATTR_LOCKED) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"The %s is locked.\n"</span></span><span>, noun_data[noun].name);
+    } </span><span><span class="hljs-keyword">else</span></span><span> {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You open the %s.\n"</span></span><span>, noun_data[noun].name);
+    }
+}
+
+</span><span><span class="hljs-comment">// === Command table ===</span></span><span>
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-title function_">void</span></span><span> </span><span><span class="hljs-params">(*VerbHandler)</span></span><span><span class="hljs-params">(Noun noun)</span></span><span>;
+
+</span><span><span class="hljs-keyword">typedef</span></span><span> </span><span><span class="hljs-class"><span class="hljs-keyword">struct</span></span></span><span> {
+    Verb verb;
+    VerbHandler handler;
+} CommandEntry;
+
+</span><span><span class="hljs-type">const</span></span><span> CommandEntry command_table[] = {
+    {VERB_LOOK, handle_look},
+    {VERB_TAKE, handle_take},
+    {VERB_OPEN, handle_open},
+    {VERB_UNKNOWN, </span><span><span class="hljs-literal">NULL</span></span><span>}
+};
+
+</span><span><span class="hljs-comment">// === Command runner ===</span></span><span>
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">run_command</span></span><span><span class="hljs-params">(Verb verb, Noun noun)</span></span><span> {
+    </span><span><span class="hljs-keyword">for</span></span><span> (</span><span><span class="hljs-type">int</span></span><span> i = </span><span><span class="hljs-number">0</span></span><span>; command_table[i].verb != VERB_UNKNOWN; i++) {
+        </span><span><span class="hljs-keyword">if</span></span><span> (command_table[i].verb == verb) {
+            command_table[i].handler(noun);
+            </span><span><span class="hljs-keyword">return</span></span><span>;
+        }
+    }
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"You can't do that.\n"</span></span><span>);
+}
+
+</span><span><span class="hljs-comment">// === Input tokenizer ===</span></span><span>
+
+</span><span><span class="hljs-type">void</span></span><span> </span><span><span class="hljs-title function_">parse_and_execute</span></span><span><span class="hljs-params">(<span class="hljs-type">const</span></span></span><span> </span><span><span class="hljs-type">char</span></span><span> *input) {
+    </span><span><span class="hljs-type">char</span></span><span> verb_word[</span><span><span class="hljs-number">16</span></span><span>], noun_word[</span><span><span class="hljs-number">16</span></span><span>];
+    </span><span><span class="hljs-keyword">if</span></span><span> (</span><span><span class="hljs-built_in">sscanf</span></span><span>(input, </span><span><span class="hljs-string">"%15s %15s"</span></span><span>, verb_word, noun_word) &lt; </span><span><span class="hljs-number">1</span></span><span>) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"I didn't understand that.\n"</span></span><span>);
+        </span><span><span class="hljs-keyword">return</span></span><span>;
+    }
+
+    Verb verb = parse_verb(verb_word);
+    Noun noun = parse_noun(noun_word);
+
+    run_command(verb, noun);
+}
+
+</span><span><span class="hljs-comment">// === Main loop ===</span></span><span>
+
+</span><span><span class="hljs-type">int</span></span><span> </span><span><span class="hljs-title function_">main</span></span><span><span class="hljs-params">(<span class="hljs-type">void</span></span></span><span>) {
+    </span><span><span class="hljs-type">char</span></span><span> input[</span><span><span class="hljs-number">64</span></span><span>];
+    </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"Text Adventure Ready.\n"</span></span><span>);
+
+    </span><span><span class="hljs-keyword">while</span></span><span> (</span><span><span class="hljs-number">1</span></span><span>) {
+        </span><span><span class="hljs-built_in">printf</span></span><span>(</span><span><span class="hljs-string">"&gt; "</span></span><span>);
+        </span><span><span class="hljs-keyword">if</span></span><span> (!fgets(input, </span><span><span class="hljs-keyword">sizeof</span></span><span>(input), </span><span><span class="hljs-built_in">stdin</span></span><span>)) </span><span><span class="hljs-keyword">break</span></span><span>;
+        
+        </span><span><span class="hljs-comment">// Strip newline if present</span></span><span>
+        </span><span><span class="hljs-type">size_t</span></span><span> len = </span><span><span class="hljs-built_in">strlen</span></span><span>(input);
+        </span><span><span class="hljs-keyword">if</span></span><span> (len &gt; </span><span><span class="hljs-number">0</span></span><span> &amp;&amp; input[len - </span><span><span class="hljs-number">1</span></span><span>] == </span><span><span class="hljs-string">'\n'</span></span><span>)
+            input[len - </span><span><span class="hljs-number">1</span></span><span>] = </span><span><span class="hljs-string">'\0'</span></span><span>;
+
+        parse_and_execute(input);
+    }
+
+    </span><span><span class="hljs-keyword">return</span></span><span> </span><span><span class="hljs-number">0</span></span><span>;
+}
+</span></span></code></div></div></pre>
+<hr data-start="4121" data-end="4124">
+<h3 data-start="4126" data-end="4149">🧪 Example session:</h3>
+<pre class="overflow-visible!" data-start="4151" data-end="4330"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">vbnet</div><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-sidebar-surface-primary text-token-text-secondary dark:bg-token-main-surface-secondary flex items-center rounded-sm px-2 font-sans text-xs"><span class="" data-state="closed"></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre!"><span><span><span class="hljs-keyword">Text</span></span><span> Adventure Ready.
+&gt; look room
+You are </span><span><span class="hljs-keyword">in</span></span><span> a dimly lit stone room.
+&gt; </span><span><span class="hljs-keyword">take</span></span><span> room
+You can</span><span><span class="hljs-comment">'t take the room.</span></span><span>
+&gt; open chest
+The chest </span><span><span class="hljs-built_in">is</span></span><span> locked.
+&gt; </span><span><span class="hljs-keyword">take</span></span><span> </span><span><span class="hljs-keyword">key</span></span><span>
+You pick up the </span><span><span class="hljs-keyword">key</span></span><span>.
+</span></span></code></div></div></pre>
+<hr data-start="4332" data-end="4335">
+<h3 data-start="4337" data-end="4353">✅ Advantages</h3>
+<ul data-start="4355" data-end="4554">
+<li data-start="4355" data-end="4420">
+<p data-start="4357" data-end="4420">Efficient: everything is <code data-start="4382" data-end="4388">enum</code> or <code data-start="4392" data-end="4405">array index</code>, not pointers.</p>
+</li>
+<li data-start="4421" data-end="4489">
+<p data-start="4423" data-end="4489">Extendable: add nouns and verbs in their tables, no logic rewrite.</p>
+</li>
+<li data-start="4490" data-end="4554">
+<p data-start="4492" data-end="4554">Clean separation: verb logic lives in handlers, nouns in data.</p>
+</li>
+</ul>
+<p data-start="4556" data-end="4670" data-is-last-node="" data-is-only-node="">Would you like help expanding this with <strong data-start="4596" data-end="4609">inventory</strong>, <strong data-start="4611" data-end="4624">locations</strong>, or <strong data-start="4629" data-end="4647">state tracking</strong> like unlocking things?</p></div></div></div></div><div class="flex absolute start-0 end-0 flex justify-start"><div class="touch:-me-2 touch:-ms-3.5 -ms-2.5 -me-1 flex items-center p-1 select-none -mt-1 focus-within:transition-none hover:transition-none duration-500 group-hover/turn-messages:delay-300 pointer-events-none [mask-image:linear-gradient(to_right,black_33%,transparent_66%)] [mask-size:300%_100%] [mask-position:100%_0%] motion-safe:transition-[mask-position] group-hover/turn-messages:pointer-events-auto group-hover/turn-messages:[mask-position:0_0] group-focus-within/turn-messages:pointer-events-auto group-focus-within/turn-messages:[mask-position:0_0] has-data-[state=open]:pointer-events-auto has-data-[state=open]:[mask-position:0_0]"><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="" data-state="closed"></span><span class="hidden"></span><span class="" data-state="closed"></span></div></div></div></div></div></div></article><div aria-hidden="true" data-edge="true" class="pointer-events-none h-px w-px"></div><div></div><div style="opacity: 1;"></div></div></div></div></div><div id="thread-bottom-container" class="isolate z-3 w-full basis-auto has-data-has-thread-error:pt-2 has-data-has-thread-error:[box-shadow:var(--sharp-edge-bottom-shadow)] md:border-transparent md:pt-0 dark:border-white/20 md:dark:border-transparent flex flex-col"><div id="thread-bottom"><div class="text-base mx-auto [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"><div class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6"><div class="flex justify-center empty:hidden"></div><div class="max-xs:[--force-hide-label:none] relative z-1 flex h-full max-w-full flex-1 flex-col" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«rqj»" data-state="closed"><div class="absolute start-0 end-0 bottom-full z-20"></div><form class="w-full [view-transition-name:var(--vt-composer)]" data-type="unified-composer"><div class="flex w-full cursor-text flex-col items-center justify-center rounded-[28px] bg-clip-padding contain-inline-size overflow-clip shadow-short bg-token-bg-primary dark:bg-[#303030]"><div class="relative flex w-full items-end px-3 py-3"><div class="relative flex w-full flex-auto flex-col"><div class="relative ms-1.5 grid grid-cols-[auto_minmax(0,1fr)]"><div class="items-top flex justify-center"><div style="opacity: 1;"></div></div><div class="relative flex-auto bg-transparent pt-0.5" style="margin-bottom: -20px; transform: translateY(-7px);"><div class="flex flex-col justify-start" style="min-height: 0px;"><div class="flex min-h-12 items-start"><div class="max-w-full min-w-0 flex-1"><div class="_prosemirror-parent_kfgfu_2 text-token-text-primary max-h-[25dvh] max-h-52 -mx-3 px-3 overflow-auto [scrollbar-width:thin] firefox vertical-scroll-fade-mask min-h-12 pe-3"><textarea class="text-token-text-primary placeholder:text-token-text-tertiary block h-10 w-full resize-none border-0 bg-transparent px-0 py-2 ring-0 placeholder:ps-px" placeholder="Ask anything" data-virtualkeyboard="true" style="display: none;"></textarea><script nonce="">window.__oai_logHTML?window.__oai_logHTML():window.__oai_SSR_HTML=window.__oai_SSR_HTML||Date.now();requestAnimationFrame((function(){window.__oai_logTTI?window.__oai_logTTI():window.__oai_SSR_TTI=window.__oai_SSR_TTI||Date.now()}))</script><div contenteditable="true" translate="no" class="ProseMirror ProseMirror-focused" id="prompt-textarea" data-virtualkeyboard="true"><p data-placeholder="Ask anything" class="placeholder"><br class="ProseMirror-trailingBreak"></p></div></div></div></div></div></div></div><div class="justify-content-end relative ms-2 flex w-full flex-auto flex-col"><div class="flex-auto"></div></div><div style="height: 48px;"></div></div><div class="bg-primary-surface-primary absolute start-3 end-0 bottom-3 z-2 flex items-center"><div class="w-full"><div data-testid="composer-footer-actions" class="flex items-center" style="margin-right: 102px;"><div data-testid="composer-action-file-upload"><div class="relative"><div class="flex flex-col"><input multiple="" style="border: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;" tabindex="-1" class="hidden" type="file"><span class="hidden"></span><span class="flex" data-state="closed"></span><div class="w-fit" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«rqn»" data-state="closed"><div></div></div></div></div></div><div data-testid="composer-action-system-hint-button"><span class="hidden"></span></div><div></div><div></div></div><div class="absolute end-3 bottom-0 flex items-center gap-2" data-testid="composer-trailing-actions"><div class="ms-auto flex items-center gap-1.5"><span class="" data-state="closed"></span><span class="" data-state="closed"></span></div></div></div></div><div class="absolute start-4 top-3 ms-[1px] flex items-center pb-px"></div></div></div><div class="w-full"></div></form></div><input class="sr-only" aria-hidden="true" data-type="photos" id="upload-photos" accept="image/*" multiple="" type="file"><input class="sr-only" aria-hidden="true" data-type="camera" id="upload-camera" accept="image/*" capture="environment" multiple="" type="file"></div></div></div><div class="text-token-text-secondary relative mt-auto flex min-h-8 w-full items-center justify-center p-2 text-center text-xs md:px-[60px]"><div>ChatGPT can make mistakes. Check important info. See <a class="text-token-text-primary decoration-token-text-primary cursor-pointer underline">Cookie Preferences</a>.</div></div></div></div></div></main>
+                    </body>
+                    </html>
